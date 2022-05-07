@@ -1,0 +1,75 @@
+﻿<Page x:Class="CourseProject.View.ProgressView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:CourseProject.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="720" d:DesignWidth="830"
+      Title="ProgressView" Background="White">
+
+    <Grid>
+        <DockPanel LastChildFill="True">
+            <Border Margin="10 25 10 10"  DockPanel.Dock="Top" Height="50" BorderThickness="1" BorderBrush="#FFB4B4B4">
+                <StackPanel  Orientation="Horizontal" >
+                    <ComboBox Width="190" FontSize="15" Name="LessonsBox" Margin="10 0 0 0" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
+                    <Label FontFamily="Papyrus" Width="400" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Name="NotificationMessgeToProgress" FontSize="16" FontStyle="Italic"/>
+                    <Button Width="45" x:Name="AddProgress">
+                        <materialDesign:PackIcon Kind="Add" VerticalAlignment="Center" HorizontalAlignment="Center"  Width="25" Height="25" materialDesign:ColorZoneAssist.Mode="Light"/>
+                    </Button>
+                    <Button x:Name="Delete" Width="45">
+                        <materialDesign:PackIcon VerticalAlignment="Center" HorizontalAlignment="Center"  Width="25" Height="25" Kind="DeleteForever"></materialDesign:PackIcon>
+                    </Button>
+                </StackPanel>
+            </Border>
+            <DataGrid Name="ProgressList" Background="Transparent"  HeadersVisibility="None" ItemsSource="{Binding Progresses}" SelectedItem="{Binding SelectedItem}" CanUserAddRows="False" AutoGenerateColumns="False" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="True">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <DockPanel LastChildFill="True" >
+                                        <StackPanel DockPanel.Dock="Right" Orientation="Vertical" Margin="0 0 10 0">
+                                            <StackPanel Orientation="Horizontal">
+                                                <Label Width="70" Content="all"/>
+                                                <Label Width="30" x:Name="NeededTasks" VerticalContentAlignment="Center" Content="{Binding NeededTasks, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                                <StackPanel>
+                                                    <materialDesign:PackIcon Kind="Add" x:Name="NeededTasksPlus"  Height="15" Width="15"></materialDesign:PackIcon>
+                                                    <materialDesign:PackIcon Kind="Minus" x:Name="NeededTasksMinus" Height="15" Width="15"></materialDesign:PackIcon>
+                                                </StackPanel>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Label Width="70" Content="complite"/>
+                                                <TextBlock Width="30" VerticalAlignment="Center" Text="{Binding ComplitedTasks}" />
+                                                <StackPanel Orientation="Vertical">
+                                                    <materialDesign:PackIcon Kind="Add" x:Name="CompletedTasksPlus"  Height="15" Width="15"></materialDesign:PackIcon>
+                                                    <materialDesign:PackIcon Kind="Minus" x:Name="CompletedTasksMinus" Height="15" Width="15"></materialDesign:PackIcon>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <StackPanel>
+                                            <Label Content="{Binding LessonName}" HorizontalAlignment="Center" FontSize="14"/>
+                                            <ProgressBar Minimum="0" Opacity="0.7" Maximum="100" Height="15" Width="600" Value="{Binding TaskProgress, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"/>
+                                        </StackPanel>
+                                    </DockPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell">
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="true">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="Black"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.CellStyle>
+            </DataGrid>
+        </DockPanel>
+    </Grid>
+</Page>

@@ -1,0 +1,113 @@
+﻿<Page x:Class="CourseProject.View.ProfileView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:CourseProject.View"
+        mc:Ignorable="d"
+        Title="ProfileView" Height="660" Width="910" FontFamily="Palatino Linotype" FontSize="20">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="4*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.6*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+        </Grid>
+
+        <Grid Grid.Row="0" Background="#FFC0B5FD">
+            <Label Grid.Column="0" Content="Profile" FontFamily="Palatino Linotype" FontSize="40" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Button ToolTip="{DynamicResource _ChangePhoto}" Margin="25,40,505,0" Height="360" VerticalAlignment="Top" Background="Transparent"  BorderBrush="{x:Null}">
+                <Ellipse Width="255" Height="240">
+                    <Ellipse.Fill>
+                        <ImageBrush x:Name="img_ProfilePhoto" ImageSource="/Resources/Photo/avatar.png" Stretch="UniformToFill" AlignmentX="Center" AlignmentY="Center"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+            </Button>
+            <StackPanel Grid.Column="0" Margin="405,77,70,227">
+                <Grid Width="385">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+
+                    <StackPanel Grid.Row="0" Margin="0 10 0 0" Width="200">
+                        <Label x:Name="UserName" Content="Surname Name" HorizontalAlignment="Center" FontSize="24" FontStyle="Italic" FontWeight="DemiBold"/>
+                    </StackPanel>
+
+
+                    <StackPanel Grid.Row="1">
+                        <Label Content="Email:" FontStyle="Italic"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBox x:Name="lbl_Email" Grid.Column="0" Margin="20,0,0,0" IsReadOnly="True" Foreground="White" FontSize="18" Grid.ColumnSpan="2"/>
+                            <Button x:Name="btn_EditEmail" ToolTip="{DynamicResource _Edit}" Grid.Column="1" BorderBrush="Transparent" Background="Transparent" Width="20" Height="20" Padding="0">
+                                <materialDesign:PackIcon Kind="Edit" Width="20" Height="20" Foreground="Black"/>
+                            </Button>
+                        </Grid>
+                    </StackPanel>
+
+                    <StackPanel  Grid.Row="2">
+                        <Label Content="Phone:" FontStyle="Italic"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBox IsReadOnly="True" Grid.Column="0" x:Name="lbl_Phone" Margin="20,0,0,0" Foreground="White" FontSize="18" Grid.ColumnSpan="2"/>
+                            <Button x:Name="btn_EditPhone" ToolTip="{DynamicResource _Edit}" Grid.Column="1" BorderBrush="Transparent" Background="Transparent" Width="20" Height="20" Padding="0">
+                                <materialDesign:PackIcon Kind="Edit" Width="20" Height="20" Foreground="Black"/>
+                            </Button>
+                        </Grid>
+                    </StackPanel>
+
+
+                    <StackPanel Grid.Row="3">
+                        <Label Content="Description:" FontStyle="Italic"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBox IsReadOnly="True" Grid.Column="0" x:Name="lbl_Description" Margin="20,0,0,0" Foreground="White" FontSize="18" Grid.ColumnSpan="2"/>
+                            <Button x:Name="btn_EditDescription" ToolTip="{DynamicResource _Edit}" Grid.Column="1" BorderBrush="Transparent" Background="Transparent" Width="20" Height="20" Padding="0">
+                                <materialDesign:PackIcon Kind="Edit" Width="20" Height="20" Foreground="Black"/>
+                            </Button>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+
+
+
+
+
+            <Button Content="Change" FontSize="37" BorderBrush="White" Foreground="Black" Background="#FFFFAFAF" Margin="449,450,114,60" Height="80">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="35"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Button FontSize="20" Content="Upload new photo" BorderBrush="White" Foreground="Black" Background="#FFFFE7E7" Height="40" Margin="88,400,568,150"/>
+
+        </Grid>
+    </Grid>
+</Page>

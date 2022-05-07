@@ -1,0 +1,53 @@
+﻿<Page x:Class="CourseProject.View.TimeTableView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      
+      xmlns:local="clr-namespace:CourseProject.View"
+      mc:Ignorable="d" 
+      xmlns:databinding="clr-namespace:CourseProject.Converters"
+      
+      d:DesignHeight="715" d:DesignWidth="830"
+      Title="TimeTableView" Background="White">
+    <Page.Resources>
+<!--                 -->
+    </Page.Resources>
+    
+    <DockPanel LastChildFill="True">
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" DataContext="{Binding SelectedTimeTable}">
+                <TextBox IsReadOnly="True" VerticalContentAlignment="Center" Width="100" TextAlignment="Center" materialDesign:HintAssist.Hint="Day"  Cursor="Arrow" />
+                <TextBox IsReadOnly="True" VerticalContentAlignment="Center" Width="90" TextAlignment="Center" materialDesign:HintAssist.Hint="Time"  Cursor="Arrow" />
+                <TextBox VerticalContentAlignment="Center" Width="80" Text="{Binding Path=auditorium, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="Auditorium" />
+                <TextBox VerticalContentAlignment="Center" Width="80" Text="{Binding Path=lessonType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="Lesson type" Cursor="Arrow"/>
+                <TextBox VerticalContentAlignment="Center" Width="120" Text="{Binding Path=lessonName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="Subject name"/>
+                
+               
+            </StackPanel>
+            <ListBox Padding="0" DockPanel.Dock="Right" Width="auto" Name="Lessons" ItemsSource="{Binding TimeTables}" SelectedItem="{Binding SelectedTimeTable}" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="True" Background="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Margin="0" Height="13" CanVerticallyScroll="False"  OpacityMask="{x:Null}">
+                            <TextBlock  Margin="10,0,0,0" Width="80" Text="{Binding Path=lessonNumber, Converter={StaticResource LessonConverter}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
+                            <TextBlock Width="60" Text="{Binding Path=auditorium, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
+                            <TextBlock Width="40" Text="{Binding Path=lessonType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
+                            <TextBlock Width="310" Text="{Binding Path=lessonName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <StackPanel>
+                <ScrollViewer CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto">
+                    <StackPanel Orientation="Vertical">
+                        <Label Height="115" Content="Monday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFA028FF" />
+                        <Label Height="116" Content="Tuesday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFB04BFF"/>
+                        <Label Height="116" Content="Wednesday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFC780FF"/>
+                        <Label Height="116" Content="Thursday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFDEB4FF"/>
+                        <Label Height="116" Content="Friday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFF4E7FF"/>
+                        <Label Height="117" Content="Saturday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="White"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </StackPanel>
+        </DockPanel>
+</Page>

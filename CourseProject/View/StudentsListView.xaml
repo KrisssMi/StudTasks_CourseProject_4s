@@ -1,0 +1,29 @@
+﻿<Page x:Class="CourseProject.View.StudentsListView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:CourseProject.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="830"
+      Title="StudentsListView" Background="White">
+
+    <Grid>
+        <DataGrid x:Name="Students_Grid" AutoGenerateColumns="False" ItemsSource="{Binding Students}" SelectedItem="{Binding SelectedItem}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" CanUserAddRows="False" Background="{x:Null}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding idStudent}" Header="ID" Width="120"/>
+                <DataGridTextColumn Binding="{Binding Name}" Header="Name" Width="120"/>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="Delete">
+                                <materialDesign:PackIcon Kind="DeleteForever" Height="40" Width="40" Foreground="White"/>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>

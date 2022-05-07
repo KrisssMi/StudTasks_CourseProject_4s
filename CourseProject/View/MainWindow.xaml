@@ -1,0 +1,118 @@
+﻿<Window x:Class="CourseProject.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:CourseProject.View"
+        mc:Ignorable="d"
+         Title="MainWindow" Height="760" Width="910" WindowStyle="None" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" FontFamily="Palatino Linotype" FontSize="20">
+    <Window.Resources>
+        <Storyboard x:Key="OpenMenu">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="67"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="180"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="CloseMenu">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="180"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="67"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonOpenMenu">
+            <BeginStoryboard Storyboard="{StaticResource OpenMenu}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonCloseMenu">
+            <BeginStoryboard Storyboard="{StaticResource CloseMenu}"/>
+        </EventTrigger>
+    </Window.Triggers>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="1" Grid.ColumnSpan="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="147*"/>
+                </Grid.RowDefinitions>
+              
+                    <Frame x:Name="MainPage"  NavigationUIVisibility="Hidden" Grid.RowSpan="2"/>
+
+
+            </Grid>
+            <Grid x:Name="GridMenu" Width="67">
+                <StackPanel x:Name="stackPanel"  Style="{DynamicResource Menu}" Background="#FFBC94FF">
+                    <Grid Height="48" Style="{DynamicResource Grid1}">
+                        <Button x:Name="ButtonCloseMenu" Width="60" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Top" HorizontalAlignment="Right" Visibility="Collapsed" Click="ButtonCloseMenu_Click">
+                            <materialDesign:PackIcon Style="{DynamicResource Icon}"  Kind="ArrowLeft" Width="30" Height="30"/>
+                        </Button>
+                        <Button x:Name="ButtonOpenMenu" Width="60" Height="50" BorderBrush="{x:Null}" VerticalAlignment="Top" HorizontalAlignment="Right" Click="ButtonOpenMenu_Click" Background="{x:Null}">
+                            <materialDesign:PackIcon Style="{DynamicResource Icon}" Kind="Menu" VerticalAlignment="Center" Margin="-20"  Width="27" Height="27" Foreground="black"/>
+                        </Button>
+                    </Grid>
+
+                    <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <ListViewItem x:Name="Task_List" Height="70" PreviewMouseDown="Task_List_PreviewMouseDown">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Style="{DynamicResource Icon}"  Kind="RadioButtonUnchecked" Width="27" Height="27" Margin="8" VerticalAlignment="Center"/>
+                                <TextBlock Text="Tasks" Style="{DynamicResource Text}"  VerticalAlignment="Center" Margin="20 10"/>
+                            </StackPanel>
+                        </ListViewItem>
+
+                        <ListViewItem x:Name="Progress" Height="70" PreviewMouseDown="Progress_PreviewMouseDown">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Style="{DynamicResource Icon}" Kind="ProgressStar" Width="27" Height="27" Margin="8" VerticalAlignment="Center" Foreground="black"/>
+                                <TextBlock Text="Progress" Style="{DynamicResource Text}" VerticalAlignment="Center" Margin="20 10"/>
+                            </StackPanel>
+                        </ListViewItem>
+
+                        <ListViewItem Height="70" x:Name="TimeTable_List" PreviewMouseDown="TimeTable_List_PreviewMouseDown">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Style="{DynamicResource Icon}" Kind="EventNote" Width="27" Height="27" Margin="8" VerticalAlignment="Center"/>
+                                <TextBlock Text="Timetable" Style="{DynamicResource Text}" VerticalAlignment="Center" Margin="20 10"/>
+                            </StackPanel>
+                        </ListViewItem>
+
+                        <ListViewItem Height="70" x:Name="Profile" PreviewMouseDown="Profile_PreviewMouseDown">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Style="{DynamicResource Icon}" Kind="User" Width="27" Height="27" Margin="8" VerticalAlignment="Center"/>
+                                <TextBlock Text="Profile" Style="{DynamicResource Text}" VerticalAlignment="Center" Margin="20 10"/>
+                            </StackPanel>
+                        </ListViewItem>
+
+                        <ListViewItem x:Name="Group_list" Height="70" Visibility="Hidden" PreviewMouseDown="Group_list_PreviewMouseDown">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Style="{DynamicResource Icon}" Kind="People" Width="27" Height="27" Margin="8" VerticalAlignment="Center"/>
+                                <TextBlock Text="Group list" Style="{DynamicResource Text}" VerticalAlignment="Center" Margin="20 10"/>
+                            </StackPanel>
+                        </ListViewItem>
+
+                    </ListView>
+                </StackPanel>
+            </Grid>
+        </Grid>
+
+        <Grid Style="{DynamicResource Grad}" Background="#FF9F95A9" MouseDown="Grid_MouseDown">
+            <materialDesign:PackIcon x:Name="Exit" PreviewMouseDown="Exit_PreviewMouseDown"  HorizontalAlignment="Right" Kind="ExitToApp" Width="30" VerticalAlignment="Center" Height="30" Style="{DynamicResource Icon}"></materialDesign:PackIcon>
+            <materialDesign:PackIcon x:Name="Minimize" PreviewMouseDown="Support_PreviewMouseDown" Margin="840 0 0 0" Kind="About" Width="30" VerticalAlignment="Center" Height="30" Style="{DynamicResource Icon}"></materialDesign:PackIcon>
+            <ToggleButton IsChecked="False" Checked="Choose_Theme_Checked" Unchecked="Choose_Theme_Unchecked"  x:Name="Choose_Theme" Margin="0 0 80 0" HorizontalAlignment="Right" Style="{StaticResource MaterialDesignSwitchToggleButton}" ToolTip="MaterialDesignSwitchToggleButton with Content and ToggleButtonAssist.OnContent">
+                <materialDesign:PackIcon Kind="WhiteBalanceSunny" Foreground="Black"/>
+                <materialDesign:ToggleButtonAssist.OnContent>
+                <materialDesign:PackIcon Kind="PowerSleep" />
+                </materialDesign:ToggleButtonAssist.OnContent>
+            </ToggleButton>
+            
+        </Grid>
+    </Grid>
+</Window>

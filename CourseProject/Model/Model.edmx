@@ -1,0 +1,462 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище StudTasksModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Progress">
+          <Key>
+            <PropertyRef Name="idProgress" />
+          </Key>
+          <Property Name="idProgress" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idStudent" Type="int" Nullable="false" />
+          <Property Name="NeededTasks" Type="int" />
+          <Property Name="ComplitedTasks" Type="int" />
+          <Property Name="TaskProgress" Type="int" />
+          <Property Name="LessonName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="idStudent" />
+          </Key>
+          <Property Name="idStudent" Type="int" StoreGeneratedPattern="None" Nullable="false" />
+          <Property Name="isAdmin" Type="bit" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Subtask">
+          <Key>
+            <PropertyRef Name="idSubtask" />
+          </Key>
+          <Property Name="idSubtask" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idTask" Type="int" Nullable="false" />
+          <Property Name="Subtask" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="idTask" />
+          </Key>
+          <Property Name="idTask" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idStudent" Type="int" Nullable="false" />
+          <Property Name="isComplite" Type="bit" />
+          <Property Name="DueDate" Type="date" />
+          <Property Name="LessonName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Importance" Type="int" />
+          <Property Name="Content" Type="nvarchar" MaxLength="50" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TimeTable">
+          <Key>
+            <PropertyRef Name="idTimeTable" />
+          </Key>
+          <Property Name="idTimeTable" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idStudent" Type="int" Nullable="false" />
+          <Property Name="Day" Type="int" />
+          <Property Name="LessonName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Auditorium" Type="nvarchar" MaxLength="10" />
+          <Property Name="LessonNumber" Type="int" />
+          <Property Name="LessonType" Type="nvarchar" MaxLength="2" />
+          <Property Name="Week" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Login" />
+          </Key>
+          <Property Name="idStudent" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Progress__idStud__4222D4EF">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="Progress" Type="Self.Progress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="idStudent" />
+            </Principal>
+            <Dependent Role="Progress">
+              <PropertyRef Name="idStudent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Subtask__idTask__3F466844">
+          <End Role="Task" Type="Self.Task" Multiplicity="1" />
+          <End Role="Subtask" Type="Self.Subtask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="idTask" />
+            </Principal>
+            <Dependent Role="Subtask">
+              <PropertyRef Name="idTask" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Task__idStudent__3C69FB99">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="idStudent" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="idStudent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TimeTable__idStu__398D8EEE">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="TimeTable" Type="Self.TimeTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="idStudent" />
+            </Principal>
+            <Dependent Role="TimeTable">
+              <PropertyRef Name="idStudent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User__idStudent__36B12243">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="idStudent" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="idStudent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище StudTasksModelContainer">
+          <EntitySet Name="Progress" EntityType="Self.Progress" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subtask" EntityType="Self.Subtask" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TimeTable" EntityType="Self.TimeTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Progress__idStud__4222D4EF" Association="Self.FK__Progress__idStud__4222D4EF">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Progress" EntitySet="Progress" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Subtask__idTask__3F466844" Association="Self.FK__Subtask__idTask__3F466844">
+            <End Role="Task" EntitySet="Task" />
+            <End Role="Subtask" EntitySet="Subtask" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Task__idStudent__3C69FB99" Association="Self.FK__Task__idStudent__3C69FB99">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TimeTable__idStu__398D8EEE" Association="Self.FK__TimeTable__idStu__398D8EEE">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="TimeTable" EntitySet="TimeTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User__idStudent__36B12243" Association="Self.FK__User__idStudent__36B12243">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="StudTasksModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Progress">
+          <Key>
+            <PropertyRef Name="idProgress" />
+          </Key>
+          <Property Name="idProgress" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idStudent" Type="Int32" Nullable="false" />
+          <Property Name="NeededTasks" Type="Int32" />
+          <Property Name="ComplitedTasks" Type="Int32" />
+          <Property Name="TaskProgress" Type="Int32" />
+          <Property Name="LessonName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Student" Relationship="Self.FK__Progress__idStud__4222D4EF" FromRole="Progress" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="idStudent" />
+          </Key>
+          <Property Name="idStudent" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="isAdmin" Type="Boolean" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Progress" Relationship="Self.FK__Progress__idStud__4222D4EF" FromRole="Student" ToRole="Progress" />
+          <NavigationProperty Name="Task" Relationship="Self.FK__Task__idStudent__3C69FB99" FromRole="Student" ToRole="Task" />
+          <NavigationProperty Name="TimeTable" Relationship="Self.FK__TimeTable__idStu__398D8EEE" FromRole="Student" ToRole="TimeTable" />
+          <NavigationProperty Name="User" Relationship="Self.FK__User__idStudent__36B12243" FromRole="Student" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Subtask">
+          <Key>
+            <PropertyRef Name="idSubtask" />
+          </Key>
+          <Property Name="idSubtask" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idTask" Type="Int32" Nullable="false" />
+          <Property Name="Subtask1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Task" Relationship="Self.FK__Subtask__idTask__3F466844" FromRole="Subtask" ToRole="Task" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="idTask" />
+          </Key>
+          <Property Name="idTask" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idStudent" Type="Int32" Nullable="false" />
+          <Property Name="isComplite" Type="Boolean" />
+          <Property Name="DueDate" Type="DateTime" Precision="0" />
+          <Property Name="LessonName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Importance" Type="Int32" />
+          <Property Name="Content" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Student" Relationship="Self.FK__Task__idStudent__3C69FB99" FromRole="Task" ToRole="Student" />
+          <NavigationProperty Name="Subtask" Relationship="Self.FK__Subtask__idTask__3F466844" FromRole="Task" ToRole="Subtask" />
+        </EntityType>
+        <EntityType Name="TimeTable">
+          <Key>
+            <PropertyRef Name="idTimeTable" />
+          </Key>
+          <Property Name="idTimeTable" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idStudent" Type="Int32" Nullable="false" />
+          <Property Name="Day" Type="Int32" />
+          <Property Name="LessonName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Auditorium" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="LessonNumber" Type="Int32" />
+          <Property Name="LessonType" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="Week" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Student" Relationship="Self.FK__TimeTable__idStu__398D8EEE" FromRole="TimeTable" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Login" />
+          </Key>
+          <Property Name="idStudent" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Student" Relationship="Self.FK__User__idStudent__36B12243" FromRole="User" ToRole="Student" />
+        </EntityType>
+        <Association Name="FK__Progress__idStud__4222D4EF">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="Progress" Type="Self.Progress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="idStudent" />
+            </Principal>
+            <Dependent Role="Progress">
+              <PropertyRef Name="idStudent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Task__idStudent__3C69FB99">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="idStudent" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="idStudent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TimeTable__idStu__398D8EEE">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="TimeTable" Type="Self.TimeTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="idStudent" />
+            </Principal>
+            <Dependent Role="TimeTable">
+              <PropertyRef Name="idStudent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User__idStudent__36B12243">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="idStudent" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="idStudent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Subtask__idTask__3F466844">
+          <End Role="Task" Type="Self.Task" Multiplicity="1" />
+          <End Role="Subtask" Type="Self.Subtask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="idTask" />
+            </Principal>
+            <Dependent Role="Subtask">
+              <PropertyRef Name="idTask" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="StudTasksEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Progress" EntityType="Self.Progress" />
+          <EntitySet Name="Student" EntityType="Self.Student" />
+          <EntitySet Name="Subtask" EntityType="Self.Subtask" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Task" EntityType="Self.Task" />
+          <EntitySet Name="TimeTable" EntityType="Self.TimeTable" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <AssociationSet Name="FK__Progress__idStud__4222D4EF" Association="Self.FK__Progress__idStud__4222D4EF">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Progress" EntitySet="Progress" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Task__idStudent__3C69FB99" Association="Self.FK__Task__idStudent__3C69FB99">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TimeTable__idStu__398D8EEE" Association="Self.FK__TimeTable__idStu__398D8EEE">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="TimeTable" EntitySet="TimeTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User__idStudent__36B12243" Association="Self.FK__User__idStudent__36B12243">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Subtask__idTask__3F466844" Association="Self.FK__Subtask__idTask__3F466844">
+            <End Role="Task" EntitySet="Task" />
+            <End Role="Subtask" EntitySet="Subtask" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище StudTasksModelContainer" CdmEntityContainer="StudTasksEntities">
+          <EntitySetMapping Name="Progress">
+            <EntityTypeMapping TypeName="StudTasksModel.Progress">
+              <MappingFragment StoreEntitySet="Progress">
+                <ScalarProperty Name="idProgress" ColumnName="idProgress" />
+                <ScalarProperty Name="idStudent" ColumnName="idStudent" />
+                <ScalarProperty Name="NeededTasks" ColumnName="NeededTasks" />
+                <ScalarProperty Name="ComplitedTasks" ColumnName="ComplitedTasks" />
+                <ScalarProperty Name="TaskProgress" ColumnName="TaskProgress" />
+                <ScalarProperty Name="LessonName" ColumnName="LessonName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Student">
+            <EntityTypeMapping TypeName="StudTasksModel.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="idStudent" ColumnName="idStudent" />
+                <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subtask">
+            <EntityTypeMapping TypeName="StudTasksModel.Subtask">
+              <MappingFragment StoreEntitySet="Subtask">
+                <ScalarProperty Name="idSubtask" ColumnName="idSubtask" />
+                <ScalarProperty Name="idTask" ColumnName="idTask" />
+                <ScalarProperty Name="Subtask1" ColumnName="Subtask" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="StudTasksModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Task">
+            <EntityTypeMapping TypeName="StudTasksModel.Task">
+              <MappingFragment StoreEntitySet="Task">
+                <ScalarProperty Name="idTask" ColumnName="idTask" />
+                <ScalarProperty Name="idStudent" ColumnName="idStudent" />
+                <ScalarProperty Name="isComplite" ColumnName="isComplite" />
+                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+                <ScalarProperty Name="LessonName" ColumnName="LessonName" />
+                <ScalarProperty Name="Importance" ColumnName="Importance" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TimeTable">
+            <EntityTypeMapping TypeName="StudTasksModel.TimeTable">
+              <MappingFragment StoreEntitySet="TimeTable">
+                <ScalarProperty Name="idTimeTable" ColumnName="idTimeTable" />
+                <ScalarProperty Name="idStudent" ColumnName="idStudent" />
+                <ScalarProperty Name="Day" ColumnName="Day" />
+                <ScalarProperty Name="LessonName" ColumnName="LessonName" />
+                <ScalarProperty Name="Auditorium" ColumnName="Auditorium" />
+                <ScalarProperty Name="LessonNumber" ColumnName="LessonNumber" />
+                <ScalarProperty Name="LessonType" ColumnName="LessonType" />
+                <ScalarProperty Name="Week" ColumnName="Week" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="StudTasksModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="idStudent" ColumnName="idStudent" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
