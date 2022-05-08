@@ -15,29 +15,54 @@ namespace CourseProject.DB
 
         public EFTaskRepository()
         {
-            context = new StudTasksEntities();
+            context = new StudTasksEntities();                                  // Создаем контекст для работы с БД
         }
 
-        public IEnumerable<Model.Task> getTasks()
+        public IEnumerable<Model.Task> getTasks()                               // Получение всех задач
         {
-            context.Task.Distinct().OrderByDescending(p => p.DueDate).Load();
-            return context.Task;
+            context.Task.Distinct().OrderByDescending(p => p.DueDate).Load();   // Загружаем все задачи в контекст
+            return context.Task;                                                // Возвращаем все задачи
         }
 
-        public void addTask(Model.Task task)
+        public IEnumerable<Model.Subtask> getSubtasks()                         // Получение все подзадачи
+        {
+            context.Subtask.Distinct().Load();                                  // Загружаем все подзадачи в контекст
+            return context.Subtask;                                             // Возвращаем все подзадачи
+        }
+        
+
+        public void addTask(Model.Task task)            // добавление задачи
         {
             context.Task.Add(task);
             context.SaveChanges();
         }
 
-        public void SaveTask()
+        public void addSubtask(Subtask subtask)         // добавление подзадачи
+        {
+            context.Subtask.Add(subtask);
+            context.SaveChanges();
+        }
+
+        public void SaveTask()                          // Сохранение изменений в БД
         {
             context.SaveChanges();
         }
 
+        public void SaveSubtask()                      // Сохранение изменений подзадачи в БД
+        {
+            context.SaveChanges();
+        }
+
+
         public void Update(Model.Task task)
         {
-            context.Entry(task).State = EntityState.Modified;
+            context.Entry(task).State = EntityState.Modified;                      // Обновляем задачу
+            context.SaveChanges();
+        }
+
+        public void Update(Model.Subtask subtask)
+        {
+            context.Entry(subtask).State = EntityState.Modified;                   // Обновляем задачу
             context.SaveChanges();
         }
 
@@ -52,17 +77,17 @@ namespace CourseProject.DB
             context.SaveChanges();
         }
 
-        public Model.Task GetTaskById(Model.Task task)
+        public Model.Task GetTaskById(Model.Task task)                          // Получение задачи по ее id
         {
             return context.Task.FirstOrDefault(p => p.idTask == task.idTask);
         }
 
-        public IEnumerable<Model.Task> GetTasksById(Student student)
+        public IEnumerable<Model.Task> GetTasksById(Student student)    
         {
             return context.Task.Where(p => p.idStudent == student.idStudent);
         }
 
-        public void ChangeComplite(Model.Task task)
+        public void ChangeComplite(Model.Task task)                             // Изменение статуса задачи
         {
             GetTaskById(task).isComplite = task.isComplite;
             context.SaveChanges();
@@ -74,7 +99,7 @@ namespace CourseProject.DB
             context.SaveChanges();
         }
 
-        public void RemoveByStudId(Student student)
+        public void RemoveByStudId(Student student)                             // Удаление задач по id студента
         {
             foreach (Model.Task task in getTasks())
             {
@@ -86,12 +111,12 @@ namespace CourseProject.DB
             context.SaveChanges();
         }
 
-        public void OrderTasks(Student student, string subject)
+        public void OrderTasks(Student student, string subject)                 // Сортировка задач по предмету
         {
             context.Task.Where(p => p.idStudent == student.idStudent).OrderBy(p => p.LessonName == subject).Load();
         }
 
-        public IEnumerable<Model.Task> getEnum(Student student, string subject)
+        public IEnumerable<Model.Task> getEnum(Student student, string subject) // Получение задач по предмету
         {
             return context.Task.Where(p => p.idStudent == student.idStudent && p.LessonName == subject);
         }

@@ -12,9 +12,14 @@ namespace CourseProject.DB
     {
         private StudTasksEntities context;     // контекст базы данных
 
-        public EFUserRepository()
+        //public EFUserRepository()
+        //{
+        //    context = new StudTasksEntities(); // инициализация контекста
+        //}
+
+        public EFUserRepository(StudTasksEntities c)
         {
-            context = new StudTasksEntities(); // инициализация контекста
+            context = c;
         }
 
         public IEnumerable<User> getUsers()    // получение всех пользователей из коллекции

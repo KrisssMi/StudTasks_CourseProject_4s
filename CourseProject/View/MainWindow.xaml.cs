@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CourseProject.DB;
+using CourseProject.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,24 @@ namespace CourseProject.View
     /// </summary>
     public partial class MainWindow : Window
     {
+        User User = User.CurrentUser;
+        Student stud = new Student();
+        EFStudentRepository eFStudent = new EFStudentRepository();
+
         public MainWindow()
         {
             InitializeComponent();
+
+            stud = eFStudent.GetStudentById((int)User.idStudent);
+
+            if (stud.isAdmin == true)
+            {
+                Group_list.Visibility = Visibility.Visible;
+            }
+            else Group_list.Visibility = Visibility.Hidden;
+
+            DataContext = this;
+            Choose_Theme_Unchecked(this, new RoutedEventArgs());
         }
 
         private void Exit_PreviewMouseDown(object sender, MouseButtonEventArgs e)

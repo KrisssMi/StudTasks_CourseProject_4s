@@ -18,9 +18,6 @@ using System.Windows.Shapes;
 
 namespace CourseProject.View
 {
-    /// <summary>
-    /// Логика взаимодействия для TaskListView.xaml
-    /// </summary>
     public partial class TaskListView : Page
     {
         User user = User.CurrentUser;
@@ -40,14 +37,44 @@ namespace CourseProject.View
         {
             ToNewTask.Visibility = Visibility.Hidden;
             NewTask.Visibility = Visibility.Visible;
+            ToNewSubtask.Visibility = Visibility.Hidden;
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             ToNewTask.Visibility = Visibility.Visible;
             NewTask.Visibility = Visibility.Hidden;
+            ToNewSubtask.Visibility = Visibility.Visible;
             Clear();
         }
+
+
+        private void ToNewSubtask_Click(object sender, RoutedEventArgs e)
+        {
+            ToNewSubtask.Visibility = Visibility.Hidden;
+            NewSubtask.Visibility = Visibility.Visible;
+            ToNewTask.Visibility = Visibility.Hidden;
+        }
+
+
+        private void Cancel2_Click(object sender, RoutedEventArgs e)
+        {
+            ToNewSubtask.Visibility = Visibility.Visible;
+            NewSubtask.Visibility = Visibility.Hidden;
+            ToNewTask.Visibility = Visibility.Visible;
+            Clear();
+        }
+
+
+        private void Save2_Click(object sender, RoutedEventArgs e)
+        {
+                //Subtask subtask = new Subtask();
+                Model.Subtask subtask = new Model.Subtask { idTask = taskViewModel.SelectedTask.idTask };
+                taskViewModel.addSubtask(subtask);
+            Clear();
+        }
+        
+
 
         private void LessonsBox_Loaded(object sender, RoutedEventArgs e)
         {
@@ -57,6 +84,7 @@ namespace CourseProject.View
             LessonsBox.SelectedIndex = 0;
         }
 
+        
         private void Save_Click(object sender, RoutedEventArgs e)
         {
             if (Deadline.Text != String.Empty && Title.Text != String.Empty && Details.Text != String.Empty)

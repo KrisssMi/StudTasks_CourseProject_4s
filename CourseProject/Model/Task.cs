@@ -32,10 +32,5 @@ namespace CourseProject.Model
         public virtual Student Student { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Subtask> Subtask { get; set; }
-
-        public string Date
-        {
-            get { return DueDate.Value.Day + "/" + DueDate.Value.Month + "/" + DueDate.Value.Year; }
-        }
     }
 }

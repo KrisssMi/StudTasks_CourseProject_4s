@@ -23,9 +23,10 @@ namespace CourseProject.ViewModel
         private Model.Task selectedTask;
 
         private ObservableCollection<Model.Task> unsatisfiedTasks = new ObservableCollection<Model.Task>();
+        private ObservableCollection<Model.Subtask> unsatisfiedSubtasks = new ObservableCollection<Model.Subtask>();
 
 
-        public ObservableCollection<Model.Task> UnsatisfiedTasks    // неудовлетворённые задания
+        public ObservableCollection<Model.Task> UnsatisfiedTasks    // невыполненные задания
         {
             get { return unsatisfiedTasks; }
             set
@@ -35,7 +36,19 @@ namespace CourseProject.ViewModel
             }
         }
 
-        public Model.Task SelectedTask
+
+        public ObservableCollection<Model.Subtask> UnsatisfiedSubtasks    // невыполненные задания
+        {
+            get { return unsatisfiedSubtasks; }
+            set
+            {
+                unsatisfiedSubtasks = value;
+                OnPropertyChanged("Subtasks");
+            }
+        }
+        
+
+        public Model.Task SelectedTask                              // выбранное задание
         {
             get { return selectedTask; }
             set
@@ -54,11 +67,11 @@ namespace CourseProject.ViewModel
 
         public TaskViewModel()
         {
-            stud = eFStudent.GetStudentById((int)user.idStudent);
+            stud = eFStudent.GetStudentById((int)user.idStudent);       // получаем студента по id
             //eFTimeTable.Clear();
         }
 
-        public void ChangeTrue()
+        public void ChangeTrue()        // изменение выполненности задания
         {
             if (SelectedTask != null)
             {
@@ -79,7 +92,7 @@ namespace CourseProject.ViewModel
             }
         }
 
-        public void UpdateFalse()
+        public void UpdateFalse()           // обновление невыполненных заданий
         {
             UnsatisfiedTasks.Clear();
 
@@ -114,6 +127,12 @@ namespace CourseProject.ViewModel
         {
             eFTaskRepository.addTask(task);
             UnsatisfiedTasks.Add(task);
+        }
+
+        public void addSubtask(Model.Subtask subtask)
+        {
+            eFTaskRepository.addSubtask(subtask);
+            UnsatisfiedSubtasks.Add(subtask);
         }
 
         public void RemoveTask()

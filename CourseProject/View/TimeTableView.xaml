@@ -12,7 +12,8 @@
       d:DesignHeight="715" d:DesignWidth="830"
       Title="TimeTableView" Background="White">
     <Page.Resources>
-<!--                 -->
+         <databinding:DayConverter x:Key="DayConverter"></databinding:DayConverter>
+        <databinding:LessonConverter x:Key="LessonConverter"></databinding:LessonConverter>       
     </Page.Resources>
     
     <DockPanel LastChildFill="True">
@@ -22,9 +23,10 @@
                 <TextBox VerticalContentAlignment="Center" Width="80" Text="{Binding Path=auditorium, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="Auditorium" />
                 <TextBox VerticalContentAlignment="Center" Width="80" Text="{Binding Path=lessonType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="Lesson type" Cursor="Arrow"/>
                 <TextBox VerticalContentAlignment="Center" Width="120" Text="{Binding Path=lessonName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="Subject name"/>
-                
-               
-            </StackPanel>
+           
+        </StackPanel>
+        
+        
             <ListBox Padding="0" DockPanel.Dock="Right" Width="auto" Name="Lessons" ItemsSource="{Binding TimeTables}" SelectedItem="{Binding SelectedTimeTable}" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="True" Background="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <ListBox.ItemTemplate>
                     <DataTemplate>

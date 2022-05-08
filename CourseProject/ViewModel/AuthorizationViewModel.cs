@@ -17,8 +17,9 @@ namespace CourseProject.ViewModel
         IEnumerable<User> users;
         IEnumerable<Student> students;
 
-        EFUserRepository eFUser = new EFUserRepository(); // Репозиторий для работы с пользователями
-        EFStudentRepository eFStudent = new EFStudentRepository(); // Репозиторий для работы с студентами
+        StudTasksEntities c = new StudTasksEntities();  // подключение к базе данных
+        EFUserRepository eFUser;           // Репозиторий для работы с пользователями
+        EFStudentRepository eFStudent;     // Репозиторий для работы с студентами
 
         public string Login { get; set; }
 
@@ -43,8 +44,11 @@ namespace CourseProject.ViewModel
 
         public AuthorizationViewModel() // Конструктор класса
         {
-            users = eFUser.getUsers(); // Получение всех пользователей
-            students = eFStudent.getStudents(); // Получение всех студентов
+
+            eFUser = new EFUserRepository(c);           // Репозиторий для работы с пользователями
+            eFStudent = new EFStudentRepository(c);     // Репозиторий для работы с студентами
+            users = eFUser.getUsers();                  // Получение всех пользователей
+            students = eFStudent.getStudents();         // Получение всех студентов
         }
 
 
@@ -125,9 +129,10 @@ namespace CourseProject.ViewModel
                                 {
                                     if (tmp1 == null)
                                     {
-                                        eFStudent.addStudent(new Student(NumStudCard, Name));
-                                        //eFUser.addUser(new User(NumStudCard, Reg_Login, User.getHash(Reg_Password)));
-                                        eFUser.Save();
+                                        Student s = new Student(NumStudCard, Name, Surname, Email, Phone);
+                                        eFStudent.addStudent(s);
+                                        User u = new User(NumStudCard, Reg_Login, User.getHash(Reg_Password));
+                                        eFUser.addUser(u);
                                         return true;
                                     }
                                     else

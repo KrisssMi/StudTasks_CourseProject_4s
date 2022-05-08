@@ -20,7 +20,7 @@ namespace CourseProject.Model
         public Nullable<int> idStudent { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
-
+    
         public virtual Student Student { get; set; }
 
         public User()
@@ -48,20 +48,20 @@ namespace CourseProject.Model
             }
         }
 
-        
+
         // получение хэш-кода пароля
-        //public static string getHash(string password)
-        //{
-        //    if (String.IsNullOrEmpty(password))
-        //    {
-        //        return "-1";
-        //    }
-        //    else
-        //    {
-        //        var md5 = MD5.Create();
-        //        var hash = md5.ComputeHash(Encoding.UTF8.GetBytes(password));
-        //        return Convert.ToBase64String(hash);
-        //    }
-        //}
+        public static string getHash(string password)
+        {
+            if (String.IsNullOrEmpty(password))
+            {
+                return "-1";
+            }
+            else
+            {
+                var md5 = MD5.Create();
+                var hash = md5.ComputeHash(Encoding.UTF8.GetBytes(password));
+                return Convert.ToBase64String(hash);
+            }
+        }
     }
 }

@@ -18,6 +18,11 @@ namespace CourseProject.DB
             context = new StudTasksEntities();          // инициализация контекста
         }
 
+        public EFStudentRepository(StudTasksEntities c)
+        {
+            context = c;
+        }
+
         public IEnumerable<Student> getStudents()       // получение списка студентов
         {
             return context.Student;
@@ -26,7 +31,7 @@ namespace CourseProject.DB
         public void addStudent(Student student)         // добавление студента
         {
             context.Student.Add(student);
-             context.SaveChanges();                    // сохранение изменений в базе данных
+            context.SaveChanges();                    // сохранение изменений в базе данных
 
             //try
             //{

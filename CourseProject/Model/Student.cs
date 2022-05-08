@@ -14,15 +14,15 @@ namespace CourseProject.Model
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
 
-    public partial class Student : INotifyPropertyChanged   // интерфейс для оповещения об изменениях в свойствах
+    public partial class Student
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Student()
         {
-            this.Progress = new HashSet<Progress>();        // инициализация коллекции прогресса
-            this.Task = new HashSet<Task>();                // инициализация коллекции заданий
-            this.TimeTable = new HashSet<TimeTable>();      // инициализация коллекции расписания
-            this.User = new HashSet<User>();                // инициализация коллекции пользователей
+            this.Progress = new HashSet<Progress>();
+            this.Task = new HashSet<Task>();
+            this.TimeTable = new HashSet<TimeTable>();
+            this.User = new HashSet<User>();
         }
     
         public int idStudent { get; set; }
@@ -43,26 +43,34 @@ namespace CourseProject.Model
         public virtual ICollection<User> User { get; set; }
 
 
-        public Student(int idstudent, string name)
+
+
+        public Student(int idstudent, string name, string surname, string email, string phone)
         {
-            idStudent = idstudent;
-            Name = name;
-            isAdmin = false;
+            this.idStudent = idstudent;
+            {
+                idStudent = idstudent;
+                Name = name;
+                Surname = surname;
+                Email = email;
+                Phone = phone;
+                isAdmin = false;
+            }    
         }
 
 
         public bool IsAdmin             // проверка на администратора
         {
-            get { return (bool)isAdmin; }  
-            set 
-            { 
+            get { return (bool)isAdmin; }
+            set
+            {
                 isAdmin = value;
                 OnPropertyChanged("IsAdmin");
             }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;           // оповещение об изменениях в свойствах
-        public void OnPropertyChanged([CallerMemberName] string prop = "") 
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));

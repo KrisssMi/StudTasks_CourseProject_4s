@@ -1,4 +1,7 @@
-﻿using System;
+﻿using CourseProject.DB;
+using CourseProject.Model;
+using CourseProject.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +23,24 @@ namespace CourseProject.View
     /// </summary>
     public partial class TimeTableView : Page
     {
+        User user = User.CurrentUser;
+        Student stud = new Student();
+
+        TimeTableViewModel timeTableViewModel;
+        EFStudentRepository eFStudent = new EFStudentRepository();
+        
         public TimeTableView()
         {
+            stud = eFStudent.GetStudentById((int)user.idStudent);
+            
             InitializeComponent();
+            timeTableViewModel = new TimeTableViewModel();
+        }
+
+
+        private void LoadTimeTableIfEmpty()
+        {
+            timeTableViewModel.LoadTT();
         }
     }
 }
