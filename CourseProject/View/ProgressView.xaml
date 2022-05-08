@@ -13,12 +13,12 @@
         <DockPanel LastChildFill="True">
             <Border Margin="10 25 10 10"  DockPanel.Dock="Top" Height="50" BorderThickness="1" BorderBrush="#FFB4B4B4">
                 <StackPanel  Orientation="Horizontal" >
-                    <ComboBox Width="190" FontSize="15" Name="LessonsBox" Margin="10 0 0 0" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
+                    <ComboBox Width="190" FontSize="15" Name="LessonsBox" Loaded="LessonsBox_Loaded" Margin="10 0 0 0" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
                     <Label FontFamily="Papyrus" Width="400" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Name="NotificationMessgeToProgress" FontSize="16" FontStyle="Italic"/>
-                    <Button Width="45" x:Name="AddProgress">
+                    <Button Width="45" x:Name="AddProgress" Click="AddProgress_Click">
                         <materialDesign:PackIcon Kind="Add" VerticalAlignment="Center" HorizontalAlignment="Center"  Width="25" Height="25" materialDesign:ColorZoneAssist.Mode="Light"/>
                     </Button>
-                    <Button x:Name="Delete" Width="45">
+                    <Button x:Name="Delete" Width="45" Click="Delete_Click">
                         <materialDesign:PackIcon VerticalAlignment="Center" HorizontalAlignment="Center"  Width="25" Height="25" Kind="DeleteForever"></materialDesign:PackIcon>
                     </Button>
                 </StackPanel>
@@ -35,16 +35,16 @@
                                                 <Label Width="70" Content="all"/>
                                                 <Label Width="30" x:Name="NeededTasks" VerticalContentAlignment="Center" Content="{Binding NeededTasks, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                                 <StackPanel>
-                                                    <materialDesign:PackIcon Kind="Add" x:Name="NeededTasksPlus"  Height="15" Width="15"></materialDesign:PackIcon>
-                                                    <materialDesign:PackIcon Kind="Minus" x:Name="NeededTasksMinus" Height="15" Width="15"></materialDesign:PackIcon>
+                                                    <materialDesign:PackIcon Kind="Add" x:Name="NeededTasksPlus" PreviewMouseDown="NeededTasksPlus_PreviewMouseDown" Height="15" Width="15"></materialDesign:PackIcon>
+                                                    <materialDesign:PackIcon Kind="Minus" x:Name="NeededTasksMinus" PreviewMouseDown="NeededTasksMinus_PreviewMouseDown" Height="15" Width="15"></materialDesign:PackIcon>
                                                 </StackPanel>
                                             </StackPanel>
                                             <StackPanel Orientation="Horizontal">
                                                 <Label Width="70" Content="complite"/>
                                                 <TextBlock Width="30" VerticalAlignment="Center" Text="{Binding ComplitedTasks}" />
                                                 <StackPanel Orientation="Vertical">
-                                                    <materialDesign:PackIcon Kind="Add" x:Name="CompletedTasksPlus"  Height="15" Width="15"></materialDesign:PackIcon>
-                                                    <materialDesign:PackIcon Kind="Minus" x:Name="CompletedTasksMinus" Height="15" Width="15"></materialDesign:PackIcon>
+                                                    <materialDesign:PackIcon Kind="Add" x:Name="CompletedTasksPlus" PreviewMouseDown="CompletedTasksPlus_PreviewMouseDown" Height="15" Width="15"></materialDesign:PackIcon>
+                                                    <materialDesign:PackIcon Kind="Minus" x:Name="CompletedTasksMinus" PreviewMouseDown="CompletedTasksMinus_PreviewMouseDown" Height="15" Width="15"></materialDesign:PackIcon>
                                                 </StackPanel>
                                             </StackPanel>
                                         </StackPanel>

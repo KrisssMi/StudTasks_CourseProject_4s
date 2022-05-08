@@ -18,8 +18,8 @@ namespace CourseProject.ViewModel
         IEnumerable<Student> students;
 
         StudTasksEntities c = new StudTasksEntities();  // подключение к базе данных
-        EFUserRepository eFUser;           // Репозиторий для работы с пользователями
-        EFStudentRepository eFStudent;     // Репозиторий для работы с студентами
+        EFUserRepository eFUser;                        // Репозиторий для работы с пользователями
+        EFStudentRepository eFStudent;                  // Репозиторий для работы с студентами
 
         public string Login { get; set; }
 
@@ -113,7 +113,7 @@ namespace CourseProject.ViewModel
             //return true;
 
 
-            /*  ЭТО ПЕРВОНАЧАЛЬНЫЙ КОД КРИСТИНЫ */
+            /*  ЭТО ПЕРВОНАЧАЛЬНЫЙ КОД */
              
             if (!String.IsNullOrEmpty(Name) && !String.IsNullOrEmpty(Surname) && !String.IsNullOrEmpty(Reg_Login) &&
                 !String.IsNullOrEmpty(Reg_Password) && !String.IsNullOrEmpty(Db_Password))
@@ -194,7 +194,7 @@ namespace CourseProject.ViewModel
         }
 
 
-        private void CreateRestoringFile(string login, string password) // метод сохраняет данные последнего зашедшего в приложение пользователя в xml файл
+        private void CreateRestoringFile(string login, string password)             // метод сохраняет данные последнего зашедшего в приложение пользователя в xml файл
         {
             XDocument doc = new XDocument(
                 new XElement("Usr",

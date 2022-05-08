@@ -9,7 +9,7 @@
       mc:Ignorable="d" 
       xmlns:databinding="clr-namespace:CourseProject.Converters"
       
-      d:DesignHeight="715" d:DesignWidth="830"
+      d:DesignHeight="715" d:DesignWidth="780"
       Title="TimeTableView" Background="White">
     <Page.Resources>
          <databinding:DayConverter x:Key="DayConverter"></databinding:DayConverter>

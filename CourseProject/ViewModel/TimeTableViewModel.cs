@@ -44,12 +44,10 @@ namespace CourseProject.ViewModel
             {
                 if (value != null)
                 {
-                    //eFTimeTable.UpdateTT(SelectedTimeTable);
                     selectedTimeTable = value;
                     Save();
                     OnPropertyChanged("SelectedTimeTable");
                 }
-
             }
         }
 
@@ -73,7 +71,6 @@ namespace CourseProject.ViewModel
         public TimeTableViewModel(int id, string week)
         {
             eFTimeTable.Clear();
-            //eFTimeTable.getTimeTableByIdGroupAndWeek(id, week);
             TimeTables = eFTimeTable.getTimeTableLocal();
         }
 

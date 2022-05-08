@@ -18,7 +18,7 @@ namespace CourseProject.DB
             context = new StudTasksEntities();          // инициализация контекста
         }
 
-        public EFStudentRepository(StudTasksEntities c)
+        public EFStudentRepository(StudTasksEntities c) // инициализация контекста
         {
             context = c;
         }
@@ -32,22 +32,6 @@ namespace CourseProject.DB
         {
             context.Student.Add(student);
             context.SaveChanges();                    // сохранение изменений в базе данных
-
-            //try
-            //{
-            //    context.SaveChanges();
-            //}
-            //catch (DbEntityValidationException ex)
-            //{
-            //    foreach (DbEntityValidationResult validationError in ex.EntityValidationErrors)
-            //    {
-            //       foreach (DbValidationError err in validationError.ValidationErrors)
-            //        {
-
-            //        }
-            //    }
-            //}
-
         }
 
         public void Update(Student student)             // обновление студента

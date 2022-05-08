@@ -26,7 +26,7 @@ namespace CourseProject.ViewModel
         private ObservableCollection<Model.Subtask> unsatisfiedSubtasks = new ObservableCollection<Model.Subtask>();
 
 
-        public ObservableCollection<Model.Task> UnsatisfiedTasks    // невыполненные задания
+        public ObservableCollection<Model.Task> UnsatisfiedTasks            // невыполненные задания
         {
             get { return unsatisfiedTasks; }
             set
@@ -48,7 +48,7 @@ namespace CourseProject.ViewModel
         }
         
 
-        public Model.Task SelectedTask                              // выбранное задание
+        public Model.Task SelectedTask                                    // выбранное задание
         {
             get { return selectedTask; }
             set
@@ -71,7 +71,7 @@ namespace CourseProject.ViewModel
             //eFTimeTable.Clear();
         }
 
-        public void ChangeTrue()        // изменение выполненности задания
+        public void ChangeTrue()                                        // изменение выполненности задания
         {
             if (SelectedTask != null)
             {
@@ -92,7 +92,7 @@ namespace CourseProject.ViewModel
             }
         }
 
-        public void UpdateFalse()           // обновление невыполненных заданий
+        public void UpdateFalse()                                       // обновление невыполненных заданий
         {
             UnsatisfiedTasks.Clear();
 

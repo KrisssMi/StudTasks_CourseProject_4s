@@ -38,7 +38,7 @@ namespace CourseProject.View
             else Group_list.Visibility = Visibility.Hidden;
 
             DataContext = this;
-            Choose_Theme_Unchecked(this, new RoutedEventArgs());
+            //Choose_Theme_Unchecked(this, new RoutedEventArgs());
         }
 
         private void Exit_PreviewMouseDown(object sender, MouseButtonEventArgs e)
@@ -80,10 +80,6 @@ namespace CourseProject.View
             DragMove();                 // окно можно перемещать
         }
 
-
-
-
-        
 
         // переход между окнами
 
