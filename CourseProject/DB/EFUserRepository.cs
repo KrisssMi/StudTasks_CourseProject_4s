@@ -12,10 +12,10 @@ namespace CourseProject.DB
     {
         private StudTasksEntities context;     // контекст базы данных
 
-        //public EFUserRepository()
-        //{
-        //    context = new StudTasksEntities(); // инициализация контекста
-        //}
+        public EFUserRepository()
+        {
+            context = new StudTasksEntities(); // инициализация контекста
+        }
 
         public EFUserRepository(StudTasksEntities c)
         {

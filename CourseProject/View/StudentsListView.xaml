@@ -7,18 +7,21 @@
       xmlns:local="clr-namespace:CourseProject.View"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="830"
-      Title="StudentsListView" Background="White">
+      Title="StudentsListView" Background="{x:Null}">
 
     <Grid>
-        <DataGrid x:Name="Students_Grid" AutoGenerateColumns="False" ItemsSource="{Binding Students}" SelectedItem="{Binding SelectedItem}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" CanUserAddRows="False" Background="{x:Null}">
+        <DataGrid x:Name="Students_Grid" AutoGenerateColumns="False" ItemsSource="{Binding Students}" SelectedItem="{Binding SelectedItem}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" CanUserAddRows="False" LostFocus="Students_Grid_LostFocus" SelectedCellsChanged="Students_Grid_SelectionChanged" Background="{x:Null}">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding idStudent}" Header="ID" Width="120"/>
                 <DataGridTextColumn Binding="{Binding Name}" Header="Name" Width="120"/>
+                <DataGridTextColumn Binding="{Binding Surname}" Header="Surname" Width="120"/>
+                <DataGridTextColumn Binding="{Binding Phone}" Header="Phone" Width="120"/>
+                <DataGridTextColumn Binding="{Binding Email}" Header="Email" Width="120"/>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button x:Name="Delete">
-                                <materialDesign:PackIcon Kind="DeleteForever" Height="40" Width="40" Foreground="White"/>
+                            <Button x:Name="Delete" Click="Delete_Click">
+                                <materialDesign:PackIcon Kind="DeleteForever" Height="25" Width="25" Foreground="White"/>
                             </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

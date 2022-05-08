@@ -126,6 +126,7 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\AuthorizationViewModel.cs" />
+    <Compile Include="ViewModel\StudentsListViewModel.cs" />
     <Compile Include="ViewModel\TaskViewModel.cs" />
     <Compile Include="ViewModel\TimeTableViewModel.cs" />
     <Compile Include="View\AuthorizationView.xaml.cs">

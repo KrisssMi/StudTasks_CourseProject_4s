@@ -77,5 +77,10 @@ namespace CourseProject.DB
             context.Student.Remove(GetStudentById(student.idStudent));
             context.SaveChanges();
         }
+
+        public IEnumerable<Student> getStudentsNoAdmin()
+        {
+            return context.Student.Where(s => s.isAdmin == false);
+        }
     }
 }
