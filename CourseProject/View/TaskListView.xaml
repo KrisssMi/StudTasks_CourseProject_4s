@@ -21,8 +21,8 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="9*"/>
-            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="23*"/>
+            <ColumnDefinition Width="17*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
@@ -58,7 +58,7 @@
                                     <StackPanel Margin="5 0 0 0" Grid.Column="1">
                                         <TextBlock FontWeight="ExtraBold"  Text="{Binding Title}" x:Name="title" Style="{DynamicResource Txt}"/>
                                         <TextBlock Text="{Binding Content}" Style="{DynamicResource Txt}" TextWrapping="Wrap"/>
-                                        <TextBlock Text="{Binding DescriptionSubtask}" x:Name="Description" Style="{DynamicResource Txt}"/>
+                                        
                                     </StackPanel>
                                 </Grid>
                             </Border>
@@ -66,13 +66,13 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
-                <DataGridTextColumn Binding="{Binding LessonName}" FontSize="9" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding LessonName}" FontSize="10" IsReadOnly="True"/>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <TextBlock Text="{Binding Date}" FontSize="9" />
-                                <materialDesign:PackIcon Kind="DeleteCircle" Margin="15 15 0 0" Height="20" Width="20" x:Name="Delete" PreviewMouseDown="Delete_PreviewMouseDown"/>
+                                <TextBlock Text="{Binding DueDate}" FontSize="10" Margin="-10 0 0 0"/>
+                                <TextBlock Text="{Binding DescriptionSubtask}" x:Name="Description" FontSize="10" Margin="-10 20 0 0"/>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

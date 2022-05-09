@@ -1,4 +1,5 @@
-﻿using CourseProject.Model;
+﻿using CourseProject.ErrorMessage;
+using CourseProject.Model;
 using CourseProject.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -68,7 +69,7 @@ namespace CourseProject.View
          {
                 if (authorizationViewModel.Registration(Reg_Password.Password, Db_Password.Password))
                 {
-                    MessageBox.Show("Registration completed successfully!", "Information", MessageBoxButton.OK);
+                    MyMessageBox.Show("Registration completed successfully!", MessageBoxButton.OK);
                 }
          }
 
@@ -86,9 +87,9 @@ namespace CourseProject.View
                         MainWindow mainWindow = new MainWindow();
                         mainWindow.Show();
                     }
-                    else MessageBox.Show("Check entered data!", "Information", MessageBoxButton.OK);
+                    else MyMessageBox.Show("Check entered data!", MessageBoxButton.OK);
                 }
-                else MessageBox.Show("Enter data!", "Information", MessageBoxButton.OK);
+                else MyMessageBox.Show("Enter data!", MessageBoxButton.OK);
             }
 
         private void Sign_Up_Click(object sender, RoutedEventArgs e)

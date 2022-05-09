@@ -135,7 +135,7 @@ namespace CourseProject.ViewModel
             UnsatisfiedSubtasks.Add(subtask);
         }
 
-        public void RemoveTask()
+        public void RemoveTask(Model.Task selectedTask)
         {
             eFTaskRepository.RemoveById(SelectedTask);
             UnsatisfiedTasks.Remove(SelectedTask);

@@ -89,6 +89,9 @@
     <Compile Include="DB\EFTaskRepository.cs" />
     <Compile Include="DB\EFTimeTableRepository.cs" />
     <Compile Include="DB\EFUserRepository.cs" />
+    <Compile Include="ErrorMessage\MyMessageBox.xaml.cs">
+      <DependentUpon>MyMessageBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\Model.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -151,6 +154,10 @@
     <Compile Include="View\TimeTableView.xaml.cs">
       <DependentUpon>TimeTableView.xaml</DependentUpon>
     </Compile>
+    <Page Include="ErrorMessage\MyMessageBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\Langs\lang_EN.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

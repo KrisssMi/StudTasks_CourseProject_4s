@@ -1,4 +1,5 @@
 ﻿using CourseProject.DB;
+using CourseProject.ErrorMessage;
 using CourseProject.Model;
 using System;
 using System.Collections.Generic;
@@ -43,7 +44,7 @@ namespace CourseProject.View
 
         private void Exit_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            var x = MessageBox.Show("Do you really want to leave?", "Exit", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
+            var x = MyMessageBox.Show("Do you really want to leave?", MessageBoxButton.YesNo);
             if (x.Equals(MessageBoxResult.Yes))
             {
                 MainWindow.GetWindow(this).Close();
@@ -59,7 +60,7 @@ namespace CourseProject.View
 
         private void Support_PreviewMouseDown(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("created by Kristina Minevich\n2022, Minsk", "Support", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
+            MyMessageBox.Show("created by Kristina Minevich\n2022, Minsk", MessageBoxButton.OK);
         }
 
 

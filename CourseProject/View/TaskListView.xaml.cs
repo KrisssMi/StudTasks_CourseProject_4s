@@ -68,9 +68,9 @@ namespace CourseProject.View
 
         private void Save2_Click(object sender, RoutedEventArgs e)
         {
-                //Subtask subtask = new Subtask();
-                Model.Subtask subtask = new Model.Subtask { idTask = taskViewModel.SelectedTask.idTask };
-                taskViewModel.addSubtask(subtask);
+            //Subtask subtask = new Subtask();
+            Model.Subtask subtask = new Model.Subtask { idTask = taskViewModel.SelectedTask.idTask, Subtask1 = DiscriptionSubtask.Text, Task = taskViewModel.SelectedTask };
+            taskViewModel.addSubtask(subtask);
             Clear();
         }
         
@@ -131,7 +131,7 @@ namespace CourseProject.View
 
         private void Delete_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            taskViewModel.RemoveTask();
+            taskViewModel.RemoveTask(taskViewModel.SelectedTask);
         }
 
         private void TaskComplite_SelectionChanged(object sender, SelectionChangedEventArgs e)

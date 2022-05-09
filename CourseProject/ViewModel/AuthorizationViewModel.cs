@@ -9,6 +9,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Xml.Linq;
+using CourseProject.ErrorMessage;
 
 namespace CourseProject.ViewModel
 {
@@ -137,35 +138,31 @@ namespace CourseProject.ViewModel
                                     }
                                     else
                                     {
-                                        MessageBox.Show("User with this login already exists!", "Error",
-                                            MessageBoxButton.OK, MessageBoxImage.Error);
-                                        return false;
+                                MyMessageBox.Show("User with this login already exists!", MessageBoxButton.OK);
+                                return false;
                                     }
                                 }
                                 else
                                 {
-                                    MessageBox.Show("A user with that student card number is already there!", "Error",
-                                        MessageBoxButton.OK, MessageBoxImage.Error);
-                                    return false;
+                            MyMessageBox.Show("A user with that student card number is already there!", MessageBoxButton.OK);
+                            return false;
                                 }
                             }
                             else
                             {
-                                MessageBox.Show("Passwords must match!", "Error", MessageBoxButton.OK,
-                                    MessageBoxImage.Error);
-                                return false;
+                        MyMessageBox.Show("Passwords must match!", MessageBoxButton.OK);
+                        return false;
                             }
                         }
                         else
                         {
-                            MessageBox.Show("Student card number must contain 8 digits!", "Error", MessageBoxButton.OK,
-                                MessageBoxImage.Error);
-                            return false;
+                    MyMessageBox.Show("Student card number must contain 8 digits!", MessageBoxButton.OK);
+                    return false;
                         }
                     }
             else
             {
-                MessageBox.Show("Check entered data!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MyMessageBox.Show("Check entered data!", MessageBoxButton.OK);
                 return false;
             }
         }

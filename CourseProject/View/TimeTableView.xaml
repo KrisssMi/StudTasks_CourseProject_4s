@@ -12,35 +12,44 @@
       d:DesignHeight="715" d:DesignWidth="780"
       Title="TimeTableView" Background="White">
     <Page.Resources>
-         <databinding:DayConverter x:Key="DayConverter"></databinding:DayConverter>
-        <databinding:LessonConverter x:Key="LessonConverter"></databinding:LessonConverter>       
+        <databinding:DayConverter x:Key="DayConverter"></databinding:DayConverter>
+        <databinding:LessonConverter x:Key="LessonConverter"></databinding:LessonConverter>
     </Page.Resources>
-    
+
     <DockPanel LastChildFill="True">
-            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" DataContext="{Binding SelectedTimeTable}">
-                <TextBox IsReadOnly="True" VerticalContentAlignment="Center" Width="100" TextAlignment="Center" materialDesign:HintAssist.Hint="Day"  Cursor="Arrow" />
-                <TextBox IsReadOnly="True" VerticalContentAlignment="Center" Width="90" TextAlignment="Center" materialDesign:HintAssist.Hint="Time"  Cursor="Arrow" />
-                <TextBox VerticalContentAlignment="Center" Width="80" Text="{Binding Path=auditorium, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="Auditorium" />
-                <TextBox VerticalContentAlignment="Center" Width="80" Text="{Binding Path=lessonType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="Lesson type" Cursor="Arrow"/>
-                <TextBox VerticalContentAlignment="Center" Width="120" Text="{Binding Path=lessonName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="Subject name"/>
-           
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Top" DataContext="{Binding SelectedTimeTable}">
+            <TextBox IsReadOnly="True" VerticalContentAlignment="Top" Width="308" TextAlignment="Right" Margin="0 0 0 0" materialDesign:HintAssist.Hint="Day"  Cursor="Arrow" Height="25" RenderTransformOrigin="0.506,0.6" />
+            <TextBox IsReadOnly="True" VerticalContentAlignment="Center" Width="190" TextAlignment="Center" materialDesign:HintAssist.Hint="Time"  Cursor="Arrow" />
+            <TextBox VerticalContentAlignment="Center" Width="80" Text="{Binding auditorium, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" materialDesign:HintAssist.Hint="Auditorium" />
+            <TextBox VerticalContentAlignment="Center" Width="80" Text="{Binding lessonType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" materialDesign:HintAssist.Hint="Lesson type" Cursor="Arrow"/>
+            <TextBox VerticalContentAlignment="Center" Width="120" Text="{Binding lessonName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" materialDesign:HintAssist.Hint="Subject name"/>
+
         </StackPanel>
-        
-        
-            <ListBox Padding="0" DockPanel.Dock="Right" Width="auto" Name="Lessons" ItemsSource="{Binding TimeTables}" SelectedItem="{Binding SelectedTimeTable}" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="True" Background="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal" Margin="0" Height="13" CanVerticallyScroll="False"  OpacityMask="{x:Null}">
-                            <TextBlock  Margin="10,0,0,0" Width="80" Text="{Binding Path=lessonNumber, Converter={StaticResource LessonConverter}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
-                            <TextBlock Width="60" Text="{Binding Path=auditorium, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
-                            <TextBlock Width="40" Text="{Binding Path=lessonType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
-                            <TextBlock Width="310" Text="{Binding Path=lessonName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-            <StackPanel>
-                <ScrollViewer CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto">
+
+
+        <ListBox Padding="0" DockPanel.Dock="Right" Width="355" Name="Lessons" ItemsSource="{Binding TimeTables}" SelectedItem="{Binding SelectedTimeTable}" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True" Background="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Visible" RenderTransformOrigin="0.5,0.5">
+            <ListBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </ListBox.RenderTransform>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" Margin="0" Height="13" CanVerticallyScroll="False"  OpacityMask="{x:Null}">
+                        <TextBlock  Margin="10,0,0,0" Width="80" Text="{Binding Path=lessonNumber, Converter={StaticResource LessonConverter}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
+                        <TextBlock Width="60" Text="{Binding Path=auditorium, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
+                        <TextBlock Width="40" Text="{Binding Path=lessonType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
+                        <TextBlock Width="310" Text="{Binding Path=lessonName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel>
+            <Grid>
+                <ScrollViewer HorizontalAlignment="Left" CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" Width="310">
                     <StackPanel Orientation="Vertical">
                         <Label Height="115" Content="Monday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFA028FF" />
                         <Label Height="116" Content="Tuesday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFB04BFF"/>
@@ -48,8 +57,10 @@
                         <Label Height="116" Content="Thursday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFDEB4FF"/>
                         <Label Height="116" Content="Friday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFF4E7FF"/>
                         <Label Height="117" Content="Saturday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="White"/>
+
                     </StackPanel>
                 </ScrollViewer>
-            </StackPanel>
-        </DockPanel>
+            </Grid>
+        </StackPanel>
+    </DockPanel>
 </Page>

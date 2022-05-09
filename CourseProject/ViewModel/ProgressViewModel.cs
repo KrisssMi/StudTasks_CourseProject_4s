@@ -1,4 +1,5 @@
 ﻿using CourseProject.DB;
+using CourseProject.ErrorMessage;
 using CourseProject.Model;
 using System;
 using System.Collections.Generic;
@@ -114,7 +115,7 @@ namespace CourseProject.ViewModel
                     Update();
                 }
             }
-            else MessageBox.Show("Choose element!", "Error", MessageBoxButton.OK);
+            else MyMessageBox.Show("Choose element!", MessageBoxButton.OK);
         }
 
         public void minusComplitedTasks()       // Удаление завершенных заданий
@@ -124,7 +125,7 @@ namespace CourseProject.ViewModel
                 SelectedItem.ComplitedTasks -= 1;
                 Update();
             }
-            else MessageBox.Show("Choose element!", "Error", MessageBoxButton.OK);
+            else MyMessageBox.Show("Choose element!", MessageBoxButton.OK);
         }
 
         public void addNeededTasks()           // Добавление необходимых заданий
@@ -134,7 +135,7 @@ namespace CourseProject.ViewModel
                 SelectedItem.NeededTasks += 1;
                 Update();
             }
-            else MessageBox.Show("Choose element!", "Error", MessageBoxButton.OK);
+            else MyMessageBox.Show("Choose element!", MessageBoxButton.OK);
         }
 
         public void minusNeededTasks()          // Удаление необходимых заданий
@@ -148,7 +149,7 @@ namespace CourseProject.ViewModel
                 }
                 Update();
             }
-            else MessageBox.Show("Choose element!", "Error", MessageBoxButton.OK);
+            else MyMessageBox.Show("Choose element!", MessageBoxButton.OK);
         }
 
         public void RemoveById()                // Удаление прогресса по id
