@@ -4,14 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d633b253bcbb419d8e680aa802b75f04" Name="Diagram1" ZoomLevel="74">
-        <EntityTypeShape EntityType="StudTasksModel.Progress" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="StudTasksModel.Student" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="StudTasksModel.Subtask" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="StudTasksModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="StudTasksModel.Task" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="StudTasksModel.TimeTable" Width="1.5" PointX="3" PointY="8.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="StudTasksModel.User" Width="1.5" PointX="3" PointY="11.75" IsExpanded="true" />
+      <Diagram DiagramId="d633b253bcbb419d8e680aa802b75f04" Name="Diagram1" ZoomLevel="81">
+        <EntityTypeShape EntityType="StudTasksModel.Progress" Width="1.5" PointX="3.125" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudTasksModel.Student" Width="1.5" PointX="5.25" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudTasksModel.Subtask" Width="1.5" PointX="9.5" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudTasksModel.sysdiagrams" Width="1.5" PointX="3.125" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudTasksModel.Task" Width="1.5" PointX="7.5" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudTasksModel.TimeTable" Width="1.5" PointX="7.5" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudTasksModel.User" Width="1.5" PointX="5.25" PointY="8" IsExpanded="true" />
         <AssociationConnector Association="StudTasksModel.FK__Progress__idStud__114A936A" ManuallyRouted="false" />
         <AssociationConnector Association="StudTasksModel.FK__Task__idStudent__0B91BA14" ManuallyRouted="false" />
         <AssociationConnector Association="StudTasksModel.FK__TimeTable__idStu__08B54D69" ManuallyRouted="false" />

@@ -19,9 +19,17 @@ namespace CourseProject.ViewModel
         EFTimeTableRepository eFTimeTable = new EFTimeTableRepository();
         EFStudentRepository eFStudent = new EFStudentRepository();
 
+        public List<TimeTable> MondayTimeTable { get; set; }
+
         public TimeTableViewModel()
         {
             stud = eFStudent.GetStudentById((int)user.idStudent);
+
+           var timetables =  eFTimeTable.GetTimeTable(stud);
+
+            MondayTimeTable = timetables.Where(x => x.Day == 1).ToList();
+
+
         }
 
         private TimeTable selectedTimeTable;        // выбранная запись в таблице

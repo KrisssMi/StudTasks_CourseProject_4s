@@ -7,8 +7,7 @@
       
       xmlns:local="clr-namespace:CourseProject.View"
       mc:Ignorable="d" 
-      xmlns:databinding="clr-namespace:CourseProject.Converters"
-      
+      xmlns:databinding="clr-namespace:CourseProject.Converters" xmlns:viewmodel="clr-namespace:CourseProject.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:TimeTableViewModel}"
       d:DesignHeight="715" d:DesignWidth="780"
       Title="TimeTableView" Background="White" FontFamily="Palatino Linotype">
     <Page.Resources>
@@ -16,103 +15,40 @@
         <databinding:LessonConverter x:Key="LessonConverter"></databinding:LessonConverter>
     </Page.Resources>
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="9*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20*" />
-            <RowDefinition Height="15*" />
-            <RowDefinition Height="15*" />
-            <RowDefinition Height="15*" />
-            <RowDefinition Height="15*" />
-            <RowDefinition Height="15*" />
-            <RowDefinition Height="15*" />
-            <RowDefinition Height="15*" />
-            <RowDefinition Height="15*" />
-            <RowDefinition Height="15*" />
-            <RowDefinition Height="15*"/>
-            <RowDefinition Height="15*"/>
-            <RowDefinition Height="15*" />
-            <RowDefinition Height="15*" />
-            <RowDefinition Height="15*" />
-            <RowDefinition Height="15*"/>
-            <RowDefinition Height="15*"/>
-            <RowDefinition Height="15*" />
-            <RowDefinition Height="15*" />
-            <RowDefinition Height="15*" />
-            <RowDefinition Height="15*"/>
-            <RowDefinition Height="15*"/>
-            <RowDefinition Height="15*" />
-            <RowDefinition Height="15*" />
-            <RowDefinition Height="15*" />
-            <RowDefinition Height="15*"/>
-            <RowDefinition Height="15*"/>
-            <RowDefinition Height="15*" />
-            <RowDefinition Height="15*" />
-            <RowDefinition Height="15*" />
-            <RowDefinition Height="15*"/>
-            <RowDefinition Height="15*"/>
+            <RowDefinition Height="45*"/>
+            <RowDefinition Height="111*"/>
+            <RowDefinition Height="111*"/>
+            <RowDefinition Height="111*"/>
+            <RowDefinition Height="111*"/>
+            <RowDefinition Height="111*"/>
+            <RowDefinition Height="111*"/>
         </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="32*" />
-            <ColumnDefinition Width="26*"/>
-            <ColumnDefinition Width="34*" />
-            <ColumnDefinition Width="25*" />
-            <ColumnDefinition Width="19*" />
-            <ColumnDefinition Width="20*" />
-        </Grid.ColumnDefinitions>
-
-
-        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
-            <Label Content="Day" FontSize="18" Foreground="Black" BorderBrush="Black" />
-        </Grid>
-        <Grid Grid.Row="0" Grid.Column="1">
-            <Label Content="Time" FontSize="18" Foreground="Black" />
-        </Grid>
-        <Grid Grid.Row="0" Grid.Column="2">
-            <Label Content="Lesson name" FontSize="18" Foreground="Black" />
-        </Grid>
-        <Grid Grid.Row="0" Grid.Column="3">
-            <Label Content="Auditorium" FontSize="18" Foreground="Black" />
-        </Grid>
-        <Grid Grid.Row="0" Grid.Column="4">
-            <Label Content="Number" FontSize="18" Foreground="Black" />
-        </Grid>
-        <Grid Grid.Row="0" Grid.Column="5">
-            <Label Content="Type" FontSize="18" Foreground="Black" />
-        </Grid>
-
-
-        <Grid Grid.Column="0" Grid.RowSpan="6" Margin="0,29,0,0" Background="#FFA028FF">
-            <Label Content="Monday" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" FontStyle="Italic" Foreground="Black"/>
-        </Grid>
-
-        <Grid Grid.Column="0" Grid.RowSpan="7" Margin="0,22,0,22" Grid.Row="5" Background="#FFB04BFF">
-            <Label Content="Tuesday" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" FontStyle="Italic" Foreground="Black"/>
-        </Grid>
-
-        <Grid Grid.Column="0" Grid.RowSpan="7" Margin="0,22,0,22" Grid.Row="10" Background="#FFC780FF">
-            <Label Content="Wednesday" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" FontStyle="Italic" Foreground="Black"/>
-        </Grid>
-
-        <Grid Grid.Column="0" Grid.RowSpan="7" Margin="0,22,0,22" Grid.Row="15" Background="#FFDEB4FF">
-            <Label Content="Thursday" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" FontStyle="Italic" Foreground="Black"/>
-        </Grid>
-
-        <Grid Grid.Column="0" Grid.RowSpan="7" Margin="0,22,0,22" Grid.Row="20" Background="#FFF4E7FF">
-            <Label Content="Friday" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" FontStyle="Italic" Foreground="Black"/>
-        </Grid>
-
-        <Grid Grid.Column="0" Grid.RowSpan="7" Margin="0,22,0,22" Grid.Row="25" Background="White">
-            <Label Content="Saturday" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" FontStyle="Italic" Foreground="Black"/>
-        </Grid>
-
-        <Grid Grid.ColumnSpan="6" Grid.Row="31" Background="GreenYellow" RenderTransformOrigin="0.558,0.548">
-            <Button Content="Save" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Background="GreenYellow" Foreground="Black" Margin="680,0,0,0" Width="130"/>
-            <materialDesign:PackIcon Kind="ContentSaveEdit" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,69,0" Height="20" Width="20"/>
-        </Grid>
-        
-        
+        <DataGrid ItemsSource="{Binding MondayTimeTable}" Grid.Column="1" Margin="0,0,0,42" Grid.RowSpan="2" AutoGenerateColumns="True">
+           
+         
+        </DataGrid>
 
     </Grid>
+
+
+
+    <!--<DataGrid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="11" ItemsSource="{Binding TimeTable}" SelectedItem="{Binding SelectedTimetable}" AutoGenerateColumns="False" Background="White" Margin="0,0,0,22">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Day" Binding="{Binding Day}"/>
+                <DataGridTextColumn Header="Time" Binding="{Binding Time}"/>
+                <DataGridTextColumn Header="Lesson name" Binding="{Binding LessonName}"/>
+                <DataGridTextColumn Header="Lesson type" Binding="{Binding LessonType}"/>
+                <DataGridTextColumn Header="Auditorium" Binding="{Binding Auditorium}"/>
+                <DataGridTextColumn Header="Week" Binding="{Binding Week}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        -->
 
     <!-- <DockPanel LastChildFill="True">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Top" DataContext="{Binding SelectedTimeTable}">

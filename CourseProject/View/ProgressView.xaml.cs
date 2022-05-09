@@ -87,12 +87,17 @@ namespace CourseProject.View
         private void AddProgress_Click(object sender, RoutedEventArgs e)
         {
             ClearNotification();
-            if (LessonsBox.SelectedIndex != 0 && !IsProgressInProgressList(LessonsBox.SelectedItem as string))
-            {
-                Progress progress = new Progress { ComplitedTasks = 0, idStudent = stud.idStudent, LessonName = LessonsBox.SelectedValue.ToString(), NeededTasks = 1, TaskProgress = 0 };
+            //if (LessonsBox.SelectedIndex != 0 && !IsProgressInProgressList(LessonsBox.SelectedItem as string))
+            //{
+            //    Progress progress = new Progress { ComplitedTasks = 0, idStudent = stud.idStudent, LessonName = LessonsBox.SelectedValue.ToString(), NeededTasks = 1, TaskProgress = 0 };
+            //    progressViewModel.addProgress(progress);
+            //    progressViewModel.OrderProgress();
+            //}
+            
+                Progress progress = new Progress { ComplitedTasks = 0, idStudent = stud.idStudent, NeededTasks = 1, TaskProgress = 0 };
                 progressViewModel.addProgress(progress);
                 progressViewModel.OrderProgress();
-            }
+           
         }
 
         private void NeededTasksMinus_PreviewMouseDown(object sender, RoutedEventArgs e)

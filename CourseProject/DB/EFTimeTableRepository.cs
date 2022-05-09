@@ -18,7 +18,7 @@ namespace CourseProject.DB
             context = new StudTasksEntities();
         }
 
-        public IEnumerable<TimeTable> getTimeTable()
+        public IEnumerable<TimeTable> getTimeTable()            // получение списка таблицы
         {
             return context.TimeTable.Local;
         }
@@ -56,6 +56,7 @@ namespace CourseProject.DB
             tmp.LessonName = timeTable.LessonName;
             tmp.Auditorium = timeTable.Auditorium;
             tmp.LessonType = timeTable.LessonType;
+            tmp.Week = timeTable.Week;
             Save();
         }
 
@@ -66,6 +67,13 @@ namespace CourseProject.DB
         }
 
 
+
+        public IEnumerable<TimeTable> GetTimeTable(Student student)     // получение предметов по студенту
+        {
+
+            // сделать
+            return context.TimeTable.Where(x => x.idStudent == student.idStudent);
+        }
 
         public IEnumerable<string> GetSubjects(Student student)     // получение предметов по студенту
         {

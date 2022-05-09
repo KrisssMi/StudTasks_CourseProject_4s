@@ -31,7 +31,7 @@ namespace CourseProject.DB
         public void addStudent(Student student)         // добавление студента
         {
             context.Student.Add(student);
-            context.SaveChanges();                    // сохранение изменений в базе данных
+            context.SaveChanges();                      // сохранение изменений в базе данных
         }
 
         public void Update(Student student)             // обновление студента

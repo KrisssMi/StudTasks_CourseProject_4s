@@ -22,33 +22,16 @@ namespace CourseProject.DB
         {
             context.Task.Distinct().OrderByDescending(p => p.DueDate).Load();   // Загружаем все задачи в контекст
             return context.Task;                                                // Возвращаем все задачи
-        }
-
-        public IEnumerable<Model.Subtask> getSubtasks()                         // Получение все подзадачи
-        {
-            context.Subtask.Distinct().Load();                                  // Загружаем все подзадачи в контекст
-            return context.Subtask;                                             // Возвращаем все подзадачи
-        }
-        
+        }    
 
         public void addTask(Model.Task task)            // добавление задачи
         {
             context.Task.Add(task);
             context.SaveChanges();
         }
-
-        public void addSubtask(Subtask subtask)         // добавление подзадачи
-        {
-            context.Subtask.Add(subtask);
-            context.SaveChanges();
-        }
+     
 
         public void SaveTask()                          // Сохранение изменений в БД
-        {
-            context.SaveChanges();
-        }
-
-        public void SaveSubtask()                      // Сохранение изменений подзадачи в БД
         {
             context.SaveChanges();
         }
@@ -57,12 +40,6 @@ namespace CourseProject.DB
         public void Update(Model.Task task)
         {
             context.Entry(task).State = EntityState.Modified;                      // Обновляем задачу
-            context.SaveChanges();
-        }
-
-        public void Update(Model.Subtask subtask)
-        {
-            context.Entry(subtask).State = EntityState.Modified;                   // Обновляем задачу
             context.SaveChanges();
         }
 

@@ -17,10 +17,12 @@ namespace CourseProject.ViewModel
         Student stud = new Student();
 
         EFTaskRepository eFTaskRepository = new EFTaskRepository();
+        EFSubtaskRepository eFSubtaskRepository = new EFSubtaskRepository();
         EFTimeTableRepository eFTimeTable = new EFTimeTableRepository();
         EFStudentRepository eFStudent = new EFStudentRepository();
 
         private Model.Task selectedTask;
+        private Model.Subtask selectedSubtask;
 
         private ObservableCollection<Model.Task> unsatisfiedTasks = new ObservableCollection<Model.Task>();
         private ObservableCollection<Model.Subtask> unsatisfiedSubtasks = new ObservableCollection<Model.Subtask>();
@@ -37,7 +39,7 @@ namespace CourseProject.ViewModel
         }
 
 
-        public ObservableCollection<Model.Subtask> UnsatisfiedSubtasks    // невыполненные задания
+        public ObservableCollection<Model.Subtask> UnsatisfiedSubtasks    // невыполненные подзадания
         {
             get { return unsatisfiedSubtasks; }
             set
@@ -48,6 +50,7 @@ namespace CourseProject.ViewModel
         }
 
 
+
         public Model.Task SelectedTask                                    // выбранное задание
         {
             get { return selectedTask; }
@@ -55,6 +58,17 @@ namespace CourseProject.ViewModel
             {
                 selectedTask = value;
                 OnPropertyChanged("SelectedTask");
+            }
+        }
+
+
+        public Model.Subtask SelectedSubtask                                    // выбранное задание
+        {
+            get { return selectedSubtask; }
+            set
+            {
+                selectedSubtask = value;
+                OnPropertyChanged("SelectedSubtask");
             }
         }
 
@@ -131,7 +145,7 @@ namespace CourseProject.ViewModel
 
         public void addSubtask(Model.Subtask subtask)
         {
-            eFTaskRepository.addSubtask(subtask);
+            eFSubtaskRepository.addSubtask(subtask);
             UnsatisfiedSubtasks.Add(subtask);
         }
 
@@ -139,6 +153,12 @@ namespace CourseProject.ViewModel
         {
             eFTaskRepository.RemoveById(SelectedTask);
             UnsatisfiedTasks.Remove(SelectedTask);
+        }
+
+        public void RemoveSubtask(Model.Subtask selectedSubtask)
+        {
+            eFSubtaskRepository.RemoveById(SelectedSubtask);
+            UnsatisfiedSubtasks.Remove(SelectedSubtask);
         }
 
         public void OrderTasks(string subject)
