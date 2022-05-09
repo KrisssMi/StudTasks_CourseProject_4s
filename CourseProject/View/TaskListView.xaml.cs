@@ -1,4 +1,5 @@
 ﻿using CourseProject.DB;
+using CourseProject.ErrorMessage;
 using CourseProject.Model;
 using CourseProject.ViewModel;
 using System;
@@ -25,7 +26,7 @@ namespace CourseProject.View
 
         TaskViewModel taskViewModel = new TaskViewModel();
         EFStudentRepository eFStudent = new EFStudentRepository();
-        
+
         public TaskListView()
         {
             stud = eFStudent.GetStudentById((int)user.idStudent);
@@ -70,10 +71,17 @@ namespace CourseProject.View
         {
             //Subtask subtask = new Subtask();
             Model.Subtask subtask = new Model.Subtask { idTask = taskViewModel.SelectedTask.idTask, Subtask1 = DiscriptionSubtask.Text, Task = taskViewModel.SelectedTask };
+            // если ни на что не указывает, то ошибка:
+            if (subtask.Subtask1 == String.Empty)
+            {
+                MyMessageBox.Show("Enter a description of the subtask!", MessageBoxButton.OK);
+            }
+
+
             taskViewModel.addSubtask(subtask);
             Clear();
         }
-        
+
 
 
         private void LessonsBox_Loaded(object sender, RoutedEventArgs e)
@@ -84,18 +92,19 @@ namespace CourseProject.View
             LessonsBox.SelectedIndex = 0;
         }
 
-        
+
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            if (Deadline.Text != String.Empty && Title.Text != String.Empty && Details.Text != String.Empty)
+            if (Deadline.Text != String.Empty && Title.Text != String.Empty && ImportanceBox.Text != String.Empty)
             {
-                
-                // добавить LessonName = LessonsBox.SelectedValue.ToString(), - добавление задачи по определённому предмету
-                Model.Task task = new Model.Task { idStudent = stud.idStudent, isComplite = false, DueDate = Convert.ToDateTime(Deadline.SelectedDate), Content = Details.Text, Title = Title.Text };
-                taskViewModel.addTask(task);
-                Clear();
+                {
+                    // добавить LessonName = LessonsBox.SelectedValue.ToString(), - добавление задачи по определённому предмету
+                    Model.Task task = new Model.Task { idStudent = stud.idStudent, isComplite = false, DueDate = Convert.ToDateTime(Deadline.SelectedDate), Content = Details.Text, Title = Title.Text, Importance = Convert.ToInt32(ImportanceBox.Text) };
+                    taskViewModel.addTask(task);
+                    Clear();
+                }
             }
-            else MessageBox.Show("Fill in all the fields", "Information", MessageBoxButton.OK);
+            else MyMessageBox.Show("Fill in all the fields", MessageBoxButton.OK);
         }
 
         private void Is_complite_Checked(object sender, RoutedEventArgs e)
@@ -141,6 +150,11 @@ namespace CourseProject.View
                 taskViewModel.UpdateFalse();
             }
             else taskViewModel.UpdateTrue();
+        }
+
+        private void FilterByImportance_SelectionChanged(object sender, SelectionChangedEventArgs e) // поиск по важности
+        {
+                taskViewModel.OrderTasks(FilterByImportance.SelectedValue.ToString());
         }
     }
 } 

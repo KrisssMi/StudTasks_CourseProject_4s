@@ -66,8 +66,8 @@ namespace CourseProject.DB
         }
 
 
-        
-        public IEnumerable<string> GetSubjects(Student student)
+
+        public IEnumerable<string> GetSubjects(Student student)     // получение предметов по студенту
         {
             return context.TimeTable.Where(p =>  (p.LessonName != "")).OrderBy(p => p.LessonName).Select(p => p.LessonName).Distinct().ToList();
         }

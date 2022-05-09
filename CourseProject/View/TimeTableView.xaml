@@ -10,13 +10,111 @@
       xmlns:databinding="clr-namespace:CourseProject.Converters"
       
       d:DesignHeight="715" d:DesignWidth="780"
-      Title="TimeTableView" Background="White">
+      Title="TimeTableView" Background="White" FontFamily="Palatino Linotype">
     <Page.Resources>
         <databinding:DayConverter x:Key="DayConverter"></databinding:DayConverter>
         <databinding:LessonConverter x:Key="LessonConverter"></databinding:LessonConverter>
     </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20*" />
+            <RowDefinition Height="15*" />
+            <RowDefinition Height="15*" />
+            <RowDefinition Height="15*" />
+            <RowDefinition Height="15*" />
+            <RowDefinition Height="15*" />
+            <RowDefinition Height="15*" />
+            <RowDefinition Height="15*" />
+            <RowDefinition Height="15*" />
+            <RowDefinition Height="15*" />
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="15*" />
+            <RowDefinition Height="15*" />
+            <RowDefinition Height="15*" />
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="15*" />
+            <RowDefinition Height="15*" />
+            <RowDefinition Height="15*" />
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="15*" />
+            <RowDefinition Height="15*" />
+            <RowDefinition Height="15*" />
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="15*" />
+            <RowDefinition Height="15*" />
+            <RowDefinition Height="15*" />
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="15*"/>
+        </Grid.RowDefinitions>
 
-    <DockPanel LastChildFill="True">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="32*" />
+            <ColumnDefinition Width="26*"/>
+            <ColumnDefinition Width="34*" />
+            <ColumnDefinition Width="25*" />
+            <ColumnDefinition Width="19*" />
+            <ColumnDefinition Width="20*" />
+        </Grid.ColumnDefinitions>
+
+
+        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+            <Label Content="Day" FontSize="18" Foreground="Black" BorderBrush="Black" />
+        </Grid>
+        <Grid Grid.Row="0" Grid.Column="1">
+            <Label Content="Time" FontSize="18" Foreground="Black" />
+        </Grid>
+        <Grid Grid.Row="0" Grid.Column="2">
+            <Label Content="Lesson name" FontSize="18" Foreground="Black" />
+        </Grid>
+        <Grid Grid.Row="0" Grid.Column="3">
+            <Label Content="Auditorium" FontSize="18" Foreground="Black" />
+        </Grid>
+        <Grid Grid.Row="0" Grid.Column="4">
+            <Label Content="Number" FontSize="18" Foreground="Black" />
+        </Grid>
+        <Grid Grid.Row="0" Grid.Column="5">
+            <Label Content="Type" FontSize="18" Foreground="Black" />
+        </Grid>
+
+
+        <Grid Grid.Column="0" Grid.RowSpan="6" Margin="0,29,0,0" Background="#FFA028FF">
+            <Label Content="Monday" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" FontStyle="Italic" Foreground="Black"/>
+        </Grid>
+
+        <Grid Grid.Column="0" Grid.RowSpan="7" Margin="0,22,0,22" Grid.Row="5" Background="#FFB04BFF">
+            <Label Content="Tuesday" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" FontStyle="Italic" Foreground="Black"/>
+        </Grid>
+
+        <Grid Grid.Column="0" Grid.RowSpan="7" Margin="0,22,0,22" Grid.Row="10" Background="#FFC780FF">
+            <Label Content="Wednesday" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" FontStyle="Italic" Foreground="Black"/>
+        </Grid>
+
+        <Grid Grid.Column="0" Grid.RowSpan="7" Margin="0,22,0,22" Grid.Row="15" Background="#FFDEB4FF">
+            <Label Content="Thursday" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" FontStyle="Italic" Foreground="Black"/>
+        </Grid>
+
+        <Grid Grid.Column="0" Grid.RowSpan="7" Margin="0,22,0,22" Grid.Row="20" Background="#FFF4E7FF">
+            <Label Content="Friday" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" FontStyle="Italic" Foreground="Black"/>
+        </Grid>
+
+        <Grid Grid.Column="0" Grid.RowSpan="7" Margin="0,22,0,22" Grid.Row="25" Background="White">
+            <Label Content="Saturday" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" FontStyle="Italic" Foreground="Black"/>
+        </Grid>
+
+        <Grid Grid.ColumnSpan="6" Grid.Row="31" Background="GreenYellow" RenderTransformOrigin="0.558,0.548">
+            <Button Content="Save" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Background="GreenYellow" Foreground="Black" Margin="680,0,0,0" Width="130"/>
+            <materialDesign:PackIcon Kind="ContentSaveEdit" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,69,0" Height="20" Width="20"/>
+        </Grid>
+        
+        
+
+    </Grid>
+
+    <!-- <DockPanel LastChildFill="True">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Top" DataContext="{Binding SelectedTimeTable}">
             <TextBox IsReadOnly="True" VerticalContentAlignment="Top" Width="308" TextAlignment="Right" Margin="0 0 0 0" materialDesign:HintAssist.Hint="Day"  Cursor="Arrow" Height="25" RenderTransformOrigin="0.506,0.6" />
             <TextBox IsReadOnly="True" VerticalContentAlignment="Center" Width="190" TextAlignment="Center" materialDesign:HintAssist.Hint="Time"  Cursor="Arrow" />
@@ -27,15 +125,7 @@
         </StackPanel>
 
 
-        <ListBox Padding="0" DockPanel.Dock="Right" Width="355" Name="Lessons" ItemsSource="{Binding TimeTables}" SelectedItem="{Binding SelectedTimeTable}" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True" Background="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Visible" RenderTransformOrigin="0.5,0.5">
-            <ListBox.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleX="-1"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </ListBox.RenderTransform>
+        <ListBox Padding="0" DockPanel.Dock="Right" Width="auto" Name="Lessons" ItemsSource="{Binding TimeTables}" SelectedItem="{Binding SelectedTimeTable}" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="True" Background="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" Margin="0" Height="13" CanVerticallyScroll="False"  OpacityMask="{x:Null}">
@@ -49,7 +139,7 @@
         </ListBox>
         <StackPanel>
             <Grid>
-                <ScrollViewer HorizontalAlignment="Left" CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" Width="310">
+                <ScrollViewer CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto">
                     <StackPanel Orientation="Vertical">
                         <Label Height="115" Content="Monday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFA028FF" />
                         <Label Height="116" Content="Tuesday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFB04BFF"/>
@@ -63,4 +153,5 @@
             </Grid>
         </StackPanel>
     </DockPanel>
+    .-->
 </Page>

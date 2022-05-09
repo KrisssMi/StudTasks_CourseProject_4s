@@ -46,7 +46,7 @@ namespace CourseProject.ViewModel
                 OnPropertyChanged("Subtasks");
             }
         }
-        
+
 
         public Model.Task SelectedTask                                    // выбранное задание
         {
@@ -152,6 +152,27 @@ namespace CourseProject.ViewModel
             else
             {
                 foreach (Model.Task task in eFTaskRepository.getEnum(stud, subject))
+                    UnsatisfiedTasks.Add(task);
+            }
+        }
+
+        
+        public void OrderByImportance(int imp)
+        {
+            UnsatisfiedTasks.Clear();
+            if (imp.Equals("1"))
+            {
+                foreach (Model.Task task in eFTaskRepository.getEnumByImportance(stud, imp))
+                    UnsatisfiedTasks.Add(task);
+            }
+            else if (imp.Equals("2"))
+            {
+                foreach (Model.Task task in eFTaskRepository.getEnumByImportance(stud, imp))
+                    UnsatisfiedTasks.Add(task);
+            }
+            else if (imp.Equals("3"))
+            {
+                foreach (Model.Task task in eFTaskRepository.getEnumByImportance(stud, imp))
                     UnsatisfiedTasks.Add(task);
             }
         }

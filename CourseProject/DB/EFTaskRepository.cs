@@ -120,5 +120,10 @@ namespace CourseProject.DB
         {
             return context.Task.Where(p => p.idStudent == student.idStudent && p.LessonName == subject);
         }
+
+        public IEnumerable<Model.Task> getEnumByImportance(Student student, int importance) // Получение задач по важности
+        {
+            return context.Task.Where(p => p.idStudent == student.idStudent && p.Importance == importance);
+        }
     }
 }

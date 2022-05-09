@@ -24,7 +24,7 @@ namespace CourseProject.ViewModel
             stud = eFStudent.GetStudentById((int)user.idStudent);
         }
 
-        private TimeTable selectedTimeTable;
+        private TimeTable selectedTimeTable;        // выбранная запись в таблице
 
         private ObservableCollection<TimeTable> timeTables = new ObservableCollection<TimeTable>();
 
