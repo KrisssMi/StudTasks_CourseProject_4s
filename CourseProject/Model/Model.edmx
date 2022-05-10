@@ -28,14 +28,6 @@
           <Property Name="Phone" Type="nvarchar" MaxLength="20" />
           <Property Name="Description" Type="nvarchar" MaxLength="100" />
         </EntityType>
-        <EntityType Name="Subtask">
-          <Key>
-            <PropertyRef Name="idSubtask" />
-          </Key>
-          <Property Name="idSubtask" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="idTask" Type="int" Nullable="false" />
-          <Property Name="Subtask" Type="nvarchar" MaxLength="100" />
-        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -92,18 +84,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Subtask__idTask__0E6E26BF">
-          <End Role="Task" Type="Self.Task" Multiplicity="1" />
-          <End Role="Subtask" Type="Self.Subtask" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Task">
-              <PropertyRef Name="idTask" />
-            </Principal>
-            <Dependent Role="Subtask">
-              <PropertyRef Name="idTask" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Task__idStudent__0B91BA14">
           <End Role="Student" Type="Self.Student" Multiplicity="1" />
           <End Role="Task" Type="Self.Task" Multiplicity="*" />
@@ -143,7 +123,6 @@
         <EntityContainer Name="Хранилище StudTasksModelContainer">
           <EntitySet Name="Progress" EntityType="Self.Progress" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Subtask" EntityType="Self.Subtask" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TimeTable" EntityType="Self.TimeTable" Schema="dbo" store:Type="Tables" />
@@ -151,10 +130,6 @@
           <AssociationSet Name="FK__Progress__idStud__114A936A" Association="Self.FK__Progress__idStud__114A936A">
             <End Role="Student" EntitySet="Student" />
             <End Role="Progress" EntitySet="Progress" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Subtask__idTask__0E6E26BF" Association="Self.FK__Subtask__idTask__0E6E26BF">
-            <End Role="Task" EntitySet="Task" />
-            <End Role="Subtask" EntitySet="Subtask" />
           </AssociationSet>
           <AssociationSet Name="FK__Task__idStudent__0B91BA14" Association="Self.FK__Task__idStudent__0B91BA14">
             <End Role="Student" EntitySet="Student" />
@@ -202,15 +177,6 @@
           <NavigationProperty Name="TimeTable" Relationship="Self.FK__TimeTable__idStu__08B54D69" FromRole="Student" ToRole="TimeTable" />
           <NavigationProperty Name="User" Relationship="Self.FK__User__idStudent__05D8E0BE" FromRole="Student" ToRole="User" />
         </EntityType>
-        <EntityType Name="Subtask">
-          <Key>
-            <PropertyRef Name="idSubtask" />
-          </Key>
-          <Property Name="idSubtask" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idTask" Type="Int32" Nullable="false" />
-          <Property Name="Subtask1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Task" Relationship="Self.FK__Subtask__idTask__0E6E26BF" FromRole="Subtask" ToRole="Task" />
-        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -234,7 +200,6 @@
           <Property Name="Content" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Student" Relationship="Self.FK__Task__idStudent__0B91BA14" FromRole="Task" ToRole="Student" />
-          <NavigationProperty Name="Subtask" Relationship="Self.FK__Subtask__idTask__0E6E26BF" FromRole="Task" ToRole="Subtask" />
         </EntityType>
         <EntityType Name="TimeTable">
           <Key>
@@ -307,22 +272,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Subtask__idTask__0E6E26BF">
-          <End Role="Task" Type="Self.Task" Multiplicity="1" />
-          <End Role="Subtask" Type="Self.Subtask" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Task">
-              <PropertyRef Name="idTask" />
-            </Principal>
-            <Dependent Role="Subtask">
-              <PropertyRef Name="idTask" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="StudTasksEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Progress" EntityType="Self.Progress" />
           <EntitySet Name="Student" EntityType="Self.Student" />
-          <EntitySet Name="Subtask" EntityType="Self.Subtask" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Task" EntityType="Self.Task" />
           <EntitySet Name="TimeTable" EntityType="Self.TimeTable" />
@@ -342,10 +294,6 @@
           <AssociationSet Name="FK__User__idStudent__05D8E0BE" Association="Self.FK__User__idStudent__05D8E0BE">
             <End Role="Student" EntitySet="Student" />
             <End Role="User" EntitySet="User" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Subtask__idTask__0E6E26BF" Association="Self.FK__Subtask__idTask__0E6E26BF">
-            <End Role="Task" EntitySet="Task" />
-            <End Role="Subtask" EntitySet="Subtask" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -376,15 +324,6 @@
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Subtask">
-            <EntityTypeMapping TypeName="StudTasksModel.Subtask">
-              <MappingFragment StoreEntitySet="Subtask">
-                <ScalarProperty Name="idSubtask" ColumnName="idSubtask" />
-                <ScalarProperty Name="idTask" ColumnName="idTask" />
-                <ScalarProperty Name="Subtask1" ColumnName="Subtask" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

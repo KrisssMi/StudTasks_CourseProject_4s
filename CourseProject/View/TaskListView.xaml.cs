@@ -38,56 +38,22 @@ namespace CourseProject.View
         {
             ToNewTask.Visibility = Visibility.Hidden;
             NewTask.Visibility = Visibility.Visible;
-            ToNewSubtask.Visibility = Visibility.Hidden;
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             ToNewTask.Visibility = Visibility.Visible;
             NewTask.Visibility = Visibility.Hidden;
-            ToNewSubtask.Visibility = Visibility.Visible;
             Clear();
         }
 
-
-        private void ToNewSubtask_Click(object sender, RoutedEventArgs e)
-        {
-            ToNewSubtask.Visibility = Visibility.Hidden;
-            NewSubtask.Visibility = Visibility.Visible;
-            ToNewTask.Visibility = Visibility.Hidden;
-        }
-
-
-        private void Cancel2_Click(object sender, RoutedEventArgs e)
-        {
-            ToNewSubtask.Visibility = Visibility.Visible;
-            NewSubtask.Visibility = Visibility.Hidden;
-            ToNewTask.Visibility = Visibility.Visible;
-            Clear();
-        }
-
-
-        private void Save2_Click(object sender, RoutedEventArgs e)
-        {
-            //Subtask subtask = new Subtask();
-            Model.Subtask subtask = new Model.Subtask { idTask = taskViewModel.SelectedTask.idTask, Subtask1 = DiscriptionSubtask.Text, Task = taskViewModel.SelectedTask };
-            // если ни на что не указывает, то ошибка:
-            if (subtask.Subtask1 == String.Empty)
-            {
-                MyMessageBox.Show("Enter a description of the subtask!", MessageBoxButton.OK);
-            }
-
-
-            taskViewModel.addSubtask(subtask);
-            Clear();
-        }
 
 
 
         private void LessonsBox_Loaded(object sender, RoutedEventArgs e)
         {
             List<string> taskSubjects = new List<string>();
-            //taskSubjects.AddRange(taskViewModel.GetSubjects());
+            taskSubjects.AddRange(taskViewModel.GetSubjects());
             LessonsBox.ItemsSource = taskSubjects;
             LessonsBox.SelectedIndex = 0;
         }
@@ -98,8 +64,8 @@ namespace CourseProject.View
             if (Deadline.Text != String.Empty && Title.Text != String.Empty && ImportanceBox.Text != String.Empty)
             {
                 {
-                    // добавить LessonName = LessonsBox.SelectedValue.ToString(), - добавление задачи по определённому предмету
-                    Model.Task task = new Model.Task { idStudent = stud.idStudent, isComplite = false, DueDate = Convert.ToDateTime(Deadline.SelectedDate), Content = Details.Text, Title = Title.Text, Importance = Convert.ToInt32(ImportanceBox.Text) };
+                    
+                    Model.Task task = new Model.Task { idStudent = stud.idStudent, isComplite = false, LessonName = LessonsBox.SelectedValue.ToString(), DueDate = Convert.ToDateTime(Deadline.SelectedDate), Content = Details.Text, Title = Title.Text, Importance = Convert.ToInt32(ImportanceBox.Text) };
                     taskViewModel.addTask(task);
                     Clear();
                 }
@@ -118,7 +84,6 @@ namespace CourseProject.View
             Details.Text = "";
             LessonsBox.SelectedIndex = 0;
         }
-
 
         private void Is_complite_Unchecked(object sender, RoutedEventArgs e)
         {
@@ -152,9 +117,9 @@ namespace CourseProject.View
             else taskViewModel.UpdateTrue();
         }
 
-        private void FilterByImportance_SelectionChanged(object sender, SelectionChangedEventArgs e) // поиск по важности
+        private void FilterByImportance_SelectionChanged(object sender, SelectionChangedEventArgs e)                    // поиск по важности
         {
-                taskViewModel.OrderTasks(FilterByImportance.SelectedValue.ToString());
+                taskViewModel.OrderByImportance(FilterByImportance.SelectedIndex +1 );
         }
     }
-} 
+}

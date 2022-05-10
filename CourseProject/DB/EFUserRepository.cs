@@ -56,8 +56,12 @@ namespace CourseProject.DB
         }
 
         public void RemoveUserById(Student student)     // удаление пользователя по его id
-        {
-            context.User.Remove(GetUserById(student.idStudent));
+        { 
+            var user = context.User.FirstOrDefault(x => x.idStudent == student.idStudent);
+            if (user!=null)
+            {
+                context.User.Remove(GetUserById(student.idStudent));
+            }
             context.SaveChanges();
         }
 

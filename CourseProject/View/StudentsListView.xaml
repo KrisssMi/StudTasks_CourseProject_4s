@@ -7,7 +7,7 @@
       xmlns:local="clr-namespace:CourseProject.View"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="830"
-      Title="StudentsListView" Background="{x:Null}">
+      Title="StudentsListView" Background="{x:Null}" FontFamily="Palatino Linotype" FontSize="17">
 
     <Grid>
         <DataGrid x:Name="Students_Grid" AutoGenerateColumns="False" ItemsSource="{Binding Students}" SelectedItem="{Binding SelectedItem}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" CanUserAddRows="False" LostFocus="Students_Grid_LostFocus" SelectedCellsChanged="Students_Grid_SelectionChanged" Background="{x:Null}">
@@ -17,8 +17,6 @@
                 <DataGridTextColumn Binding="{Binding Surname}" Header="Surname" Width="120"/>
                 <DataGridTextColumn Binding="{Binding Phone}" Header="Phone" Width="120"/>
                 <DataGridTextColumn Binding="{Binding Email}" Header="Email" Width="120"/>
-                <DataGridTextColumn Binding="{Binding Login}" Header="Login" Width="120"/>
-                <DataGridTextColumn Binding="{Binding Password}" Header="Password" Width="120"/>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

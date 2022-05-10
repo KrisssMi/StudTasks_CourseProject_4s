@@ -40,7 +40,7 @@
                                                 </StackPanel>
                                             </StackPanel>
                                             <StackPanel Orientation="Horizontal">
-                                                <Label Width="70" Content="complite"/>
+                                                <Label Width="70" Content="complete"/>
                                                 <TextBlock Width="30" VerticalAlignment="Center" Text="{Binding ComplitedTasks}" />
                                                 <StackPanel Orientation="Vertical">
                                                     <materialDesign:PackIcon Kind="Add" x:Name="CompletedTasksPlus" PreviewMouseDown="CompletedTasksPlus_PreviewMouseDown" Height="15" Width="15"></materialDesign:PackIcon>

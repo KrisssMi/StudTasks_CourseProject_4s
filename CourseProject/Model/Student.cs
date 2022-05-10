@@ -42,14 +42,17 @@ namespace CourseProject.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<User> User { get; set; }
 
-        public Student(int idstudent, string name, string surname, string phone, string email)
+        public Student(int idstudent, string name, string surname, string email, string phone)
         {
-            idStudent = idstudent;
-            Name = name;
-            Surname = surname;
-            Phone = phone;
-            Email = email;
-            isAdmin = false;
+            this.idStudent = idstudent;
+            {
+                idStudent = idstudent;
+                Name = name;
+                Surname = surname;
+                Email = email;
+                Phone = phone;
+                isAdmin = false;
+            }
         }
 
 

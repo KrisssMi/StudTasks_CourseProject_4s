@@ -20,16 +20,24 @@ namespace CourseProject.ViewModel
         EFStudentRepository eFStudent = new EFStudentRepository();
 
         public List<TimeTable> MondayTimeTable { get; set; }
+        public List<TimeTable> TuesdayTimeTable { get; set; }
+        public List<TimeTable> WednesdayTimeTable { get; set; }
+        public List<TimeTable> ThursdayTimeTable { get; set; }
+        public List<TimeTable> FridayTimeTable { get; set; }
+        public List<TimeTable> SaturdayTimeTable { get; set; }
+
 
         public TimeTableViewModel()
         {
-            stud = eFStudent.GetStudentById((int)user.idStudent);
-
+           stud = eFStudent.GetStudentById((int)user.idStudent);
            var timetables =  eFTimeTable.GetTimeTable(stud);
-
-            MondayTimeTable = timetables.Where(x => x.Day == 1).ToList();
-
-
+            
+           MondayTimeTable = timetables.Where(x => x.Day == 1).ToList();        // Получаем все занятия на понедельник
+           TuesdayTimeTable = timetables.Where(x => x.Day == 2).ToList();       // Получаем все занятия на вторник
+           WednesdayTimeTable = timetables.Where(x => x.Day == 3).ToList();     // Получаем все занятия на среду
+           ThursdayTimeTable = timetables.Where(x => x.Day == 4).ToList();      // Получаем все занятия на четверг
+           FridayTimeTable = timetables.Where(x => x.Day == 5).ToList();        // Получаем все занятия на пятницу
+           SaturdayTimeTable = timetables.Where(x => x.Day == 6).ToList();      // Получаем все занятия на субботу
         }
 
         private TimeTable selectedTimeTable;        // выбранная запись в таблице
@@ -75,6 +83,32 @@ namespace CourseProject.ViewModel
                 }
         }
 
+        public ObservableCollection<TimeTable> GetByWeek(string week, int id)
+        {
+            TimeTables.Clear();
+            foreach (TimeTable tt in getTimeTable())
+            {
+                if (tt.idStudent == id && tt.Week == week)
+                {
+                    TimeTables.Add(tt);
+                }
+            }
+            return TimeTables;
+        }
+
+        public ObservableCollection<TimeTable> GetByWeekAdmin(string week, int idStudent)
+        {
+            TimeTables.Clear();
+            foreach (TimeTable tt in getTimeTable())
+            {
+                stud = eFStudent.GetStudentById((int)tt.idStudent);
+                if (stud.idStudent == tt.idStudent)
+                {
+                    TimeTables.Add(tt);
+                }
+            }
+            return TimeTables;
+        }
 
         public TimeTableViewModel(int id, string week)
         {
@@ -91,13 +125,48 @@ namespace CourseProject.ViewModel
         {
             eFTimeTable.Save();
         }
-        
 
+        public string CurrentWeek()
+        {
+            int dayStart = FirstSeptDay().DayOfYear - (int)FirstSeptDay().DayOfWeek + 1;//Номер понедельника в году в неделе с первым сентября
+            if ((DaysSinceStart(dayStart) / 7) % 2 == 0)
+            {
+                return "First";
+            }
+            else return "Second";
+        }
+
+
+        private int DaysSinceStart(int dayStart)
+        {
+            if (DateTime.Now.Month > 8)
+                return DateTime.Now.DayOfYear - dayStart;
+            else
+                if (DateTime.IsLeapYear(FirstSeptDay().Year))
+                return 366 - dayStart + DateTime.Now.DayOfYear;
+            else
+                return 365 - dayStart + DateTime.Now.DayOfYear;
+        }
+
+        private DateTime FirstSeptDay()
+        {
+            DateTime d = DateTime.Now;
+            DateTime ds;
+            if (d.Month < 9)
+                ds = new DateTime(DateTime.Now.Year - 1, 9, 1);
+            else
+                ds = new DateTime(DateTime.Now.Year, 9, 1);
+            return ds;
+        }        
+
+        
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
+
+        
     }
 }

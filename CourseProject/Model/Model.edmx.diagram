@@ -7,7 +7,6 @@
       <Diagram DiagramId="d633b253bcbb419d8e680aa802b75f04" Name="Diagram1" ZoomLevel="81">
         <EntityTypeShape EntityType="StudTasksModel.Progress" Width="1.5" PointX="3.125" PointY="5.375" IsExpanded="true" />
         <EntityTypeShape EntityType="StudTasksModel.Student" Width="1.5" PointX="5.25" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="StudTasksModel.Subtask" Width="1.5" PointX="9.5" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="StudTasksModel.sysdiagrams" Width="1.5" PointX="3.125" PointY="3" IsExpanded="true" />
         <EntityTypeShape EntityType="StudTasksModel.Task" Width="1.5" PointX="7.5" PointY="3.125" IsExpanded="true" />
         <EntityTypeShape EntityType="StudTasksModel.TimeTable" Width="1.5" PointX="7.5" PointY="6.375" IsExpanded="true" />
@@ -16,7 +15,6 @@
         <AssociationConnector Association="StudTasksModel.FK__Task__idStudent__0B91BA14" ManuallyRouted="false" />
         <AssociationConnector Association="StudTasksModel.FK__TimeTable__idStu__08B54D69" ManuallyRouted="false" />
         <AssociationConnector Association="StudTasksModel.FK__User__idStudent__05D8E0BE" ManuallyRouted="false" />
-        <AssociationConnector Association="StudTasksModel.FK__Subtask__idTask__0E6E26BF" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

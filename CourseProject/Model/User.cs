@@ -9,7 +9,6 @@
 
 namespace CourseProject.Model
 {
-    using CourseProject.ErrorMessage;
     using System;
     using System.Collections.Generic;
     using System.Security.Cryptography;
@@ -45,7 +44,7 @@ namespace CourseProject.Model
                 if (value != null)          // если пользователь не авторизован,
                     currentUser = value;    // то присваиваем ему значение пользователя из БД
                 else
-                    MyMessageBox.Show("Ошибка входа!", MessageBoxButton.OK);
+                    MessageBox.Show("Ошибка входа!");
             }
         }
 

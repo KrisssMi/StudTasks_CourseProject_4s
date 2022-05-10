@@ -56,11 +56,17 @@ namespace CourseProject.DB
             return context.Student.FirstOrDefault(x => x.idStudent == id);
         }
 
+        
         public void RemoveStudentById(Student student)  // удаление студента по его идентификатору
         {
-            context.Student.Remove(GetStudentById(student.idStudent));
+        var stud = context.Student.FirstOrDefault(x => x.idStudent == student.idStudent);
+            if (stud != null)
+            {
+                context.Student.Remove(GetStudentById(student.idStudent));
+            }
             context.SaveChanges();
         }
+
 
         public IEnumerable<Student> getStudentsNoAdmin()
         {

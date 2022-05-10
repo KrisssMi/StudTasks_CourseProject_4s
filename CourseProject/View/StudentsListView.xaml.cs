@@ -1,4 +1,6 @@
-﻿using CourseProject.ViewModel;
+﻿using CourseProject.ErrorMessage;
+using CourseProject.Model;
+using CourseProject.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +20,7 @@ namespace CourseProject.View
 {
     public partial class StudentsListView : Page
     {
+        Student stud = new Student();
         StudentsListViewModel studentsListViewModel = new StudentsListViewModel();
         public StudentsListView()
         {
@@ -65,8 +68,12 @@ namespace CourseProject.View
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
-            studentsListViewModel.RemoveAllInfAboutStudent(studentsListViewModel.SelectedItem);
-            Students_Grid.ItemsSource = studentsListViewModel.Students;
+            if (!studentsListViewModel.SelectedItem.IsAdmin)
+            {
+                studentsListViewModel.RemoveAllInfAboutStudent(studentsListViewModel.SelectedItem);
+                Students_Grid.ItemsSource = studentsListViewModel.Students;
+            }
+            else MyMessageBox.Show("Нельзя удалить администратора!", MessageBoxButton.OK);
         }
     }
 }

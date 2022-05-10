@@ -17,15 +17,12 @@ namespace CourseProject.ViewModel
         Student stud = new Student();
 
         EFTaskRepository eFTaskRepository = new EFTaskRepository();
-        EFSubtaskRepository eFSubtaskRepository = new EFSubtaskRepository();
         EFTimeTableRepository eFTimeTable = new EFTimeTableRepository();
         EFStudentRepository eFStudent = new EFStudentRepository();
 
         private Model.Task selectedTask;
-        private Model.Subtask selectedSubtask;
 
         private ObservableCollection<Model.Task> unsatisfiedTasks = new ObservableCollection<Model.Task>();
-        private ObservableCollection<Model.Subtask> unsatisfiedSubtasks = new ObservableCollection<Model.Subtask>();
 
 
         public ObservableCollection<Model.Task> UnsatisfiedTasks            // невыполненные задания
@@ -39,16 +36,6 @@ namespace CourseProject.ViewModel
         }
 
 
-        public ObservableCollection<Model.Subtask> UnsatisfiedSubtasks    // невыполненные подзадания
-        {
-            get { return unsatisfiedSubtasks; }
-            set
-            {
-                unsatisfiedSubtasks = value;
-                OnPropertyChanged("Subtasks");
-            }
-        }
-
 
 
         public Model.Task SelectedTask                                    // выбранное задание
@@ -61,16 +48,11 @@ namespace CourseProject.ViewModel
             }
         }
 
-
-        public Model.Subtask SelectedSubtask                                    // выбранное задание
+        public IEnumerable<string> GetSubjects()                            // получение предметов из таблицы расписания
         {
-            get { return selectedSubtask; }
-            set
-            {
-                selectedSubtask = value;
-                OnPropertyChanged("SelectedSubtask");
-            }
+            return eFTimeTable.GetSubjects(stud);
         }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
@@ -143,11 +125,7 @@ namespace CourseProject.ViewModel
             UnsatisfiedTasks.Add(task);
         }
 
-        public void addSubtask(Model.Subtask subtask)
-        {
-            eFSubtaskRepository.addSubtask(subtask);
-            UnsatisfiedSubtasks.Add(subtask);
-        }
+
 
         public void RemoveTask(Model.Task selectedTask)
         {
@@ -155,11 +133,6 @@ namespace CourseProject.ViewModel
             UnsatisfiedTasks.Remove(SelectedTask);
         }
 
-        public void RemoveSubtask(Model.Subtask selectedSubtask)
-        {
-            eFSubtaskRepository.RemoveById(SelectedSubtask);
-            UnsatisfiedSubtasks.Remove(SelectedSubtask);
-        }
 
         public void OrderTasks(string subject)
         {
@@ -180,17 +153,17 @@ namespace CourseProject.ViewModel
         public void OrderByImportance(int imp)
         {
             UnsatisfiedTasks.Clear();
-            if (imp.Equals("1"))
+            if (imp.Equals(1))
             {
                 foreach (Model.Task task in eFTaskRepository.getEnumByImportance(stud, imp))
                     UnsatisfiedTasks.Add(task);
             }
-            else if (imp.Equals("2"))
+            else if (imp.Equals(2))
             {
                 foreach (Model.Task task in eFTaskRepository.getEnumByImportance(stud, imp))
                     UnsatisfiedTasks.Add(task);
             }
-            else if (imp.Equals("3"))
+            else if (imp.Equals(3))
             {
                 foreach (Model.Task task in eFTaskRepository.getEnumByImportance(stud, imp))
                     UnsatisfiedTasks.Add(task);

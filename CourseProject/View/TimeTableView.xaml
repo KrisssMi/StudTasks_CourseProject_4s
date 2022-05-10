@@ -4,20 +4,20 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-      
       xmlns:local="clr-namespace:CourseProject.View"
       mc:Ignorable="d" 
-      xmlns:databinding="clr-namespace:CourseProject.Converters" xmlns:viewmodel="clr-namespace:CourseProject.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:TimeTableViewModel}"
-      d:DesignHeight="715" d:DesignWidth="780"
-      Title="TimeTableView" Background="White" FontFamily="Palatino Linotype">
+      xmlns:databinding="clr-namespace:CourseProject.Converters" 
+      xmlns:viewmodel="clr-namespace:CourseProject.ViewModel" 
+      d:DataContext="{d:DesignInstance Type=viewmodel:TimeTableViewModel}" d:DesignWidth="780"
+      Title="TimeTableView" Background="White" FontFamily="Palatino Linotype" Height="680">
     <Page.Resources>
         <databinding:DayConverter x:Key="DayConverter"></databinding:DayConverter>
         <databinding:LessonConverter x:Key="LessonConverter"></databinding:LessonConverter>
     </Page.Resources>
-    <Grid>
-        <Grid.ColumnDefinitions>
+    <Grid Margin="0,0,0,0">
+        <!-- <Grid.ColumnDefinitions>
             <ColumnDefinition Width="5*"/>
-            <ColumnDefinition Width="9*"/>
+
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="45*"/>
@@ -27,13 +27,79 @@
             <RowDefinition Height="111*"/>
             <RowDefinition Height="111*"/>
             <RowDefinition Height="111*"/>
-        </Grid.RowDefinitions>
+        </Grid.RowDefinitions> -->
 
-        <DataGrid ItemsSource="{Binding MondayTimeTable}" Grid.Column="1" Margin="0,0,0,42" Grid.RowSpan="2" AutoGenerateColumns="True">
-           
-         
-        </DataGrid>
+        <!--<DataGrid ItemsSource="{Binding MondayTimeTable}" Grid.Column="1" Margin="0,0,0,42" Grid.RowSpan="2" AutoGenerateColumns="True">
+            <DataGrid.Resources>
+                <DataTemplate x:Key="TimeTableCellTemplate">
+                    <Border BorderThickness="1" BorderBrush="Black" Background="White" Padding="5">
+                        <TextBlock Text="{Binding Path=Time, Converter={StaticResource DayConverter}}" FontSize="20" FontWeight="Bold" />
+                    </Border>
 
+                </DataTemplate>
+            </DataGrid.Resources>
+        </DataGrid>-->
+
+        <ItemsControl Margin="0,601,0,14">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto">
+                                
+                            </ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Day}" Grid.Column="1">
+                            
+                        </TextBlock>
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <DockPanel LastChildFill="True" Margin="0,0,0,79" Grid.RowSpan="3">
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" DataContext="{Binding SelectedTimeTable}">
+                <TextBox IsReadOnly="True" VerticalContentAlignment="Center" Width="100" Text="{Binding day, Converter={StaticResource DayConverter}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="Day"  Cursor="Arrow" />
+                <TextBox IsReadOnly="True" VerticalContentAlignment="Center" Width="90" Text="{Binding lessonNumber, Converter={StaticResource LessonConverter},  UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="Time"  Cursor="Arrow" />
+                <TextBox VerticalContentAlignment="Center" Width="80" Text="{Binding Path=auditorium, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="Auditorium" />
+                <TextBox VerticalContentAlignment="Center" Width="80" Text="{Binding Path=lessonType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="Lesson type"/>
+                <TextBox VerticalContentAlignment="Center" Width="120" Text="{Binding Path=lessonName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="Subject name"/>
+                <TextBlock VerticalAlignment="Center" Text="Week"/>
+                <ComboBox Margin="5,0" Name="Stud_Week" SelectionChanged="Stud_Week_SelectionChanged" Loaded="Stud_Week_Loaded">
+                    <ComboBoxItem Content="First"/>
+                    <ComboBoxItem>
+                        Second
+                    </ComboBoxItem>
+                </ComboBox>
+                <!--<Label Name="IdGroupL" Visibility="Hidden" Content="ID group"/>
+            <ComboBox Visibility="Hidden" Name="IdGroup" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>-->
+                <ComboBox x:Name="Choose_idStudent" Margin="125,0" Width="120" materialDesign:HintAssist.Hint="Choose idStudent" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
+            </StackPanel>
+            <ListBox Padding="0" DockPanel.Dock="Right" Width="auto" Name="Lessons" ItemsSource="{Binding TimeTables}" SelectedItem="{Binding SelectedTimeTable}" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="True" Background="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Margin="0" Height="13" CanVerticallyScroll="False"  OpacityMask="{x:Null}">
+                            <TextBlock  Margin="10,0,0,0" Width="80" Text="{Binding Path=lessonNumber, Converter={StaticResource LessonConverter}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
+                            <TextBlock Width="60" Text="{Binding Path=auditorium, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
+                            <TextBlock Width="40" Text="{Binding Path=lessonType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
+                            <TextBlock Width="310" Text="{Binding Path=lessonName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <StackPanel Height="800">
+                <ScrollViewer CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto">
+                    <StackPanel Orientation="Vertical">
+                        <Label Height="91" Content="Monday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FF9B1FFF" />
+                        <Label Height="96" Content="Tuesday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFAC48FC"/>
+                        <Label Height="96" Content="Wednesday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFBC69FF"/>
+                        <Label Height="96" Content="Thursday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFCF94FF"/>
+                        <Label Height="96" Content="Friday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFE1BDFF"/>
+                        <Label Height="96" Content="Saturday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFF1E0FF"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </StackPanel>
+        </DockPanel>
     </Grid>
 
 
@@ -73,21 +139,6 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <StackPanel>
-            <Grid>
-                <ScrollViewer CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto">
-                    <StackPanel Orientation="Vertical">
-                        <Label Height="115" Content="Monday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFA028FF" />
-                        <Label Height="116" Content="Tuesday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFB04BFF"/>
-                        <Label Height="116" Content="Wednesday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFC780FF"/>
-                        <Label Height="116" Content="Thursday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFDEB4FF"/>
-                        <Label Height="116" Content="Friday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFF4E7FF"/>
-                        <Label Height="117" Content="Saturday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="White"/>
-
-                    </StackPanel>
-                </ScrollViewer>
-            </Grid>
-        </StackPanel>
     </DockPanel>
     .-->
 </Page>

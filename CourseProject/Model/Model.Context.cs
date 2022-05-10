@@ -27,7 +27,6 @@ namespace CourseProject.Model
     
         public virtual DbSet<Progress> Progress { get; set; }
         public virtual DbSet<Student> Student { get; set; }
-        public virtual DbSet<Subtask> Subtask { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Task> Task { get; set; }
         public virtual DbSet<TimeTable> TimeTable { get; set; }

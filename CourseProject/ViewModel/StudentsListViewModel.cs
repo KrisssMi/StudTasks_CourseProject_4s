@@ -42,11 +42,12 @@ namespace CourseProject.ViewModel
 
         public void RemoveAllInfAboutStudent(Student student)
         {
-            //eFProgress.RemoveByStudId(student);
+            eFProgress.RemoveByStudId(student);
             eFTask.RemoveByStudId(student);
             eFUser.RemoveUserById(student);
             eFStudent.RemoveStudentById(student);
             tmpStudents.Remove(student);
+            
         }
 
         User User = User.CurrentUser;

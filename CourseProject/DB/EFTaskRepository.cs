@@ -24,14 +24,14 @@ namespace CourseProject.DB
             return context.Task;                                                // Возвращаем все задачи
         }    
 
-        public void addTask(Model.Task task)            // добавление задачи
+        public void addTask(Model.Task task)                                    // добавление задачи
         {
             context.Task.Add(task);
             context.SaveChanges();
         }
      
 
-        public void SaveTask()                          // Сохранение изменений в БД
+        public void SaveTask()                                                  // Сохранение изменений в БД
         {
             context.SaveChanges();
         }
@@ -76,7 +76,7 @@ namespace CourseProject.DB
             context.SaveChanges();
         }
 
-        public void RemoveByStudId(Student student)                             // Удаление задач по id студента
+        public void RemoveByStudId(Student student)                                         // Удаление задач по id студента
         {
             foreach (Model.Task task in getTasks())
             {
@@ -88,12 +88,12 @@ namespace CourseProject.DB
             context.SaveChanges();
         }
 
-        public void OrderTasks(Student student, string subject)                 // Сортировка задач по предмету
+        public void OrderTasks(Student student, string subject)                             // Сортировка задач по предмету
         {
             context.Task.Where(p => p.idStudent == student.idStudent).OrderBy(p => p.LessonName == subject).Load();
         }
 
-        public IEnumerable<Model.Task> getEnum(Student student, string subject) // Получение задач по предмету
+        public IEnumerable<Model.Task> getEnum(Student student, string subject)             // Получение задач по предмету
         {
             return context.Task.Where(p => p.idStudent == student.idStudent && p.LessonName == subject);
         }

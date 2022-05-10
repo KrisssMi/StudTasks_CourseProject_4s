@@ -86,7 +86,6 @@
     <Compile Include="Converters\LessonConverter.cs" />
     <Compile Include="DB\EFProgressRepository.cs" />
     <Compile Include="DB\EFStudentRepository.cs" />
-    <Compile Include="DB\EFSubtaskRepository.cs" />
     <Compile Include="DB\EFTaskRepository.cs" />
     <Compile Include="DB\EFTimeTableRepository.cs" />
     <Compile Include="DB\EFUserRepository.cs" />
@@ -112,9 +111,6 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Student.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Subtask.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\sysdiagrams.cs">

@@ -14,12 +14,6 @@ namespace CourseProject.Model
     
     public partial class Task
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Task()
-        {
-            this.Subtask = new HashSet<Subtask>();
-        }
-    
         public int idTask { get; set; }
         public int idStudent { get; set; }
         public Nullable<bool> isComplite { get; set; }
@@ -30,7 +24,5 @@ namespace CourseProject.Model
         public string Title { get; set; }
     
         public virtual Student Student { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Subtask> Subtask { get; set; }
     }
 }
