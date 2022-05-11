@@ -72,5 +72,10 @@ namespace CourseProject.DB
         {
             return context.Student.Where(s => s.isAdmin == false);
         }
+
+        public void Save()
+        {
+            context.SaveChanges();
+        }
     }
 }

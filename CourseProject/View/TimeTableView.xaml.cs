@@ -18,9 +18,6 @@ using System.Windows.Shapes;
 
 namespace CourseProject.View
 {
-    /// <summary>
-    /// Логика взаимодействия для TimeTableView.xaml
-    /// </summary>
     public partial class TimeTableView : Page
     {
         User user = User.CurrentUser;
@@ -38,7 +35,7 @@ namespace CourseProject.View
         }
 
 
-        private void LoadGroupsId()
+        private void LoadStudentId()
         {
             if (stud.IsAdmin)
             {
@@ -79,11 +76,11 @@ namespace CourseProject.View
 
         private void Stud_Week_Loaded(object sender, RoutedEventArgs e)
         {
-            foreach (var el in Stud_Week.Items)
+            foreach (var el in Stud_Week.Items)         // загружаем все недели в комбобокс
             {
                 if ((el is ComboBoxItem))
                 {
-                    if ((el as ComboBoxItem).Content.ToString() == timeTableViewModel.CurrentWeek())
+                    if ((el as ComboBoxItem).Content.ToString() == timeTableViewModel.CurrentWeek())        // выбираем текущую неделю
                     {
                         (el as ComboBoxItem).IsSelected = true;
                         break;

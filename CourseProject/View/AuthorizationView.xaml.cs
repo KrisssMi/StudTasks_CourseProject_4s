@@ -77,6 +77,7 @@ namespace CourseProject.View
          public void SignIn()
          {
            User currentUser = authorizationViewModel.СompareDataOfUser(Password.Password);
+            
 
              if (!String.IsNullOrEmpty(Password.Password) && !String.IsNullOrEmpty(Login.Text))
              {
@@ -84,6 +85,7 @@ namespace CourseProject.View
                 {
                         Hide();
                         User.CurrentUser = currentUser;
+                        authorizationViewModel.GetTimeTable();
                         MainWindow mainWindow = new MainWindow();
                         mainWindow.Show();
                     }

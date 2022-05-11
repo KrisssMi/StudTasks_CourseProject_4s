@@ -17,7 +17,7 @@ namespace CourseProject.Model
 
     public partial class User
     {
-        public Nullable<int> idStudent { get; set; }
+        public int idStudent { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
     

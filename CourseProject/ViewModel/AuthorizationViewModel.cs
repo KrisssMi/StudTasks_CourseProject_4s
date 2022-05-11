@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Xml.Linq;
 using CourseProject.ErrorMessage;
+using System.Windows.Input;
 
 namespace CourseProject.ViewModel
 {
@@ -22,7 +23,7 @@ namespace CourseProject.ViewModel
         EFUserRepository eFUser;                        // Репозиторий для работы с пользователями
         EFStudentRepository eFStudent;                  // Репозиторий для работы с студентами
 
-        public string Login { get; set; }
+        public string Login { get; set; } = "kris";
 
         public int NumStudCard { get; set; }
 
@@ -36,11 +37,13 @@ namespace CourseProject.ViewModel
 
         public string Reg_Login { get; set; }
 
-        public string Password { get; set; }
+        public string Password { get; set; } = "krstn";
 
         public string Reg_Password { get; set; }
 
-        public string Db_Password { get; set; }
+        public string Db_Password { get; set; } = "krstn";
+
+        public ICommand AuthorizationCommand { get; set; }
 
 
         public AuthorizationViewModel() // Конструктор класса
@@ -52,6 +55,10 @@ namespace CourseProject.ViewModel
             students = eFStudent.getStudents();         // Получение всех студентов
         }
 
+        private void Authorization(object obj) // Метод авторизации
+        {
+            
+        }
 
         public bool Registration(string password1, string password2) // Регистрация
         {
@@ -134,7 +141,35 @@ namespace CourseProject.ViewModel
                                         eFStudent.addStudent(s);
                                         User u = new User(NumStudCard, Reg_Login, User.getHash(Reg_Password));
                                         eFUser.addUser(u);
-                                        return true;
+                                eFUser.Save();
+                                eFStudent.Save();
+
+                                EFTimeTableRepository TTRepository = new EFTimeTableRepository();
+                                List<TimeTable> timeTables = new List<TimeTable>();
+                                for (int i = 1; i <= 6; i++)
+                                {
+                                    for (int j = 0; j < 2; j++)
+                                    {
+                                        for (int k = 1; k <= 4; k++)
+                                        {
+                                            timeTables.Add(new TimeTable()
+                                            {
+                                                Day = i,
+                                                Week = j == 0 ? "First" : "Second",
+                                                idStudent = s.idStudent,
+                                                LessonNumber = k
+                                            });
+                                        }
+                                    }
+                                }
+
+                                foreach (var timeTable in timeTables)
+                                {
+                                    TTRepository.addTimeTable(timeTable);
+                                }
+                                TTRepository.Save();
+
+                                    return true;
                                     }
                                     else
                                     {
@@ -159,7 +194,8 @@ namespace CourseProject.ViewModel
                     MyMessageBox.Show("Student card number must contain 8 digits!", MessageBoxButton.OK);
                     return false;
                         }
-                    }
+            }
+            
             else
             {
                 MyMessageBox.Show("Check entered data!", MessageBoxButton.OK);
@@ -190,6 +226,40 @@ namespace CourseProject.ViewModel
             return null;
         }
 
+
+        public void GetTimeTable()
+        {
+            EFTimeTableRepository eFTimeTable = new EFTimeTableRepository();
+            EFStudentRepository eFStudent = new EFStudentRepository();
+            Student student = eFStudent.GetStudentById(User.CurrentUser.idStudent);
+            List<TimeTable> TimeTables = eFTimeTable.GetTimeTable(student).ToList();
+
+            foreach (TimeTable t in TimeTables)
+            {
+                switch (t.Day)
+                {
+                    case 1:
+                        TimeTableViewModel.MondayTimeTable.Add(t);
+                        break;
+                    case 2:
+                        TimeTableViewModel.TuesdayTimeTable.Add(t);
+                        break;
+                    case 3:
+                        TimeTableViewModel.WednesdayTimeTable.Add(t);
+                        break;
+                    case 4:
+                        TimeTableViewModel.ThursdayTimeTable.Add(t);
+                        break;
+                    case 5:
+                        TimeTableViewModel.FridayTimeTable.Add(t);
+                        break;
+                    case 6:
+                        TimeTableViewModel.SaturdayTimeTable.Add(t);
+                        break;
+
+                }
+            }
+        }
 
         private void CreateRestoringFile(string login, string password)             // метод сохраняет данные последнего зашедшего в приложение пользователя в xml файл
         {

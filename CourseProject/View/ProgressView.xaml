@@ -49,8 +49,9 @@
                                             </StackPanel>
                                         </StackPanel>
                                         <StackPanel>
-                                            <Label Content="{Binding LessonName}" HorizontalAlignment="Center" FontSize="14"/>
-                                            <ProgressBar Minimum="0" Opacity="0.7" Maximum="100" Height="15" Width="600" Value="{Binding TaskProgress, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"/>
+                                            <Label x:Name="LessonName" FontSize="15" FontWeight="Bold" Content="{Binding LessonName}"/>
+                                            
+                                            <ProgressBar Minimum="0" Opacity="0.7" Maximum="100" Height="15" Width="600" Value="{Binding TaskProgress, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}" Background="Lavender"/>
                                         </StackPanel>
                                     </DockPanel>
                                 </Grid>

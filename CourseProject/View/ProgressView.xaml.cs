@@ -1,4 +1,5 @@
 ﻿using CourseProject.DB;
+using CourseProject.ErrorMessage;
 using CourseProject.Model;
 using CourseProject.ViewModel;
 using System;
@@ -42,7 +43,13 @@ namespace CourseProject.View
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
-            progressViewModel.RemoveById();
+            // если выбрана запись в таблице, то ошибка:
+            // нельзя удалить запись, которая не выбрана
+            if (progressViewModel.SelectedItem == null)
+            {
+                MyMessageBox.Show("Select a progress", MessageBoxButton.OK);
+            }
+            else progressViewModel.RemoveById();
         }
 
         private void LessonsBox_Loaded(object sender, RoutedEventArgs e)

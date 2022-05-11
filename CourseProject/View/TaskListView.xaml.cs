@@ -105,7 +105,15 @@ namespace CourseProject.View
 
         private void Delete_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            taskViewModel.RemoveTask(taskViewModel.SelectedTask);
+            // если задание не выделено, то мы не можем его удалять:
+            if (taskViewModel.SelectedTask == null)
+            {
+                MyMessageBox.Show("Select a task", MessageBoxButton.OK);
+            }
+            else
+            {
+                taskViewModel.RemoveTask(taskViewModel.SelectedTask);
+            }
         }
 
         private void TaskComplite_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -121,5 +129,8 @@ namespace CourseProject.View
         {
                 taskViewModel.OrderByImportance(FilterByImportance.SelectedIndex +1 );
         }
+
+        
+        
     }
 }

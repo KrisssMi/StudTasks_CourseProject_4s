@@ -8,6 +8,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace CourseProject.ViewModel
 {
@@ -16,29 +17,137 @@ namespace CourseProject.ViewModel
         User user = User.CurrentUser;
         Student stud = new Student();
 
+        private List<TimeTable> allMonday = new List<TimeTable>();
+        private List<TimeTable> allTuesday = new List<TimeTable>();
+        private List<TimeTable> allWednesday = new List<TimeTable>();
+        private List<TimeTable> allThursday = new List<TimeTable>();
+        private List<TimeTable> allFriday = new List<TimeTable>();
+        private List<TimeTable> allSaturday = new List<TimeTable>();
+
         EFTimeTableRepository eFTimeTable = new EFTimeTableRepository();
         EFStudentRepository eFStudent = new EFStudentRepository();
 
-        public List<TimeTable> MondayTimeTable { get; set; }
-        public List<TimeTable> TuesdayTimeTable { get; set; }
-        public List<TimeTable> WednesdayTimeTable { get; set; }
-        public List<TimeTable> ThursdayTimeTable { get; set; }
-        public List<TimeTable> FridayTimeTable { get; set; }
-        public List<TimeTable> SaturdayTimeTable { get; set; }
+        public static List<TimeTable> MondayTimeTable { get; set; }      =new List<TimeTable>();
+        public static List<TimeTable> TuesdayTimeTable { get; set; }     =new List<TimeTable>();
+        public static List<TimeTable> WednesdayTimeTable { get; set; }   =new List<TimeTable>();
+        public static List<TimeTable> ThursdayTimeTable { get; set; } = new List<TimeTable>();
+        public static List<TimeTable> FridayTimeTable { get; set; } = new List<TimeTable>();
+        public static List<TimeTable> SaturdayTimeTable { get; set; } = new List<TimeTable>();
+
+        public List<TimeTable> Monday
+        {
+            get
+            {
+                return MondayTimeTable;
+            }
+            set
+            {
+                MondayTimeTable = value;
+                OnPropertyChanged("Monday");
+            }
+        }
+
+        public List<TimeTable> Tuesday
+        {
+            get
+            {
+                return TuesdayTimeTable;
+            }
+            set
+            {
+                MondayTimeTable = value;
+                OnPropertyChanged("Tuesday");
+            }
+        }
+
+        public List<TimeTable> Wednesday
+        {
+            get
+            {
+                return WednesdayTimeTable;
+            }
+            set
+            {
+                MondayTimeTable = value;
+                OnPropertyChanged("Wednesday");
+            }
+        }
+
+        public List<TimeTable> Thursday
+        {
+            get
+            {
+                return ThursdayTimeTable;
+            }
+            set
+            {
+                MondayTimeTable = value;
+                OnPropertyChanged("Thursday");
+            }
+        }
+
+        public List<TimeTable> Friday
+        {
+            get
+            {
+                return FridayTimeTable;
+            }
+            set
+            {
+                MondayTimeTable = value;
+                OnPropertyChanged("Friday");
+            }
+        }
+
+        public List<TimeTable> Saturday
+        {
+            get
+            {
+                return SaturdayTimeTable;
+            }
+            set
+            {
+                MondayTimeTable = value;
+                OnPropertyChanged("Saturday");
+            }
+        }
 
 
         public TimeTableViewModel()
         {
-           stud = eFStudent.GetStudentById((int)user.idStudent);
-           var timetables =  eFTimeTable.GetTimeTable(stud);
-            
-           MondayTimeTable = timetables.Where(x => x.Day == 1).ToList();        // Получаем все занятия на понедельник
-           TuesdayTimeTable = timetables.Where(x => x.Day == 2).ToList();       // Получаем все занятия на вторник
-           WednesdayTimeTable = timetables.Where(x => x.Day == 3).ToList();     // Получаем все занятия на среду
-           ThursdayTimeTable = timetables.Where(x => x.Day == 4).ToList();      // Получаем все занятия на четверг
-           FridayTimeTable = timetables.Where(x => x.Day == 5).ToList();        // Получаем все занятия на пятницу
-           SaturdayTimeTable = timetables.Where(x => x.Day == 6).ToList();      // Получаем все занятия на субботу
+            stud = eFStudent.GetStudentById((int)user.idStudent);
+            var timetables = eFTimeTable.GetTimeTable(stud);
+
+            // allMonday = timetables.Where(x => x.Day == 1).ToList();        // Получаем все занятия на понедельник
+            // allTuesday = timetables.Where(x => x.Day == 2).ToList();       // Получаем все занятия на вторник
+            // allWednesday = timetables.Where(x => x.Day == 3).ToList();     // Получаем все занятия на среду
+            // allThursday = timetables.Where(x => x.Day == 4).ToList();      // Получаем все занятия на четверг
+            // allFriday = timetables.Where(x => x.Day == 5).ToList();        // Получаем все занятия на пятницу
+            // allSaturday = timetables.Where(x => x.Day == 6).ToList();      // Получаем все занятия на субботу
+
+            // MondayTimeTable = timetables.Where(x => x.Day == 1).ToList();        // Получаем все занятия на понедельник
+            //TuesdayTimeTable = timetables.Where(x => x.Day == 2).ToList();       // Получаем все занятия на вторник
+            //WednesdayTimeTable = timetables.Where(x => x.Day == 3).ToList();     // Получаем все занятия на среду
+            //ThursdayTimeTable = timetables.Where(x => x.Day == 4).ToList();      // Получаем все занятия на четверг
+            //FridayTimeTable = timetables.Where(x => x.Day == 5).ToList();        // Получаем все занятия на пятницу
+            //SaturdayTimeTable = timetables.Where(x => x.Day == 6).ToList();      // Получаем все занятия на субботу
+
+            allMonday = MondayTimeTable;
+            allTuesday = TuesdayTimeTable;
+            allWednesday = WednesdayTimeTable;
+            allThursday = ThursdayTimeTable;
+            allFriday = FridayTimeTable;
+            allSaturday = SaturdayTimeTable;
+
+            MondayTimeTable = allMonday.Where(x => x.Week == "First").ToList();
+            TuesdayTimeTable = allTuesday.Where(x => x.Week == "First").ToList();
+            WednesdayTimeTable = allWednesday.Where(x => x.Week == "First").ToList();
+            ThursdayTimeTable = allThursday.Where(x => x.Week == "First").ToList();
+            FridayTimeTable = allFriday.Where(x => x.Week == "First").ToList();
+            SaturdayTimeTable = allSaturday.Where(x => x.Week == "First").ToList();
         }
+
+
 
         private TimeTable selectedTimeTable;        // выбранная запись в таблице
 

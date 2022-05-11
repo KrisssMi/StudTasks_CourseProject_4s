@@ -1,10 +1,12 @@
-﻿using CourseProject.Model;
+﻿using CourseProject.ErrorMessage;
+using CourseProject.Model;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace CourseProject.DB
 {
@@ -62,8 +64,15 @@ namespace CourseProject.DB
 
         public void RemoveById(Progress progress)                                   // Удаляем прогресс по идентификатору
         {
-            context.Progress.Remove(GetProgressById(progress));
-            context.SaveChanges();
+            try
+            {
+                context.Progress.Remove(GetProgressById(progress));
+                context.SaveChanges();
+            }
+            catch
+            {
+                MyMessageBox.Show("You can't delete an empty progress!", MessageBoxButton.OK);
+            }
         }
 
         public void RemoveByStudId(Student student)                                 
