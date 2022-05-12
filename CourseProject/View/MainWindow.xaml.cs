@@ -118,7 +118,7 @@ namespace CourseProject.View
             {
                 this.Resources = new ResourceDictionary()
                 {
-                    Source = new Uri("pack://application:,,/Themes/Dark.xaml")
+                    Source = new Uri("pack://application:,,/Resources/Themes/DarkTheme.xaml")
                 };
             }
             catch (Exception ex)
@@ -133,7 +133,7 @@ namespace CourseProject.View
             {
                 this.Resources = new ResourceDictionary()
                 {
-                    Source = new Uri("pack://application:,,/Themes/Light.xaml")
+                    Source = new Uri("pack://application:,,/Resources/Themes/LightTheme.xaml")
                 };
             }
             catch (Exception ex)

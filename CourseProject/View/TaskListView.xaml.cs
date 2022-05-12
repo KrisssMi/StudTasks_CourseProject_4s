@@ -93,7 +93,7 @@ namespace CourseProject.View
         private void FilterBySubject_Loaded(object sender, RoutedEventArgs e)
         {
             List<string> taskSubjects = new List<string>();
-            //taskSubjects.AddRange(taskViewModel.GetSubjects());
+            taskSubjects.AddRange(taskViewModel.GetSubjects());
             taskSubjects.Add("All");
             FilterBySubject.ItemsSource = taskSubjects;
         }
@@ -105,7 +105,6 @@ namespace CourseProject.View
 
         private void Delete_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            // если задание не выделено, то мы не можем его удалять:
             if (taskViewModel.SelectedTask == null)
             {
                 MyMessageBox.Show("Select a task", MessageBoxButton.OK);
@@ -127,10 +126,7 @@ namespace CourseProject.View
 
         private void FilterByImportance_SelectionChanged(object sender, SelectionChangedEventArgs e)                    // поиск по важности
         {
-                taskViewModel.OrderByImportance(FilterByImportance.SelectedIndex +1 );
+           taskViewModel.OrderByImportance(FilterByImportance.SelectedIndex + 1 );
         }
-
-        
-        
     }
 }

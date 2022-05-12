@@ -35,37 +35,16 @@ namespace CourseProject.View
         }
 
 
-        private void LoadStudentId()
-        {
-            if (stud.IsAdmin)
-            {
-                Choose_idStudent.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                Choose_idStudent.Visibility = Visibility.Hidden;
-            }
-        }
-
-        private void LoadTimeTableIfEmpty()
+        private void LoadTimeTableIfEmpty()         // загрузка расписания в пустой таблице
         {
             timeTableViewModel.LoadTT();
         }
 
         private void UpdateTT(string week)
         {
-            if (stud.IsAdmin)
-            {
-                int idStudent = Convert.ToInt32(Choose_idStudent.SelectedValue);
-                timeTableViewModel.GetByWeekAdmin(week, idStudent);
-                DataContext = new TimeTableViewModel(idStudent, week);
-            }
-
-            else
-            {
                 timeTableViewModel.GetByWeek(week, (int)stud.idStudent);
                 DataContext = new TimeTableViewModel((int)stud.idStudent, week);
-            }
+
         }
 
 
@@ -74,18 +53,13 @@ namespace CourseProject.View
             UpdateTT(((sender as ComboBox).SelectedItem as ComboBoxItem).Content.ToString());
         }
 
+        
         private void Stud_Week_Loaded(object sender, RoutedEventArgs e)
         {
-            foreach (var el in Stud_Week.Items)         // загружаем все недели в комбобокс
+            foreach (var el in Stud_Week.Items)                                                             // загружаем все недели в комбобокс
             {
-                if ((el is ComboBoxItem))
-                {
-                    if ((el as ComboBoxItem).Content.ToString() == timeTableViewModel.CurrentWeek())        // выбираем текущую неделю
-                    {
-                        (el as ComboBoxItem).IsSelected = true;
-                        break;
-                    }
-                }
+                Stud_Week.SelectedItem = el;
+                break;
             }
         }
 

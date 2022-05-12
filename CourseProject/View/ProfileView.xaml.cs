@@ -30,6 +30,7 @@ namespace CourseProject.View
         
         public ProfileView()
         {
+            user = User.CurrentUser;
             InitializeComponent();
             FillInfo();
 
@@ -42,6 +43,10 @@ namespace CourseProject.View
             lbl_Phone.Text = stud.Phone;
         }
 
+
+
+
+        
         private byte[] _imageBytes = null;
         private void Btn_UploadPhoto_Click(object sender, RoutedEventArgs e)
         {
@@ -65,34 +70,58 @@ namespace CourseProject.View
         }
 
 
-        //private void SaveImage()
-        //{
-        //    if (!String.IsNullOrEmpty(lbl_PhotoPath.Content.ToString()))
-        //    {
-        //        attach.ImagePath = lbl_PhotoPath.Content.ToString();
-        //        attach.Image = _imageBytes;
-        //        Registration.unit.Attachments.Update(attach);
-        //        Registration.unit.Save();
-        //    }
-        //}
+        private void SaveImage()
+        {
+            if (!String.IsNullOrEmpty(lbl_PhotoPath.Content.ToString()))
+            {
+                using (var fs = new FileStream(lbl_PhotoPath.Content.ToString(), FileMode.Open, FileAccess.Read))
+                {
+                    _imageBytes = new byte[fs.Length];
+                }
+            }
+        }
 
-        //private void LoadImage()
-        //{
-        //    try
-        //    {
-        //        if (attach != null && attach.Image != null && attach.ImagePath != null)
-        //        {
-        //            img_ProfilePhoto.ImageSource = new BitmapImage(new Uri(attach.ImagePath));
-        //            lbl_PhotoPath.Content = attach.ImagePath;
-        //        }
-        //    }
-        //    catch
-        //    {
-        //        MessageBox.Show("Photo path " + attach.ImagePath + " is not found");
-        //    }
-        //}
+        private void LoadImage()
+        {
+            if (!String.IsNullOrEmpty(lbl_PhotoPath.Content.ToString()))
+            {
+                using (var fs = new FileStream(lbl_PhotoPath.Content.ToString(), FileMode.Open, FileAccess.Read))
+                {
+                    _imageBytes = new byte[fs.Length];
+                    fs.Read(_imageBytes, 0, System.Convert.ToInt32(fs.Length));
+                }
+            }
+            else { return; }
+        }
+
+        // изменение информации о студенте:
+        private void Btn_Save_Click(object sender, RoutedEventArgs e)
+        {
+            stud.Name = UserName.Content.ToString().Split(' ')[0];
+
+            stud.Email = lbl_Email.Text;
+            stud.Phone = lbl_Phone.Text;
+            //stud.Photo = _imageBytes;
+            eFStudent.Update(stud);
+            MessageBox.Show("Информация о студенте обновлена");
+            
+        }
+            //{
+            //    try
+            //    {
+            //        if (attach != null && attach.Image != null && attach.ImagePath != null)
+            //        {
+            //            img_ProfilePhoto.ImageSource = new BitmapImage(new Uri(attach.ImagePath));
+            //            lbl_PhotoPath.Content = attach.ImagePath;
+            //        }
+            //    }
+            //    catch
+            //    {
+            //        MessageBox.Show("Photo path " + attach.ImagePath + " is not found");
+            //    }
+            //}
 
 
 
-    }
+        }
 }

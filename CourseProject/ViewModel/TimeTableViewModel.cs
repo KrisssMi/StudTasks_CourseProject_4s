@@ -27,9 +27,9 @@ namespace CourseProject.ViewModel
         EFTimeTableRepository eFTimeTable = new EFTimeTableRepository();
         EFStudentRepository eFStudent = new EFStudentRepository();
 
-        public static List<TimeTable> MondayTimeTable { get; set; }      =new List<TimeTable>();
-        public static List<TimeTable> TuesdayTimeTable { get; set; }     =new List<TimeTable>();
-        public static List<TimeTable> WednesdayTimeTable { get; set; }   =new List<TimeTable>();
+        public static List<TimeTable> MondayTimeTable { get; set; } = new List<TimeTable>();
+        public static List<TimeTable> TuesdayTimeTable { get; set; } = new List<TimeTable>();
+        public static List<TimeTable> WednesdayTimeTable { get; set; } = new List<TimeTable>();
         public static List<TimeTable> ThursdayTimeTable { get; set; } = new List<TimeTable>();
         public static List<TimeTable> FridayTimeTable { get; set; } = new List<TimeTable>();
         public static List<TimeTable> SaturdayTimeTable { get; set; } = new List<TimeTable>();
@@ -113,7 +113,7 @@ namespace CourseProject.ViewModel
         }
 
 
-        public TimeTableViewModel()
+    public TimeTableViewModel()
         {
             stud = eFStudent.GetStudentById((int)user.idStudent);
             var timetables = eFTimeTable.GetTimeTable(stud);
@@ -150,6 +150,7 @@ namespace CourseProject.ViewModel
 
 
         private TimeTable selectedTimeTable;        // выбранная запись в таблице
+     
 
         private ObservableCollection<TimeTable> timeTables = new ObservableCollection<TimeTable>();
 
@@ -158,6 +159,9 @@ namespace CourseProject.ViewModel
             get { return timeTables; }
             set { timeTables = value; }
         }
+
+
+        
 
         public TimeTable SelectedTimeTable
         {
@@ -234,39 +238,6 @@ namespace CourseProject.ViewModel
         {
             eFTimeTable.Save();
         }
-
-        public string CurrentWeek()
-        {
-            int dayStart = FirstSeptDay().DayOfYear - (int)FirstSeptDay().DayOfWeek + 1;//Номер понедельника в году в неделе с первым сентября
-            if ((DaysSinceStart(dayStart) / 7) % 2 == 0)
-            {
-                return "First";
-            }
-            else return "Second";
-        }
-
-
-        private int DaysSinceStart(int dayStart)
-        {
-            if (DateTime.Now.Month > 8)
-                return DateTime.Now.DayOfYear - dayStart;
-            else
-                if (DateTime.IsLeapYear(FirstSeptDay().Year))
-                return 366 - dayStart + DateTime.Now.DayOfYear;
-            else
-                return 365 - dayStart + DateTime.Now.DayOfYear;
-        }
-
-        private DateTime FirstSeptDay()
-        {
-            DateTime d = DateTime.Now;
-            DateTime ds;
-            if (d.Month < 9)
-                ds = new DateTime(DateTime.Now.Year - 1, 9, 1);
-            else
-                ds = new DateTime(DateTime.Now.Year, 9, 1);
-            return ds;
-        }        
 
         
         public event PropertyChangedEventHandler PropertyChanged;

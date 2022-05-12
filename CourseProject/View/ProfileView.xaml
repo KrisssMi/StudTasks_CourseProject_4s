@@ -42,7 +42,7 @@
 
 
                     <StackPanel Grid.Row="0" Margin="0 10 0 0" Width="200">
-                        <Label x:Name="UserName" Content="Surname Name" HorizontalAlignment="Center" FontSize="24" FontStyle="Italic" FontWeight="DemiBold"/>
+                        <Label x:Name="UserName" Content="Surname Name" HorizontalAlignment="Center" FontSize="24" FontStyle="Italic" FontWeight="DemiBold" Foreground="Black"/>
                     </StackPanel>
 
 

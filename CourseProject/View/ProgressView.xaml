@@ -7,7 +7,7 @@
       xmlns:local="clr-namespace:CourseProject.View"
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="830"
-      Title="ProgressView" Background="White">
+      Title="ProgressView" Background="{x:Null}">
 
     <Grid>
         <DockPanel LastChildFill="True">

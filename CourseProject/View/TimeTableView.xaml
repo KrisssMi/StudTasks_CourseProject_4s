@@ -9,37 +9,36 @@
       xmlns:databinding="clr-namespace:CourseProject.Converters" 
       xmlns:viewmodel="clr-namespace:CourseProject.ViewModel" 
       d:DataContext="{d:DesignInstance Type=viewmodel:TimeTableViewModel}" d:DesignWidth="780"
-      Title="TimeTableView" Background="White" FontFamily="Palatino Linotype" Height="680">
+      Title="TimeTableView" Background="White" FontFamily="Palatino Linotype" Height="740">
     <Page.Resources>
         <databinding:DayConverter x:Key="DayConverter"></databinding:DayConverter>
         <databinding:LessonConverter x:Key="LessonConverter"></databinding:LessonConverter>
     </Page.Resources>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <!-- Верхняя панель для редактирования строки: -->
         <Grid Grid.Row="0">
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" DataContext="{Binding SelectedTimeTable}">
-                <TextBox IsReadOnly="True" VerticalContentAlignment="Center" Width="100" Text="{Binding day, Converter={StaticResource DayConverter}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="Day"  Cursor="Arrow" />
-                <TextBox IsReadOnly="True" VerticalContentAlignment="Center" Width="90" Text="{Binding lessonNumber, Converter={StaticResource LessonConverter},  UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="Time"  Cursor="Arrow" />
-                <TextBox VerticalContentAlignment="Center" Width="80" Text="{Binding Path=auditorium, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="Auditorium" Cursor="Arrow" />
-                <TextBox VerticalContentAlignment="Center" Width="80" Text="{Binding Path=lessonType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="Lesson type"/>
-                <TextBox VerticalContentAlignment="Center" Width="120" Text="{Binding Path=lessonName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="Subject name"/>
-                <TextBlock VerticalAlignment="Center" Text="Week"/>
-                <ComboBox Margin="5,0" Name="Stud_Week" SelectionChanged="Stud_Week_SelectionChanged" Loaded="Stud_Week_Loaded">
+                <TextBox IsReadOnly="True" VerticalContentAlignment="Center" Width="100" Text="{Binding Day, Converter={StaticResource DayConverter}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="Day"  Cursor="Arrow" />
+                <TextBox IsReadOnly="True" VerticalContentAlignment="Center" Width="90" Text="{Binding LessonNumber, Converter={StaticResource LessonConverter},  UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="Time"  Cursor="Arrow" />
+                <TextBox VerticalContentAlignment="Center" Width="80" Text="{Binding Path=Auditorium, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="Auditorium" Cursor="Arrow" />
+                <TextBox VerticalContentAlignment="Center" Width="80" Text="{Binding Path=LessonType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="Lesson type"/>
+                <TextBox VerticalContentAlignment="Center" Width="120" Text="{Binding Path=LessonName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="Subject name"/>
+                <TextBlock VerticalAlignment="Center" Text="Week" Margin="20 0"/>
+                <ComboBox x:Name="Stud_Week" SelectionChanged="Stud_Week_SelectionChanged" Loaded="Stud_Week_Loaded" Width="55">
                     <ComboBoxItem Content="First"/>
-                    <ComboBoxItem>
-                        Second
-                    </ComboBoxItem>
+                    <ComboBoxItem Content="Second"/>
                 </ComboBox>
-
-                <ComboBox x:Name="Choose_idStudent" Margin="125,0" Width="120" materialDesign:HintAssist.Hint="Choose idStudent" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
             </StackPanel>
         </Grid>
 
+
+        <!-- Таблица -->
         <Grid Grid.Row="1">
             <Grid Margin="0,0,0,0">
                 <Grid.ColumnDefinitions>
@@ -56,9 +55,9 @@
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" Margin="0" Height="13" CanVerticallyScroll="False"  OpacityMask="{x:Null}">
                                         <TextBlock  Margin="10,0,0,0" Width="80" Text="{Binding Path=LessonNumber, Converter={StaticResource LessonConverter}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
-                                        <TextBlock Width="60" Text="{Binding Path=auditorium, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
-                                        <TextBlock Width="40" Text="{Binding Path=lessonType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
-                                        <TextBlock Width="310" Text="{Binding Path=lessonName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
+                                        <TextBlock Width="60" Text="{Binding Path=Auditorium, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
+                                        <TextBlock Width="40" Text="{Binding Path=LessonType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
+                                        <TextBlock Width="310" Text="{Binding Path=LessonName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
@@ -66,7 +65,7 @@
                         <StackPanel Height="650">
                             <ScrollViewer CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto">
                                 <StackPanel Orientation="Vertical">
-                                    <Label Height="109" Content="Monday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FF9B1FFF" />
+                                    <Label Height="110" Content="Monday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FF9B1FFF" />
                                     <Label Height="109" Content="Tuesday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFAC48FC"/>
                                     <Label Height="109" Content="Wednesday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFBC69FF"/>
                                     <Label Height="109" Content="Thursday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFCF94FF"/>
@@ -90,137 +89,108 @@
                     </Grid.RowDefinitions>
 
                     <Grid Grid.Row="0">
-                        <ItemsControl ItemsSource="{Binding Path=Monday}">
-                            <ItemsControl.ItemTemplate>
+                        <ListBox ItemsSource="{Binding Monday}" SelectedItem="{Binding SelectedTimeTable}">
+                            <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="1*" />
-                                            <ColumnDefinition Width="1*" />
-                                            <ColumnDefinition Width="1*" />
-                                            <ColumnDefinition Width="1*" />
-                                        </Grid.ColumnDefinitions>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="1*" />
-                                            <RowDefinition Height="1*" />
-                                            <RowDefinition Height="1*" />
-                                            <RowDefinition Height="1*" />
-                                        </Grid.RowDefinitions>
-                                        
-                                        <TextBlock Grid.Column="0" Grid.Row="0"  Margin="10,0,0,0" Width="80" Text="{Binding Path=LessonNumber, Converter={StaticResource LessonConverter}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
-                                        <TextBlock Grid.Column="1" Grid.Row="0"   Margin="10,0,0,0" Width="80" Text="{Binding Path=LessonName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
-                                        <TextBlock Grid.Column="2"  Grid.Row="0"   Margin="10,0,0,0" Width="80" Text="{Binding Path=Auditorium, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
-                                        <TextBlock Grid.Column="3" Grid.Row="0"  Margin="10,0,0,0" Width="80" Text="{Binding Path=LessonType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
-                                        
-                                    </Grid>
 
-                               
-
-
-                                    <!--<StackPanel Orientation="Horizontal" Margin="0" Height="13" CanVerticallyScroll="False"  OpacityMask="{x:Null}">
+                                    <StackPanel Orientation="Horizontal" Margin="0" Height="13" CanVerticallyScroll="False"  OpacityMask="{x:Null}">
                                         <StackPanel.InputBindings>
                                             <MouseBinding MouseAction="LeftClick"/>
-
-
                                         </StackPanel.InputBindings>
-
                                         <TextBlock Margin="10,0,0,0" Width="80" Text="{Binding Path=LessonNumber, Converter={StaticResource LessonConverter}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
                                         <TextBlock  Margin="10,0,0,0" Width="80" Text="{Binding Path=LessonName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
                                         <TextBlock  Margin="10,0,0,0" Width="80" Text="{Binding Path=Auditorium, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
                                         <TextBlock  Margin="10,0,0,0" Width="80" Text="{Binding Path=LessonType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
+                                    </StackPanel>
 
-                                    </StackPanel>-->
-                                    
-                                    
-                                    
                                 </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
                     </Grid>
 
                     <Grid Grid.Row="1">
-                        <ItemsControl ItemsSource="{Binding Path=Tuesday}">
-                            <ItemsControl.ItemTemplate>
+                        <ListBox ItemsSource="{Binding Path=Tuesday}" SelectedItem="{Binding SelectedTimeTable}">
+                            <ListBox.ItemTemplate>
                                 <DataTemplate>
+
                                     <StackPanel Orientation="Horizontal" Margin="0" Height="13" CanVerticallyScroll="False"  OpacityMask="{x:Null}">
                                         <TextBlock Margin="10,0,0,0" Width="80" Text="{Binding Path=LessonNumber, Converter={StaticResource LessonConverter}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
                                         <TextBlock  Margin="10,0,0,0" Width="80" Text="{Binding Path=LessonName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
                                         <TextBlock  Margin="10,0,0,0" Width="80" Text="{Binding Path=Auditorium, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
                                         <TextBlock  Margin="10,0,0,0" Width="80" Text="{Binding Path=LessonType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
-
                                     </StackPanel>
+
                                 </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
                     </Grid>
 
                     <Grid Grid.Row="2">
-                        <ItemsControl ItemsSource="{Binding Path=Wednesday}">
-                            <ItemsControl.ItemTemplate>
-                                
-                                
+                        <ListBox ItemsSource="{Binding Path=Wednesday}" SelectedItem="{Binding SelectedTimeTable}">
+                            <ListBox.ItemTemplate>
                                 <DataTemplate>
+
                                     <StackPanel Orientation="Horizontal" Margin="0" Height="13" CanVerticallyScroll="False"  OpacityMask="{x:Null}">
                                         <TextBlock Margin="10,0,0,0" Width="80" Text="{Binding Path=LessonNumber, Converter={StaticResource LessonConverter}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
                                         <TextBlock  Margin="10,0,0,0" Width="80" Text="{Binding Path=LessonName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
                                         <TextBlock  Margin="10,0,0,0" Width="80" Text="{Binding Path=Auditorium, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
                                         <TextBlock  Margin="10,0,0,0" Width="80" Text="{Binding Path=LessonType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
-
                                     </StackPanel>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </Grid>
 
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Grid>
 
                     <Grid Grid.Row="3">
-                        <ItemsControl ItemsSource="{Binding Path=Thursday}">
-                            <ItemsControl.ItemTemplate>
+                        <ListBox ItemsSource="{Binding Path=Thursday}" SelectedItem="{Binding SelectedTimeTable}">
+                            <ListBox.ItemTemplate>
                                 <DataTemplate>
+
                                     <StackPanel Orientation="Horizontal" Margin="0" Height="13" CanVerticallyScroll="False"  OpacityMask="{x:Null}">
                                         <TextBlock Margin="10,0,0,0" Width="80" Text="{Binding Path=LessonNumber, Converter={StaticResource LessonConverter}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
                                         <TextBlock  Margin="10,0,0,0" Width="80" Text="{Binding Path=LessonName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
                                         <TextBlock  Margin="10,0,0,0" Width="80" Text="{Binding Path=Auditorium, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
                                         <TextBlock  Margin="10,0,0,0" Width="80" Text="{Binding Path=LessonType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
-
                                     </StackPanel>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </Grid>
 
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Grid>
 
                     <Grid Grid.Row="4">
-                        <ItemsControl ItemsSource="{Binding Path=Friday}">
-                            <ItemsControl.ItemTemplate>
+                        <ListBox ItemsSource="{Binding Path=Friday}" SelectedItem="{Binding SelectedTimeTable}">
+                            <ListBox.ItemTemplate>
                                 <DataTemplate>
+
                                     <StackPanel Orientation="Horizontal" Margin="0" Height="13" CanVerticallyScroll="False"  OpacityMask="{x:Null}">
                                         <TextBlock Margin="10,0,0,0" Width="80" Text="{Binding Path=LessonNumber, Converter={StaticResource LessonConverter}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
                                         <TextBlock  Margin="10,0,0,0" Width="80" Text="{Binding Path=LessonName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
                                         <TextBlock  Margin="10,0,0,0" Width="80" Text="{Binding Path=Auditorium, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
                                         <TextBlock  Margin="10,0,0,0" Width="80" Text="{Binding Path=LessonType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
-
                                     </StackPanel>
+
                                 </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
                     </Grid>
 
-
                     <Grid Grid.Row="5">
-                        <ItemsControl ItemsSource="{Binding Path=Saturday}">
-                            <ItemsControl.ItemTemplate>
+                        <ListBox ItemsSource="{Binding Path=Saturday}" SelectedItem="{Binding SelectedTimeTable}">
+                            <ListBox.ItemTemplate>
                                 <DataTemplate>
+
                                     <StackPanel Orientation="Horizontal" Margin="0" Height="13" CanVerticallyScroll="False"  OpacityMask="{x:Null}">
                                         <TextBlock Margin="10,0,0,0" Width="80" Text="{Binding Path=LessonNumber, Converter={StaticResource LessonConverter}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
                                         <TextBlock  Margin="10,0,0,0" Width="80" Text="{Binding Path=LessonName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
                                         <TextBlock  Margin="10,0,0,0" Width="80" Text="{Binding Path=Auditorium, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
                                         <TextBlock  Margin="10,0,0,0" Width="80" Text="{Binding Path=LessonType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
-
                                     </StackPanel>
+
                                 </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
                     </Grid>
                 </Grid>
             </Grid>

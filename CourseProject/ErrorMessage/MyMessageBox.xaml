@@ -6,7 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:CourseProject.ErrorMessage"
         mc:Ignorable="d"
-        Title="MyMessageBox" Height="180"  WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize" Width="250" Background="#FF8E00E2" BorderBrush="Black" BorderThickness="2">
+        Title="MyMessageBox" Height="180"  WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize" Width="290" Background="LightCoral" BorderBrush="Black" BorderThickness="2">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="27"/>
@@ -14,10 +14,10 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Background="#FFAC63FA">
+        <Grid Grid.Row="0" Background="red">
             <materialDesign:PackIcon Kind="ErrorOutline" Margin="10 0 0 0" Width="25" Height="25" VerticalAlignment="Center" FontWeight="Medium"  Foreground="#FFE9F2F3"/>
         </Grid>
-        <TextBlock Name="MessageContainer" VerticalAlignment="Center" FontWeight="Light" HorizontalAlignment="Center" Grid.Row="1" TextWrapping="Wrap" FontFamily="Palatino Linotype" FontSize="22" Margin="10" Foreground="White"/>
+        <TextBlock Name="MessageContainer" VerticalAlignment="Center" FontWeight="Light" HorizontalAlignment="Center" Grid.Row="1" TextWrapping="Wrap" FontFamily="Palatino Linotype" FontSize="18" Margin="10" Foreground="White"/>
         <StackPanel Name="ButtonContainer" Grid.Row="2" Orientation="Horizontal"
                     HorizontalAlignment="Right" Margin="10">
             <StackPanel.Resources>

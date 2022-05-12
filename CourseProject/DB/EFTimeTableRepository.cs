@@ -67,17 +67,14 @@ namespace CourseProject.DB
         }
 
 
-
-        public IEnumerable<TimeTable> GetTimeTable(Student student)     // получение предметов по студенту
+        public IEnumerable<TimeTable> GetTimeTable(Student student)     // получение таблицы по студенту
         {
-
-            // сделать
             return context.TimeTable.Where(x => x.idStudent == student.idStudent);
         }
 
-        public IEnumerable<string> GetSubjects(Student student)     // получение предметов по студенту
+        public IEnumerable<string> GetSubjects(Student student)         // получение предметов по студенту
         {
-            return context.TimeTable.Where(p =>  (p.LessonName != "")).OrderBy(p => p.LessonName).Select(p => p.LessonName).Distinct().ToList();
+            return context.TimeTable.Where(p => (p.LessonName != "")).OrderBy(p => p.LessonName).Select(p => p.LessonName).Distinct().ToList();
         }
     }
 }

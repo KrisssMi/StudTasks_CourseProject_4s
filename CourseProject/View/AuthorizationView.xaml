@@ -7,6 +7,7 @@
         xmlns:local="clr-namespace:CourseProject.View"
         mc:Ignorable="d"
         Title="AuthorizationView" Height="580" Width="390" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize"  FontFamily="Palatino Linotype" FontSize="17">
+    
     <Window.Resources>
         <Style TargetType="Rectangle">
             <Setter Property="Margin" Value="5"></Setter>
