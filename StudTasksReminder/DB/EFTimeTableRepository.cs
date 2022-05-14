@@ -1,4 +1,4 @@
-﻿using CourseProject.Model;
+﻿using StudTasksReminder.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -50,15 +50,7 @@ namespace CourseProject.DB
             context.SaveChanges();
         }
 
-        public void UpdateTT(TimeTable timeTable)
-        {
-            TimeTable tmp = context.TimeTable.FirstOrDefault(x => x.idTimeTable == timeTable.idTimeTable);
-            tmp.LessonName = timeTable.LessonName;
-            tmp.Auditorium = timeTable.Auditorium;
-            tmp.LessonType = timeTable.LessonType;
-            tmp.Week = timeTable.Week;
-            Save();
-        }
+        
 
         public void Remove(TimeTable timeTable)
         {
@@ -75,6 +67,13 @@ namespace CourseProject.DB
         public IEnumerable<string> GetSubjects(Student student)         // получение предметов по студенту
         {
             return context.TimeTable.Where(p => (p.LessonName != "")).OrderBy(p => p.LessonName).Select(p => p.LessonName).Distinct().ToList();
+        }
+
+        public List<TimeTable> GetLabsOnTomorrow(string week, User user, int tomorrow)
+        {
+            return context.TimeTable.Where(t => t.Week == week &&
+                (t.Day) == tomorrow &&
+                t.LessonType.ToLower() == "лр").ToList();
         }
     }
 }

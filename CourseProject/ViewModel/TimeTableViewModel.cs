@@ -8,6 +8,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace CourseProject.ViewModel
@@ -112,11 +113,11 @@ namespace CourseProject.ViewModel
             }
         }
 
-
     public TimeTableViewModel()
         {
             stud = eFStudent.GetStudentById((int)user.idStudent);
             var timetables = eFTimeTable.GetTimeTable(stud);
+            //UpdateLineCommand = new DelegateCommand(UpdateLine);
 
             // allMonday = timetables.Where(x => x.Day == 1).ToList();        // Получаем все занятия на понедельник
             // allTuesday = timetables.Where(x => x.Day == 2).ToList();       // Получаем все занятия на вторник
@@ -147,10 +148,7 @@ namespace CourseProject.ViewModel
             SaturdayTimeTable = allSaturday.Where(x => x.Week == "First").ToList();
         }
 
-
-
         private TimeTable selectedTimeTable;        // выбранная запись в таблице
-     
 
         private ObservableCollection<TimeTable> timeTables = new ObservableCollection<TimeTable>();
 
@@ -159,9 +157,6 @@ namespace CourseProject.ViewModel
             get { return timeTables; }
             set { timeTables = value; }
         }
-
-
-        
 
         public TimeTable SelectedTimeTable
         {
@@ -246,7 +241,54 @@ namespace CourseProject.ViewModel
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
+        private DelegateCommand updateLine;
+        public ICommand UpdateLineCommand
+        {
+            get
+            {
+                return updateLine ?? (updateLine = new DelegateCommand(
+                    (obj) =>
+                    {
+                        try
+                        {
+                            TimeTable updated;
 
-        
+                            using (StudTasksEntities db = new StudTasksEntities())
+                            {
+
+                                var DeletedTT = new ObservableCollection<TimeTable>(db.TimeTable).Where(x => x.Day == SelectedTimeTable.Day);
+                                db.TimeTable.RemoveRange(new ObservableCollection<TimeTable>(db.TimeTable).Where(x => x.Day == SelectedTimeTable.Day && x.idStudent == SelectedTimeTable.idStudent));
+                                updated = DeletedTT.Where(x => x.idTimeTable == SelectedTimeTable.idTimeTable).First();
+                                updated.idTimeTable = SelectedTimeTable.idTimeTable;
+                                updated.Auditorium = SelectedTimeTable.Auditorium;
+                                updated.LessonName = SelectedTimeTable.LessonName;
+                                updated.LessonNumber = SelectedTimeTable.LessonNumber;
+                                updated.LessonType = SelectedTimeTable.LessonType;
+                                db.TimeTable.AddRange(DeletedTT);
+                                db.SaveChanges();
+
+
+                            }
+
+                            //TimeTable updated = SaveTT.GetTimeTable(stud).ToList().FirstOrDefault(t => t.idTimeTable == SelectedTimeTable.idTimeTable);
+
+
+
+                            //SaveTT.UpdateTT(updated);
+                            //SaveTT.Save();
+
+                        }
+                        catch (Exception e)
+                        {
+                            MessageBox.Show(e.Message);
+                        }
+                        }
+                    ));
+            }
+        }
+        private void UpdateLine(object obj)
+        {
+            
+        }
     }
 }

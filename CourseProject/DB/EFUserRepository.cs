@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace CourseProject.DB
 {
@@ -56,9 +57,9 @@ namespace CourseProject.DB
         }
 
         public void RemoveUserById(Student student)     // удаление пользователя по его id
-        { 
+        {
             var user = context.User.FirstOrDefault(x => x.idStudent == student.idStudent);
-            if (user!=null)
+            if (user != null)
             {
                 context.User.Remove(GetUserById(student.idStudent));
             }
@@ -67,7 +68,7 @@ namespace CourseProject.DB
 
         public User GetUserByLogin(string login)        // получение пользователя по его логину
         {
-            return context.User.FirstOrDefault(x => x.Login == login);
+                    return context.User.FirstOrDefault(x => x.Login == login);
         }
     }
 }

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CourseProject.Model
+namespace StudTasksReminder.Model
 {
     using System;
     using System.Collections.Generic;
@@ -41,6 +41,7 @@ namespace CourseProject.Model
         public virtual ICollection<TimeTable> TimeTable { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<User> User { get; set; }
+
 
         public Student(int idstudent, string name, string surname, string email, string phone)
         {

@@ -44,7 +44,6 @@ namespace CourseProject.View
         {
                 timeTableViewModel.GetByWeek(week, (int)stud.idStudent);
                 DataContext = new TimeTableViewModel((int)stud.idStudent, week);
-
         }
 
 

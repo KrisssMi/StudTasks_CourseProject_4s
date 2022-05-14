@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CourseProject.Model
+namespace StudTasksReminder.Model
 {
     using System;
     using System.Collections.Generic;

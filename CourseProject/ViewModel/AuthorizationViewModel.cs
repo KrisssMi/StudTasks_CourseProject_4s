@@ -65,184 +65,201 @@ namespace CourseProject.ViewModel
             Reg_Password = password1;
             Db_Password = password2; // сравнение с уже зашифрованным паролем 
 
-            if (String.IsNullOrEmpty(Name) && String.IsNullOrEmpty(Surname) && String.IsNullOrEmpty(Reg_Login) &&
-                String.IsNullOrEmpty(Reg_Password) && String.IsNullOrEmpty(Db_Password))
-            {
-                MessageBox.Show("Check entered data!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
+            //    if (String.IsNullOrEmpty(Name) && String.IsNullOrEmpty(Surname) && String.IsNullOrEmpty(Reg_Login) &&
+            //        String.IsNullOrEmpty(Reg_Password) && String.IsNullOrEmpty(Db_Password))
+            //    {
+            //        MessageBox.Show("Check entered data!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            //        return false;
+            //    }
 
-            // регулярное выражение для электронной почты:
-            if (!Regex.IsMatch(Email, @"^[-a-z0-9!#$%&'*+/=?^_`{|}~]+(\.[-a-z0-9!#$%&'*+/=?^_`{|}~]+)*@([a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?\.)" +
-                        "*(aero|arpa|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|[a-z][a-z])$"))
-            {
-                MessageBox.Show("Incorrect email number input!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
+            //    // регулярное выражение для электронной почты:
+            //    if (!Regex.IsMatch(Email, @"^[-a-z0-9!#$%&'*+/=?^_`{|}~]+(\.[-a-z0-9!#$%&'*+/=?^_`{|}~]+)*@([a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?\.)" +
+            //                "*(aero|arpa|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|[a-z][a-z])$"))
+            //    {
+            //        MyMessageBox.Show("Incorrect email number input!", MessageBoxButton.OK);
+            //        return false;
+            //    }
 
-            if (!Regex.IsMatch(Phone, @"^(\+375|80)(29|25|44|33|17)([0-9]{3}([0-9]{2}){2})$"))
-            {
-                MessageBox.Show("Incorrect phone number input!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
+            //    if (!Regex.IsMatch(Phone, @"^(\+375|80)(29|25|44|33|17)([0-9]{3}([0-9]{2}){2})$"))
+            //    {
+            //        MyMessageBox.Show("Incorrect phone number input!", MessageBoxButton.OK);
+            //        return false;
+            //    }
 
-            if (NumStudCard.ToString().Length != 8)
-            {
-                MessageBox.Show("Student card number must contain 8 digits!", "Error", MessageBoxButton.OK,
-                    MessageBoxImage.Error);
-                return false;
-            }
+            //    if (NumStudCard.ToString().Length != 8)
+            //    {
+            //        MyMessageBox.Show("Student card number must contain 8 digits!", MessageBoxButton.OK);
+            //        return false;
+            //    }
 
-            if (!password1.Equals(password2))
-            {
-                MessageBox.Show("Passwords must match!", "Error", MessageBoxButton.OK,
-                    MessageBoxImage.Error);
-                return false;
-            }
+            //    if (!password1.Equals(password2))
+            //    {
+            //        MyMessageBox.Show("Passwords must match!", MessageBoxButton.OK);
+            //        return false;
+            //    }
 
-            User tmp1 = eFUser.GetUserByLogin(Reg_Login);
-            Student tmp2 = eFStudent.GetStudentById(NumStudCard);
+            //    User tmp1 = eFUser.GetUserByLogin(Reg_Login);
+            //    Student tmp2 = eFStudent.GetStudentById(NumStudCard);
 
-            if (tmp2 != null)
-            {
-                MessageBox.Show("A user with that student card number is already there!", "Error",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
+            //    if (tmp2 != null)
+            //    {
+            //        MyMessageBox.Show("A user with that student card number is already there!", MessageBoxButton.OK);
+            //        return false;
+            //    }
 
-            if (tmp1 != null)
-            {
-                MessageBox.Show("User with this login already exists!", "Error",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
-            Student s = new Student(NumStudCard, Name, Surname, Email, Phone);
-            eFStudent.addStudent(s);
-            User u = new User(NumStudCard, Reg_Login, User.getHash(Reg_Password));
-            eFUser.addUser(u);
-            eFUser.Save();
-            eFStudent.Save();
+            //    if (tmp1 != null)
+            //    {
+            //        MyMessageBox.Show("User with this login already exists!", MessageBoxButton.OK);
+            //        return false;
+            //    }
+            //    Student s = new Student(NumStudCard, Name, Surname, Email, Phone);
+            //    eFStudent.addStudent(s);
+            //    User u = new User(NumStudCard, Reg_Login, User.getHash(Reg_Password));
+            //    eFUser.addUser(u);
+            //    eFUser.Save();
+            //    eFStudent.Save();
 
-            EFTimeTableRepository TTRepository = new EFTimeTableRepository();
-            List<TimeTable> timeTables = new List<TimeTable>();
-            for (int i = 1; i <= 6; i++)
-            {
-                for (int j = 0; j < 2; j++)
-                {
-                    for (int k = 1; k <= 4; k++)
-                    {
-                        timeTables.Add(new TimeTable()
-                        {
-                            Day = i,
-                            Week = j == 0 ? "First" : "Second",
-                            idStudent = s.idStudent,
-                            LessonNumber = k
-                        });
-                    }
-                }
-            }
+            //    EFTimeTableRepository TTRepository = new EFTimeTableRepository();
+            //    List<TimeTable> timeTables = new List<TimeTable>();
+            //    for (int i = 1; i <= 6; i++)
+            //    {
+            //        for (int j = 0; j < 2; j++)
+            //        {
+            //            for (int k = 1; k <= 4; k++)
+            //            {
+            //                timeTables.Add(new TimeTable()
+            //                {
+            //                    Day = i,
+            //                    Week = j == 0 ? "First" : "Second",
+            //                    idStudent = s.idStudent,
+            //                    LessonNumber = k
+            //                });
+            //            }
+            //        }
+            //    }
 
-            foreach (var timeTable in timeTables)
-            {
-                TTRepository.addTimeTable(timeTable);
-            }
-            TTRepository.Save();
+            //    foreach (var timeTable in timeTables)
+            //    {
+            //        TTRepository.addTimeTable(timeTable);
+            //    }
+            //    TTRepository.Save();
 
-            return true;
-        }
+            //    return true;
+            //}
 
 
 
 
             /*  ЭТО ПЕРВОНАЧАЛЬНЫЙ КОД */
 
-            //    if (!String.IsNullOrEmpty(Name) && !String.IsNullOrEmpty(Surname) && !String.IsNullOrEmpty(Reg_Login) &&
-            //        !String.IsNullOrEmpty(Reg_Password) && !String.IsNullOrEmpty(Db_Password))
-            //    {
+            if (!String.IsNullOrEmpty(Name) && !String.IsNullOrEmpty(Surname) && !String.IsNullOrEmpty(Reg_Login) &&
+                !String.IsNullOrEmpty(Reg_Password) && !String.IsNullOrEmpty(Db_Password))
+            {
+                if (NumStudCard.ToString().Length == 8)
+                {
+                    //    // регулярное выражение для электронной почты:
+                    if (!Regex.IsMatch(Email, @"^[-a-z0-9!#$%&'*+/=?^_`{|}~]+(\.[-a-z0-9!#$%&'*+/=?^_`{|}~]+)*@([a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?\.)" +
+                                "*(aero|arpa|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|[a-z][a-z])$"))
+                    {
+                        MyMessageBox.Show("Incorrect email number input!", MessageBoxButton.OK);
+                        return false;
+                    }
 
-            //                if (NumStudCard.ToString().Length == 8)
-            //                {
-            //                    if (password1.Equals(password2))
-            //                    {
-            //                        User tmp1 = eFUser.GetUserByLogin(Reg_Login);
-            //                        Student tmp2 = eFStudent.GetStudentById(NumStudCard);
-            //                        if (tmp2 == null)
-            //                        {
-            //                            if (tmp1 == null)
-            //                            {
-            //                                Student s = new Student(NumStudCard, Name, Surname, Email, Phone);
-            //                                eFStudent.addStudent(s);
-            //                                User u = new User(NumStudCard, Reg_Login, User.getHash(Reg_Password));
-            //                                eFUser.addUser(u);
-            //                                eFUser.Save();
-            //                                eFStudent.Save();
+                    if (!Regex.IsMatch(Phone, @"^(\+375|80)(29|25|44|33|17)([0-9]{3}([0-9]{2}){2})$"))
+                    {
+                        MyMessageBox.Show("Incorrect phone number input!", MessageBoxButton.OK);
+                        return false;
+                    }
+                    if (password1.Equals(password2))
+                    {
+                        User tmp1 = eFUser.GetUserByLogin(Reg_Login);
+                        Student tmp2 = eFStudent.GetStudentById(NumStudCard);
+                        if (tmp2 == null)
+                        {
+                            if (tmp1 == null)
+                            {
+                                Student s = new Student(NumStudCard, Name, Surname, Email, Phone);
+                                eFStudent.addStudent(s);
+                                User u = new User(NumStudCard, Reg_Login, User.getHash(Reg_Password));
+                                eFUser.addUser(u);
+                                eFStudent.Save();
+                                eFUser.Save();
+                                
 
-            //                        EFTimeTableRepository TTRepository = new EFTimeTableRepository();
-            //                        List<TimeTable> timeTables = new List<TimeTable>();
-            //                        for (int i = 1; i <= 6; i++)
-            //                        {
-            //                            for (int j = 0; j < 2; j++)
-            //                            {
-            //                                for (int k = 1; k <= 4; k++)
-            //                                {
-            //                                    timeTables.Add(new TimeTable()
-            //                                    {
-            //                                        Day = i,
-            //                                        Week = j == 0 ? "First" : "Second",
-            //                                        idStudent = s.idStudent,
-            //                                        LessonNumber = k
-            //                                    });
-            //                                }
-            //                            }
-            //                        }
+                                EFTimeTableRepository TTRepository = new EFTimeTableRepository();
+                                List<TimeTable> timeTables = new List<TimeTable>();
+                                for (int i = 1; i <= 6; i++)
+                                {
+                                    for (int j = 0; j < 2; j++)
+                                    {
+                                        for (int k = 1; k <= 4; k++)
+                                        {
+                                            timeTables.Add(new TimeTable()
+                                            {
+                                                Day = i,
+                                                Week = j == 0 ? "First" : "Second",
+                                                idStudent = s.idStudent,
+                                                LessonNumber = k
+                                            });
+                                        }
+                                    }
+                                }
 
-            //                        foreach (var timeTable in timeTables)
-            //                        {
-            //                            TTRepository.addTimeTable(timeTable);
-            //                        }
-            //                        TTRepository.Save();
+                                foreach (var timeTable in timeTables)
+                                {
+                                    TTRepository.addTimeTable(timeTable);
+                                }
+                                TTRepository.Save();
 
-            //                            return true;
-            //                            }
-            //                            else
-            //                            {
-            //                        MyMessageBox.Show("User with this login already exists!", MessageBoxButton.OK);
-            //                        return false;
-            //                            }
-            //                        }
-            //                        else
-            //                        {
-            //                    MyMessageBox.Show("A user with that student card number is already there!", MessageBoxButton.OK);
-            //                    return false;
-            //                        }
-            //                    }
-            //                    else
-            //                    {
-            //                MyMessageBox.Show("Passwords must match!", MessageBoxButton.OK);
-            //                return false;
-            //                    }
-            //                }
-            //                else
-            //                {
-            //            MyMessageBox.Show("Student card number must contain 8 digits!", MessageBoxButton.OK);
-            //            return false;
-            //                }
-            //    }
+                                return true;
+                            }
+                            else
+                            {
+                                MyMessageBox.Show("User with this login already exists!", MessageBoxButton.OK);
+                                return false;
+                            }
+                        }
+                        else
+                        {
+                            MyMessageBox.Show("A user with that student card number is already there!", MessageBoxButton.OK);
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        MyMessageBox.Show("Passwords must match!", MessageBoxButton.OK);
+                        return false;
+                    }
+                }
+                else
+                {
+                    MyMessageBox.Show("Student card number must contain 8 digits!", MessageBoxButton.OK);
+                    return false;
+                }
+            }
 
-            //    else
-            //    {
-            //        MyMessageBox.Show("Check entered data!", MessageBoxButton.OK);
-            //        return false;
-            //    }
-            //}
+            else
+            {
+                MyMessageBox.Show("Check entered data!", MessageBoxButton.OK);
+                return false;
+            }
+        }
 
 
-            public User СompareDataOfUser(string password)
+        public User СompareDataOfUser(string password)
             {
                 Password = password;
                 if (!String.IsNullOrEmpty(Login) && !String.IsNullOrEmpty(Password))
                 {
                     User tmp = eFUser.GetUserByLogin(Login);
+
+               
+                    if (tmp.Password != User.getHash(Password))
+                    {
+                        return null;
+                    }
+                
+                
                     if (tmp != null)
                     {
 

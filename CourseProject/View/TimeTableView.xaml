@@ -9,7 +9,8 @@
       xmlns:databinding="clr-namespace:CourseProject.Converters" 
       xmlns:viewmodel="clr-namespace:CourseProject.ViewModel" 
       d:DataContext="{d:DesignInstance Type=viewmodel:TimeTableViewModel}" d:DesignWidth="780"
-      Title="TimeTableView" Background="White" FontFamily="Palatino Linotype" Height="740">
+      Title="TimeTableView" Background="White" FontFamily="Palatino Linotype" Height="740"
+      x:Name="page">
     <Page.Resources>
         <databinding:DayConverter x:Key="DayConverter"></databinding:DayConverter>
         <databinding:LessonConverter x:Key="LessonConverter"></databinding:LessonConverter>
@@ -17,20 +18,22 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="36"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <!-- Верхняя панель для редактирования строки: -->
         <Grid Grid.Row="0">
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" DataContext="{Binding SelectedTimeTable}">
-                <TextBox IsReadOnly="True" VerticalContentAlignment="Center" Width="100" Text="{Binding Day, Converter={StaticResource DayConverter}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="Day"  Cursor="Arrow" />
+                <TextBox IsReadOnly="True" VerticalContentAlignment="Center" Width="95" Text="{Binding Day, Converter={StaticResource DayConverter}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="Day"  Cursor="Arrow" />
                 <TextBox IsReadOnly="True" VerticalContentAlignment="Center" Width="90" Text="{Binding LessonNumber, Converter={StaticResource LessonConverter},  UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="Time"  Cursor="Arrow" />
-                <TextBox VerticalContentAlignment="Center" Width="80" Text="{Binding Path=Auditorium, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="Auditorium" Cursor="Arrow" />
-                <TextBox VerticalContentAlignment="Center" Width="80" Text="{Binding Path=LessonType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="Lesson type"/>
-                <TextBox VerticalContentAlignment="Center" Width="120" Text="{Binding Path=LessonName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="Subject name"/>
-                <TextBlock VerticalAlignment="Center" Text="Week" Margin="20 0"/>
-                <ComboBox x:Name="Stud_Week" SelectionChanged="Stud_Week_SelectionChanged" Loaded="Stud_Week_Loaded" Width="55">
+                <TextBox VerticalContentAlignment="Center" Width="115" Text="{Binding Path=LessonName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="Subject name"/>
+                <TextBox VerticalContentAlignment="Center" Width="115" Text="{Binding Path=Auditorium, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="Auditorium" Cursor="Arrow" />
+                <TextBox VerticalContentAlignment="Center" Width="115" Text="{Binding Path=LessonType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="Lesson type"/>
+                <Button Content="Save" Command="{Binding ElementName=page, Path=DataContext.UpdateLineCommand}"/>
+
+                <TextBlock VerticalAlignment="Center" Text="Week" Margin="120 0 0 0"/>
+                <ComboBox x:Name="Stud_Week" SelectionChanged="Stud_Week_SelectionChanged" Loaded="Stud_Week_Loaded" Width="80" Margin="10 0 0 0">
                     <ComboBoxItem Content="First"/>
                     <ComboBoxItem Content="Second"/>
                 </ComboBox>
@@ -42,7 +45,7 @@
         <Grid Grid.Row="1">
             <Grid Margin="0,0,0,0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="4*" />
                     <ColumnDefinition Width="7*"/>
                 </Grid.ColumnDefinitions>
 
@@ -62,15 +65,15 @@
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
-                        <StackPanel Height="650">
-                            <ScrollViewer CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto">
+                        <StackPanel Height="700">
+                            <ScrollViewer CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" Height="718">
                                 <StackPanel Orientation="Vertical">
-                                    <Label Height="110" Content="Monday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FF9B1FFF" />
-                                    <Label Height="109" Content="Tuesday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFAC48FC"/>
-                                    <Label Height="109" Content="Wednesday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFBC69FF"/>
-                                    <Label Height="109" Content="Thursday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFCF94FF"/>
-                                    <Label Height="109" Content="Friday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFE1BDFF"/>
-                                    <Label Height="109" Content="Saturday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFF1E0FF"/>
+                                    <Label Height="117" Content="Monday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FF9B1FFF" />
+                                    <Label Height="117" Content="Tuesday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFAC48FC"/>
+                                    <Label Height="117" Content="Wednesday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFBC69FF"/>
+                                    <Label Height="117" Content="Thursday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFCF94FF"/>
+                                    <Label Height="117" Content="Friday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFE1BDFF"/>
+                                    <Label Height="117" Content="Saturday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFF1E0FF"/>
                                 </StackPanel>
                             </ScrollViewer>
                         </StackPanel>
@@ -79,13 +82,13 @@
 
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="109"/>
-                        <RowDefinition Height="109"/>
-                        <RowDefinition Height="109"/>
-                        <RowDefinition Height="109"/>
-                        <RowDefinition Height="109"/>
-                        <RowDefinition Height="109"/>
-                        <RowDefinition Height="109"/>
+                        <RowDefinition Height="117"/>
+                        <RowDefinition Height="117"/>
+                        <RowDefinition Height="117"/>
+                        <RowDefinition Height="117"/>
+                        <RowDefinition Height="117"/>
+                        <RowDefinition Height="117"/>
+                        <RowDefinition Height="117"/>
                     </Grid.RowDefinitions>
 
                     <Grid Grid.Row="0">

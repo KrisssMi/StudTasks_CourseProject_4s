@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CourseProject.Model
+namespace StudTasksReminder.Model
 {
     using System;
     using System.Collections.Generic;
@@ -17,7 +17,7 @@ namespace CourseProject.Model
 
     public partial class User
     {
-        public int idStudent { get; set; }
+        public Nullable<int> idStudent { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
     
@@ -25,6 +25,7 @@ namespace CourseProject.Model
 
         public User()
         {
+
         }
 
         public User(int idstudent, string login, string password)

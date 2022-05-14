@@ -25,6 +25,7 @@ namespace CourseProject.Model
 
         public User()
         {
+
         }
 
         public User(int idstudent, string login, string password)
