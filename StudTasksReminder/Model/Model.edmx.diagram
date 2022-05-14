@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d633b253bcbb419d8e680aa802b75f04" Name="Diagram1" ZoomLevel="81">
+        <EntityTypeShape EntityType="StudTasksModel.Progress" Width="1.5" PointX="3.125" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudTasksModel.Student" Width="1.5" PointX="5.25" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudTasksModel.sysdiagrams" Width="1.5" PointX="3.125" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudTasksModel.Task" Width="1.5" PointX="7.5" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudTasksModel.TimeTable" Width="1.5" PointX="7.5" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudTasksModel.User" Width="1.5" PointX="5.25" PointY="8" IsExpanded="true" />
+        <AssociationConnector Association="StudTasksModel.FK__Progress__idStud__114A936A" ManuallyRouted="false" />
+        <AssociationConnector Association="StudTasksModel.FK__Task__idStudent__0B91BA14" ManuallyRouted="false" />
+        <AssociationConnector Association="StudTasksModel.FK__TimeTable__idStu__08B54D69" ManuallyRouted="false" />
+        <AssociationConnector Association="StudTasksModel.FK__User__idStudent__05D8E0BE" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
