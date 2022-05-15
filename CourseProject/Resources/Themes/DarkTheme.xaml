@@ -23,6 +23,12 @@
         <Setter Property="Opacity" Value="0.8"/>
     </Style>
 
+
+    <Style x:Key="GridProfile">
+        <Setter Property="Control.Background" Value="#FF46424A"/>
+        <Setter Property="Control.Opacity" Value="0.8"/>
+    </Style>
+
     <Style x:Key="Window" TargetType="Window">
         <Setter Property="Background" Value="#FFD4D4D4" />
     </Style>

@@ -83,7 +83,8 @@ namespace CourseProject.View
         }
 
 
-        private void ButtonCloseMenu_Click(object sender, RoutedEventArgs e)
+        private void ButtonClose
+            _Click(object sender, RoutedEventArgs e)
         {
             ButtonOpenMenu.Visibility = Visibility.Visible;
             ButtonCloseMenu.Visibility = Visibility.Collapsed;

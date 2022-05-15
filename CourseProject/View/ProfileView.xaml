@@ -20,7 +20,7 @@
             </Grid.ColumnDefinitions>
         </Grid>
 
-        <Grid Grid.Row="0" Background="#FFC0B5FD">
+        <Grid Grid.Row="0" Style="{DynamicResource GridProfile}">
             <Label Grid.Column="0" Content="Profile" FontFamily="Palatino Linotype" FontSize="40" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
         <Grid Grid.Row="1"/>
