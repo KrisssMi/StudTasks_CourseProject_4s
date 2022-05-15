@@ -40,25 +40,25 @@ namespace CourseProject.View
 
             DataContext = this;
             //Choose_Theme_Unchecked(this, new RoutedEventArgs());
-            AddRemindersToAutorun();
+            //AddRemindersToAutorun();
         }
 
-        private void AddRemindersToAutorun()
-        {
-            // открываем нужную ветку в реестре   
-            // @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run\"  
+        //private void AddRemindersToAutorun()
+        //{
+        //    // открываем нужную ветку в реестре   
+        //    // @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run\"  
 
-            Microsoft.Win32.RegistryKey Key =
-                Microsoft.Win32.Registry.LocalMachine.OpenSubKey(
-                "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\\", true);
+        //    Microsoft.Win32.RegistryKey Key =
+        //        Microsoft.Win32.Registry.LocalMachine.OpenSubKey(
+        //        "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\\", true);
 
-            string path = System.IO.Path.GetFullPath(@"StudTasksReminder\StudTasksReminder.exe");
-            //добавляем первый параметр - название ключа  
-            // Второй параметр - это путь к   
-            // исполняемому файлу программы.  
-            Key.SetValue("NtOrg", "\"" + path + "\"");
-            Key.Close();
-        }
+        //    string path = System.IO.Path.GetFullPath(@"StudTasksReminder\StudTasksReminder.exe");
+        //    //добавляем первый параметр - название ключа  
+        //    // Второй параметр - это путь к   
+        //    // исполняемому файлу программы.  
+        //    Key.SetValue("NtOrg", "\"" + path + "\"");
+        //    Key.Close();
+        //}
         
 
         private void Exit_PreviewMouseDown(object sender, MouseButtonEventArgs e)

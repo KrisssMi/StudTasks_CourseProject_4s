@@ -7,11 +7,17 @@ using System.Threading.Tasks;
 
 namespace CourseProject.ViewModel
 {
-    class ProfileViewModel
+    class ProfileViewModel : BaseViewModel
     {
-        User user = User.CurrentUser;
+        //User user = User.CurrentUser;
         Student stud = new Student();
 
+        public User LoggerUser { get; set; }
         
+        public ProfileViewModel()
+        {
+            // вывести имя текущего пользователя:
+            LoggerUser = User.CurrentUser;
+        }
     }
 }

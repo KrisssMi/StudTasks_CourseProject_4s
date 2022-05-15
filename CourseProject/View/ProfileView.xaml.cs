@@ -27,101 +27,34 @@ namespace CourseProject.View
         Student stud = new Student();
 
         EFStudentRepository eFStudent = new EFStudentRepository();
-        
+
         public ProfileView()
         {
             user = User.CurrentUser;
             InitializeComponent();
-            FillInfo();
-
-        }
-
-        private void FillInfo()
-        {
-            UserName.Content = stud.Name + " " + stud.Surname;
-            lbl_Email.Text = stud.Email;
-            lbl_Phone.Text = stud.Phone;
-        }
-
-
-
-
-        
-        private byte[] _imageBytes = null;
-        private void Btn_UploadPhoto_Click(object sender, RoutedEventArgs e)
-        {
-            var dialog = new OpenFileDialog
+            stud = eFStudent.GetStudentById(user.idStudent);
+            if (stud != null)
             {
-                CheckFileExists = true,
-                Multiselect = false,
-                Filter = "Images (*.jpg,*.png)|*.jpg;*.png|All Files(*.*)|*.*"
-            };
-            if (dialog.ShowDialog() != true) { return; }
+                tbName.Text = stud.Name;
+                tbSurname.Text = stud.Surname;
+                tbNumber.Text = stud.idStudent.ToString();
+                tbPhone.Text = stud.Phone;
+                tbEmail.Text = stud.Email;
 
-            lbl_PhotoPath.Content = dialog.FileName;
-            img_ProfilePhoto.ImageSource = new BitmapImage(new Uri(lbl_PhotoPath.Content.ToString()));
-
-            using (var fs = new FileStream(lbl_PhotoPath.Content.ToString(), FileMode.Open, FileAccess.Read))
-            {
-                _imageBytes = new byte[fs.Length];
-                fs.Read(_imageBytes, 0, System.Convert.ToInt32(fs.Length));
-            }
-            //SaveImage();
-        }
-
-
-        private void SaveImage()
-        {
-            if (!String.IsNullOrEmpty(lbl_PhotoPath.Content.ToString()))
-            {
-                using (var fs = new FileStream(lbl_PhotoPath.Content.ToString(), FileMode.Open, FileAccess.Read))
-                {
-                    _imageBytes = new byte[fs.Length];
-                }
+                // редактирование профиля
+                //if (user.idStudent == stud.idStudent)
+                //{
+                //    btnEdit.Visibility = Visibility.Visible;
+                //    btnSave.Visibility = Visibility.Hidden;
+                //    btnCancel.Visibility = Visibility.Hidden;
+                //}
+                //else
+                //{
+                //    btnEdit.Visibility = Visibility.Hidden;
+                //    btnSave.Visibility = Visibility.Hidden;
+                //    btnCancel.Visibility = Visibility.Hidden;
+                //}
             }
         }
-
-        private void LoadImage()
-        {
-            if (!String.IsNullOrEmpty(lbl_PhotoPath.Content.ToString()))
-            {
-                using (var fs = new FileStream(lbl_PhotoPath.Content.ToString(), FileMode.Open, FileAccess.Read))
-                {
-                    _imageBytes = new byte[fs.Length];
-                    fs.Read(_imageBytes, 0, System.Convert.ToInt32(fs.Length));
-                }
-            }
-            else { return; }
-        }
-
-        // изменение информации о студенте:
-        private void Btn_Save_Click(object sender, RoutedEventArgs e)
-        {
-            stud.Name = UserName.Content.ToString().Split(' ')[0];
-
-            stud.Email = lbl_Email.Text;
-            stud.Phone = lbl_Phone.Text;
-            //stud.Photo = _imageBytes;
-            eFStudent.Update(stud);
-            MessageBox.Show("Информация о студенте обновлена");
-            
-        }
-            //{
-            //    try
-            //    {
-            //        if (attach != null && attach.Image != null && attach.ImagePath != null)
-            //        {
-            //            img_ProfilePhoto.ImageSource = new BitmapImage(new Uri(attach.ImagePath));
-            //            lbl_PhotoPath.Content = attach.ImagePath;
-            //        }
-            //    }
-            //    catch
-            //    {
-            //        MessageBox.Show("Photo path " + attach.ImagePath + " is not found");
-            //    }
-            //}
-
-
-
-        }
+    }
 }

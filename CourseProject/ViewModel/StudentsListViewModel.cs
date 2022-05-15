@@ -13,13 +13,14 @@ namespace CourseProject.ViewModel
 {
     class StudentsListViewModel : INotifyPropertyChanged
     {
-        //private StudTasksEntities context;                    // контекст базы данных
+        private StudTasksEntities context;                    // контекст базы данных
         //private static StudTasksEntities context;
         EFUserRepository eFUser = new EFUserRepository();
         EFProgressRepository eFProgress = new EFProgressRepository();
         EFTaskRepository eFTask = new EFTaskRepository();
         EFStudentRepository eFStudent = new EFStudentRepository();
 
+        
         public IEnumerable<Student> getStudents()
         {
             return eFStudent.getStudents();
@@ -77,6 +78,7 @@ namespace CourseProject.ViewModel
             tmpStudents.Clear();
             foreach (Student a in students)
                 tmpStudents.Add(a);
+            SingletonView.SingletonAdmin.getInstance(null).StudentsListViewModel = this;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

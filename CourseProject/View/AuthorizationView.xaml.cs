@@ -92,7 +92,8 @@ namespace CourseProject.View
                     else MyMessageBox.Show("Check entered data!", MessageBoxButton.OK);
                 }
                 else MyMessageBox.Show("Enter data!", MessageBoxButton.OK);
-            }
+            WelcomeView wv = new WelcomeView();
+        }
 
         private void Sign_Up_Click(object sender, RoutedEventArgs e)
         {

@@ -64,7 +64,7 @@ namespace CourseProject.ViewModel
         public TaskViewModel()
         {
             stud = eFStudent.GetStudentById((int)user.idStudent);       // получаем студента по id
-            //eFTimeTable.Clear();
+            eFTimeTable.Clear();
         }
 
         public void ChangeTrue()                                        // изменение выполненности задания
@@ -114,10 +114,6 @@ namespace CourseProject.ViewModel
             }
         }
 
-        //public IEnumerable<string> GetSubjects()
-        //{
-        //    return eFTimeTable.GetSubjects(stud);
-        //}
 
         public void addTask(Model.Task task)
         {
