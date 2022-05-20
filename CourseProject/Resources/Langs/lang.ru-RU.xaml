@@ -1,0 +1,30 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:v="clr-namespace:System;assembly=mscorlib">
+    <v:String x:Key="_Tasks">Задания</v:String>
+    <v:String x:Key="_Progress">Статистика</v:String>
+    <v:String x:Key="_TimeTable">Расписание</v:String>
+    <v:String x:Key="_Profile">Профиль</v:String>
+    <v:String x:Key="_StudentList">Cтуденты</v:String>
+    <v:String x:Key="_Information">Вы вошли в систему как: </v:String>
+    <v:String x:Key="_Name">Имя: </v:String>
+    <v:String x:Key="_Surname">Фамилия: </v:String>
+    <v:String x:Key="_StudCard">Студенческий билет: </v:String>
+    <v:String x:Key="_Phone">Телефон: </v:String>
+    <v:String x:Key="_Email">Электр. почта: </v:String>
+    <v:String x:Key="_ID">Id: </v:String>
+    <v:String x:Key="_Complete">сделано: </v:String>
+    <v:String x:Key="_All">всего: </v:String>
+    <v:String x:Key="_FilterBy">Фильтр по</v:String>
+    <v:String x:Key="_Current">Текущие</v:String>
+    <v:String x:Key="_Past">Выполненные</v:String>
+    <v:String x:Key="_FilterByImportance">Фильтр по важности</v:String>
+    <v:String x:Key="_NewTask">Новое задание</v:String>
+    <v:String x:Key="_Subject">Предмет</v:String>
+    <v:String x:Key="_Importance">Важность</v:String>
+    <v:String x:Key="_PickDate">Дата</v:String>
+    <v:String x:Key="_Title">Заголовок</v:String>
+    <v:String x:Key="_Details">Детали</v:String>
+
+
+</ResourceDictionary>
