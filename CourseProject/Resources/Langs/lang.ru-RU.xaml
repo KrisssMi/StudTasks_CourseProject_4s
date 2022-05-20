@@ -25,6 +25,21 @@
     <v:String x:Key="_PickDate">Дата</v:String>
     <v:String x:Key="_Title">Заголовок</v:String>
     <v:String x:Key="_Details">Детали</v:String>
-
-
+    <v:String x:Key="_ChooseSubject">Выберите предмет</v:String>
+    <v:String x:Key="_Day">День</v:String>
+    <v:String x:Key="_Time">Время</v:String>
+    <v:String x:Key="_LessonName">Предмет</v:String>
+    <v:String x:Key="_LessonType">Тип</v:String>
+    <v:String x:Key="_Auditorium">Аудитория</v:String>
+    <v:String x:Key="_Week">Неделя</v:String>
+    <v:String x:Key="_First">Первая</v:String>
+    <v:String x:Key="_Second">Вторая</v:String>
+    <v:String x:Key="_Monday">Понедельник</v:String>
+    <v:String x:Key="_Tuesday">Вторник</v:String>
+    <v:String x:Key="_Wednesday">Среда</v:String>
+    <v:String x:Key="_Thursday">Четверг</v:String>
+    <v:String x:Key="_Friday">Пятница</v:String>
+    <v:String x:Key="_Saturday">Суббота</v:String>
+    <v:String x:Key="_Save">Сохранить</v:String>
+    <v:String x:Key="_Cancel">Отменить</v:String>
 </ResourceDictionary>

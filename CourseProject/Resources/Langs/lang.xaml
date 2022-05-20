@@ -25,6 +25,21 @@
     <v:String x:Key="_PickDate">Pick date</v:String>
     <v:String x:Key="_Title">Title</v:String>
     <v:String x:Key="_Details">Details</v:String>
-
-
+    <v:String x:Key="_ChooseSubject">Choose subject</v:String>
+    <v:String x:Key="_Day">Day</v:String>
+    <v:String x:Key="_Time">Time</v:String>
+    <v:String x:Key="_LessonName">Lesson name</v:String>
+    <v:String x:Key="_LessonType">Lesson type</v:String>
+    <v:String x:Key="_Auditorium">Auditorium</v:String>
+    <v:String x:Key="_Week">Week</v:String>
+    <v:String x:Key="_First">First</v:String>
+    <v:String x:Key="_Second">Second</v:String>
+    <v:String x:Key="_Monday">Monday</v:String>
+    <v:String x:Key="_Tuesday">Tuesday</v:String>
+    <v:String x:Key="_Wednesday">Wednesday</v:String>
+    <v:String x:Key="_Thursday">Thursday</v:String>
+    <v:String x:Key="_Friday">Friday</v:String>
+    <v:String x:Key="_Saturday">Saturday</v:String>
+    <v:String x:Key="_Save">Save</v:String>
+    <v:String x:Key="_Cancel">Cancel</v:String>
 </ResourceDictionary>

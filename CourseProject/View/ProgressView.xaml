@@ -13,7 +13,7 @@
         <DockPanel LastChildFill="True">
             <Border Margin="10 25 10 10"  DockPanel.Dock="Top" Height="50" BorderThickness="1" BorderBrush="#FFB4B4B4">
                 <StackPanel  Orientation="Horizontal" >
-                    <ComboBox Width="190" FontSize="15" Name="LessonsBox" Loaded="LessonsBox_Loaded" Margin="10 0 0 0" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
+                    <ComboBox Width="190" FontSize="15" Name="LessonsBox" Loaded="LessonsBox_Loaded" Margin="10 0 0 0" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Disabled" materialDesign:HintAssist.Hint="{DynamicResource _ChooseSubject}"/>
                     <Label FontFamily="Papyrus" Width="400" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Name="NotificationMessgeToProgress" FontSize="16" FontStyle="Italic"/>
                     <Button Width="45" x:Name="AddProgress" Click="AddProgress_Click" Cursor="Hand">
                         <materialDesign:PackIcon Kind="Add" VerticalAlignment="Center" HorizontalAlignment="Center"  Width="25" Height="25" materialDesign:ColorZoneAssist.Mode="Light"/>
@@ -32,7 +32,7 @@
                                     <DockPanel LastChildFill="True" >
                                         <StackPanel DockPanel.Dock="Right" Orientation="Vertical" Margin="0 0 10 0">
                                             <StackPanel Orientation="Horizontal">
-                                                <Label Width="70" Content="all"/>
+                                                <Label Width="70" Content="{DynamicResource _All}"/>
                                                 <Label Width="30" x:Name="NeededTasks" VerticalContentAlignment="Center" Content="{Binding NeededTasks, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                                 <StackPanel>
                                                     <materialDesign:PackIcon Kind="Add" x:Name="NeededTasksPlus" PreviewMouseDown="NeededTasksPlus_PreviewMouseDown" Height="15" Width="15"></materialDesign:PackIcon>
@@ -40,18 +40,16 @@
                                                 </StackPanel>
                                             </StackPanel>
                                             <StackPanel Orientation="Horizontal">
-                                                <Label Width="70" Content="complete"/>
+                                                <Label Width="70" Content="{DynamicResource _Complete}"/>
                                                 <TextBlock Width="30" VerticalAlignment="Center" Text="{Binding ComplitedTasks}" />
-                                                <StackPanel Orientation="Vertical">
-                                                    <materialDesign:PackIcon Kind="Add" x:Name="CompletedTasksPlus" PreviewMouseDown="CompletedTasksPlus_PreviewMouseDown" Height="15" Width="15"></materialDesign:PackIcon>
+                                                <StackPanel Orientation="Vertical"><materialDesign:PackIcon Kind="Add" x:Name="CompletedTasksPlus" PreviewMouseDown="CompletedTasksPlus_PreviewMouseDown" Height="15" Width="15"></materialDesign:PackIcon>
                                                     <materialDesign:PackIcon Kind="Minus" x:Name="CompletedTasksMinus" PreviewMouseDown="CompletedTasksMinus_PreviewMouseDown" Height="15" Width="15"></materialDesign:PackIcon>
                                                 </StackPanel>
                                             </StackPanel>
                                         </StackPanel>
-                                        <StackPanel>
-                                            <Label x:Name="LessonName" FontSize="15" FontWeight="Bold" Content="{Binding LessonName}"/>
-                                            
+                                        <StackPanel Orientation="Vertical">
                                             <ProgressBar Minimum="0" Opacity="0.7" Maximum="100" Height="15" Width="600" Value="{Binding TaskProgress, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}" Background="Lavender"/>
+                                           <TextBlock Text="{Binding LessonName}" FontSize="10" Margin="-90 0 0 0" TextWrapping="Wrap"/>
                                         </StackPanel>
                                     </DockPanel>
                                 </Grid>

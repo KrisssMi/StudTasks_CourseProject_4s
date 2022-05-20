@@ -4,7 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:local="clr-namespace:CourseProject.View" xmlns:viewmodel="clr-namespace:CourseProject.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:ProfileViewModel}"
+        xmlns:local="clr-namespace:CourseProject.View" 
+      xmlns:viewmodel="clr-namespace:CourseProject.ViewModel" 
+      d:DataContext="{d:DesignInstance Type=viewmodel:ProfileViewModel}"
       mc:Ignorable="d"
         Title="ProfileView" Height="660" Width="910" FontFamily="Palatino Linotype" FontSize="20">
     <Grid>
@@ -21,7 +23,7 @@
         </Grid>
 
         <Grid Grid.Row="0" Style="{DynamicResource GridProfile}">
-            <Label Grid.Column="0" Content="Profile" FontFamily="Palatino Linotype" FontSize="40" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Grid.Column="0" Content="{DynamicResource _Profile}" FontFamily="Palatino Linotype" FontSize="40" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
         <Grid Grid.Row="1"/>
         <Grid Margin="155,92,155,92" Grid.Row="1">
@@ -39,23 +41,23 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Row="0" Grid.ColumnSpan="2" TextAlignment="Center" VerticalAlignment="Top" FontSize="40" FontStyle="Italic" Text="You are logged in as: " Height="55" Foreground="Black" />
+            <TextBlock Grid.Row="0" Grid.ColumnSpan="2" TextAlignment="Center" VerticalAlignment="Top" FontSize="40" FontStyle="Italic" Text="{DynamicResource _Information}" Height="55" Foreground="Black" />
 
-            <Label Grid.Row="1" Grid.Column="0" Content="Name:"  FontSize="37" HorizontalAlignment="Center" Height="50" Foreground="Black" />
+            <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource _Name}"  FontSize="37" HorizontalAlignment="Center" Height="50" Foreground="Black" />
             <TextBlock x:Name="tbName" FontStyle="Italic" Grid.Row="1" Grid.Column="1" TextAlignment="Center" VerticalAlignment="Center" FontSize="37" Height="50" Foreground="#FF950B0B"/>
 
 
-            <Label Grid.Row="2" Grid.Column="0" Content="Surname:" FontSize="37" HorizontalAlignment="Center" Height="50" Foreground="Black"/>
+            <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource _Surname}" FontSize="37" HorizontalAlignment="Center" Height="50" Foreground="Black"/>
             <TextBlock x:Name="tbSurname" FontStyle="Italic" Grid.Row="2" Grid.Column="1" TextAlignment="Center" VerticalAlignment="Center" FontSize="37" Height="50" Foreground="#FF950B0B" />
 
 
-            <Label Grid.Row="3" Grid.Column="0" Content="Student's card:" FontSize="37" HorizontalAlignment="Center" Height="50" Foreground="Black" />
+            <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource _StudCard}" FontSize="37" HorizontalAlignment="Center" Height="50" Foreground="Black" />
             <TextBlock x:Name="tbNumber" FontStyle="Italic" Grid.Row="3" Grid.Column="1" TextAlignment="Center" VerticalAlignment="Center" FontSize="37" Height="50" Foreground="#FF950B0B" />
 
-            <Label Grid.Row="4" Grid.Column="0" Content="Phone:" FontSize="37" HorizontalAlignment="Center" Height="50" Foreground="Black" />
+            <Label Grid.Row="4" Grid.Column="0" Content="{DynamicResource _Phone}" FontSize="37" HorizontalAlignment="Center" Height="50" Foreground="Black" />
             <TextBlock x:Name="tbPhone" FontStyle="Italic" Grid.Row="4" Grid.Column="1" TextAlignment="Center" VerticalAlignment="Center" FontSize="37" Height="50" Foreground="#FF950B0B" />
 
-            <Label Grid.Row="5" Grid.Column="0" Content="Email:" FontSize="37" HorizontalAlignment="Center" Height="50" Foreground="Black" />
+            <Label Grid.Row="5" Grid.Column="0" Content="{DynamicResource _Email}" FontSize="37" HorizontalAlignment="Center" Height="50" Foreground="Black" />
             <TextBlock x:Name="tbEmail" FontStyle="Italic" Grid.Row="5" Grid.Column="1" TextAlignment="Center" VerticalAlignment="Center" FontSize="37" Height="50" Foreground="#FF950B0B" />
         </Grid>
     </Grid>

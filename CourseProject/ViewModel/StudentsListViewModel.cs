@@ -14,13 +14,13 @@ namespace CourseProject.ViewModel
     class StudentsListViewModel : INotifyPropertyChanged
     {
         private StudTasksEntities context;                    // контекст базы данных
-        //private static StudTasksEntities context;
         EFUserRepository eFUser = new EFUserRepository();
         EFProgressRepository eFProgress = new EFProgressRepository();
         EFTaskRepository eFTask = new EFTaskRepository();
         EFStudentRepository eFStudent = new EFStudentRepository();
+        EFTimeTableRepository eFTimeTable = new EFTimeTableRepository();
 
-        
+
         public IEnumerable<Student> getStudents()
         {
             return eFStudent.getStudents();
@@ -42,13 +42,13 @@ namespace CourseProject.ViewModel
         }
 
         public void RemoveAllInfAboutStudent(Student student)
-        {
+        { 
+            eFTimeTable.RemoveByStudId(student);
             eFProgress.RemoveByStudId(student);
             eFTask.RemoveByStudId(student);
             eFUser.RemoveUserById(student);
             eFStudent.RemoveStudentById(student);
             tmpStudents.Remove(student);
-            
         }
 
         User User = User.CurrentUser;

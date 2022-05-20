@@ -137,6 +137,9 @@
     <Compile Include="ViewModel\TaskViewModel.cs" />
     <Compile Include="ViewModel\TimeTableViewModel.cs" />
     <Compile Include="ViewModel\WelcomeViewModel.cs" />
+    <Compile Include="View\AdminPage.xaml.cs">
+      <DependentUpon>AdminPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\AuthorizationView.xaml.cs">
       <DependentUpon>AuthorizationView.xaml</DependentUpon>
     </Compile>
@@ -149,6 +152,9 @@
     <Compile Include="View\ProgressView.xaml.cs">
       <DependentUpon>ProgressView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\StartPage.xaml.cs">
+      <DependentUpon>StartPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\StudentsListView.xaml.cs">
       <DependentUpon>StudentsListView.xaml</DependentUpon>
     </Compile>
@@ -158,18 +164,15 @@
     <Compile Include="View\TimeTableView.xaml.cs">
       <DependentUpon>TimeTableView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\WelcomeView.xaml.cs">
-      <DependentUpon>WelcomeView.xaml</DependentUpon>
-    </Compile>
     <Page Include="ErrorMessage\MyMessageBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources\Langs\lang_EN.xaml">
+    <Page Include="Resources\Langs\lang.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources\Langs\lang_RU.xaml">
+    <Page Include="Resources\Langs\lang.ru-RU.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -178,6 +181,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Themes\LightTheme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AdminPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -197,6 +204,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\StartPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\StudentsListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -206,10 +217,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\TimeTableView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\WelcomeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -267,7 +274,6 @@
     <Resource Include="Resources\Photo\ico.ico" />
     <Resource Include="ico.ico" />
     <Resource Include="Resources\Photo\StudTasksPhoto.png" />
-    <Resource Include="Resources\Photo\StudTasks.png" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Model\Model.Context.tt">
@@ -280,6 +286,8 @@
       <DependentUpon>Model.edmx</DependentUpon>
       <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\Photo\StudTasksAdmin.png" />
+    <Resource Include="Resources\Photo\StudTasks.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.5.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.5.0\build\MaterialDesignThemes.targets')" />

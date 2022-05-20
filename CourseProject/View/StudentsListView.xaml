@@ -12,11 +12,11 @@
     <Grid>
         <DataGrid x:Name="Students_Grid" AutoGenerateColumns="False" ItemsSource="{Binding Students}" SelectedItem="{Binding SelectedItem}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" CanUserAddRows="False" LostFocus="Students_Grid_LostFocus" SelectedCellsChanged="Students_Grid_SelectionChanged" Background="{x:Null}">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding idStudent}" Header="ID" Width="120"/>
-                <DataGridTextColumn Binding="{Binding Name}" Header="Name" Width="120"/>
-                <DataGridTextColumn Binding="{Binding Surname}" Header="Surname" Width="120"/>
-                <DataGridTextColumn Binding="{Binding Phone}" Header="Phone" Width="120"/>
-                <DataGridTextColumn Binding="{Binding Email}" Header="Email" Width="120"/>
+                <DataGridTextColumn Binding="{Binding idStudent}" Header="{DynamicResource _ID}" Width="120"/>
+                <DataGridTextColumn Binding="{Binding Name}" Header="{DynamicResource _Name}" Width="120"/>
+                <DataGridTextColumn Binding="{Binding Surname}" Header="{DynamicResource _Surname}" Width="120"/>
+                <DataGridTextColumn Binding="{Binding Phone}" Header="{DynamicResource _Phone}" Width="120"/>
+                <DataGridTextColumn Binding="{Binding Email}" Header="{DynamicResource _Email}" Width="120"/>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

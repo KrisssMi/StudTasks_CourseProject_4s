@@ -35,9 +35,6 @@ namespace CourseProject.ViewModel
             }
         }
 
-
-
-
         public Model.Task SelectedTask                                    // выбранное задание
         {
             get { return selectedTask; }

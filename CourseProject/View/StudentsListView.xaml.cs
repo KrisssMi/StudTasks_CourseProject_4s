@@ -26,7 +26,6 @@ namespace CourseProject.View
         {
             InitializeComponent();
             DataContext = studentsListViewModel;
-
             Students_Grid.ItemsSource = studentsListViewModel.Students;
         }
 
@@ -43,7 +42,7 @@ namespace CourseProject.View
                 {
                     foreach (var err in (exc as System.Data.Entity.Validation.DbEntityValidationResult).ValidationErrors)
                     {
-                        MessageBox.Show((err as System.Data.Entity.Validation.DbValidationError).ErrorMessage);
+                        MyMessageBox.Show((err as System.Data.Entity.Validation.DbValidationError).ErrorMessage, MessageBoxButton.OK);
                         break;
                     }
                     break;
@@ -52,7 +51,7 @@ namespace CourseProject.View
             }
             catch (System.InvalidOperationException ex)
             {
-                MessageBox.Show(ex.Message);
+                MyMessageBox.Show(ex.Message, MessageBoxButton.OK);
             }
         }
 
@@ -73,7 +72,7 @@ namespace CourseProject.View
                 studentsListViewModel.RemoveAllInfAboutStudent(studentsListViewModel.SelectedItem);
                 Students_Grid.ItemsSource = studentsListViewModel.Students;
             }
-            else MyMessageBox.Show("Нельзя удалить администратора!", MessageBoxButton.OK);
+            else MyMessageBox.Show("You can't delete the administrator!", MessageBoxButton.OK);
         }
     }
 }

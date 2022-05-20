@@ -15,6 +15,65 @@
             <Setter Property="Width" Value="100"></Setter>
             <Setter Property="HorizontalAlignment" Value="Left"></Setter>
         </Style>
+
+        <Style x:Key="ButtonStyle1" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle">
+                <Setter.Value>
+                    <Style>
+                        <Setter Property="Control.Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <Rectangle Margin="0" SnapsToDevicePixels="True" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background" Value="{DynamicResource PrimaryHueMidBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource PrimaryHueMidBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidForegroundBrush}"/>
+            <Setter Property="materialDesign:ButtonProgressAssist.IndicatorForeground" Value="{DynamicResource PrimaryHueMidForegroundBrush}"/>
+            <Setter Property="materialDesign:ButtonProgressAssist.IndicatorBackground" Value="{DynamicResource PrimaryHueMidBrush}"/>
+            <Setter Property="materialDesign:RippleAssist.Feedback" Value="White"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="materialDesign:ShadowAssist.ShadowDepth" Value="Depth1"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="materialDesign:ButtonProgressAssist.IsIndicatorVisible" Value="False"/>
+            <Setter Property="materialDesign:ButtonProgressAssist.Opacity" Value="0.4"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <AdornerDecorator CacheMode="{Binding (materialDesign:ShadowAssist.CacheMode), RelativeSource={RelativeSource Self}}">
+                                <Grid>
+                                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="10" Margin="0,0,0,0">
+                                    </Border>
+                                </Grid>
+                            </AdornerDecorator>
+                            <materialDesign:Ripple ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="materialDesign:ShadowAssist.Darken" TargetName="border" Value="True"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter Property="materialDesign:ShadowAssist.Darken" TargetName="border" Value="True"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.23"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
     <Window.Background>
         <ImageBrush ImageSource="/Resources/Photo/back.jpg"/>
@@ -40,6 +99,13 @@
                 <ColumnDefinition Width="10"/>
             </Grid.ColumnDefinitions>
 
+            <Grid MouseDown="Grid_MouseDown"  Grid.ColumnSpan="3" Grid.Row="0">
+                <StackPanel Orientation="Horizontal">
+                    <Button HorizontalAlignment="Left" Height="12" VerticalAlignment="Top" Width="12" Margin="10 5 0 0" Style="{DynamicResource ButtonStyle1}" Background="#FFFF2E00" BorderBrush="#FFFF2E00" Click="Button_Click"/>
+                    <Button x:Name="Roll_Up" HorizontalAlignment="Left" Height="12" VerticalAlignment="Top" Width="12" Margin="7 5 0 0" Style="{DynamicResource ButtonStyle1}" Background="#FFFFC500" BorderBrush="#FFFFC500" Click="Roll_Up_Click"/>
+                </StackPanel>
+            </Grid>
+            
             <Image x:Name="Logo" Source="/Resources/Photo/StudTasksPhoto.png" Margin="56,28,51,0" Grid.Column="1" Grid.RowSpan="5" Grid.Row="1" Panel.ZIndex="1"/>
             <Rectangle Grid.RowSpan="9" RadiusX="15" RadiusY="15" Height="Auto" Fill="#ADB4FF" Stroke="{x:Null}" Margin="35,25,0,-20" Width="330" Grid.Column="1" Grid.Row="1"/>
             <Rectangle Grid.RowSpan="10" RadiusX="15" RadiusY="15"  Margin="20,45,0,-5" MinHeight="460" MinWidth="300" Fill="White" Stroke="{x:Null}" StrokeThickness="2" Height="Auto" Width="330" Grid.Column="1"/>

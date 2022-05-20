@@ -9,7 +9,7 @@
       xmlns:databinding="clr-namespace:CourseProject.Converters" 
       xmlns:viewmodel="clr-namespace:CourseProject.ViewModel" 
       d:DataContext="{d:DesignInstance Type=viewmodel:TimeTableViewModel}" d:DesignWidth="780"
-      Title="TimeTableView" Background="White" FontFamily="Palatino Linotype" Height="740"
+      Title="TimeTableView" Background="{x:Null}" FontFamily="Palatino Linotype" Height="743"
       x:Name="page">
     <Page.Resources>
         <databinding:DayConverter x:Key="DayConverter"></databinding:DayConverter>
@@ -25,17 +25,17 @@
         <!-- Верхняя панель для редактирования строки: -->
         <Grid Grid.Row="0">
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" DataContext="{Binding SelectedTimeTable}">
-                <TextBox IsReadOnly="True" VerticalContentAlignment="Center" Width="95" Text="{Binding Day, Converter={StaticResource DayConverter}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="Day"  Cursor="Arrow" />
-                <TextBox IsReadOnly="True" VerticalContentAlignment="Center" Width="90" Text="{Binding LessonNumber, Converter={StaticResource LessonConverter},  UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="Time"  Cursor="Arrow" />
-                <TextBox VerticalContentAlignment="Center" Width="115" Text="{Binding Path=LessonName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="Subject name"/>
-                <TextBox VerticalContentAlignment="Center" Width="115" Text="{Binding Path=Auditorium, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="Auditorium" Cursor="Arrow" />
-                <TextBox VerticalContentAlignment="Center" Width="115" Text="{Binding Path=LessonType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="Lesson type"/>
-                <Button Content="Save" Command="{Binding ElementName=page, Path=DataContext.UpdateLineCommand}"/>
+                <TextBox IsReadOnly="True" VerticalContentAlignment="Center" Width="95" Text="{Binding Day, Converter={StaticResource DayConverter}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="{DynamicResource _Day}"  Cursor="Arrow" />
+                <TextBox IsReadOnly="True" VerticalContentAlignment="Center" Width="90" Text="{Binding LessonNumber, Converter={StaticResource LessonConverter},  UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="{DynamicResource _Time}"  Cursor="Arrow" />
+                <TextBox VerticalContentAlignment="Center" Width="115" Text="{Binding Path=LessonName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="{DynamicResource _LessonName}"/>
+                <TextBox VerticalContentAlignment="Center" Width="115" Text="{Binding Path=Auditorium, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="{DynamicResource _Auditorium}" Cursor="Arrow" />
+                <TextBox VerticalContentAlignment="Center" Width="115" Text="{Binding Path=LessonType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="{DynamicResource _LessonType}"/>
+                <Button Content="{DynamicResource _Save}" Command="{Binding ElementName=page, Path=DataContext.UpdateLineCommand}" Width="95"/>
 
-                <TextBlock VerticalAlignment="Center" Text="Week" Margin="120 0 0 0"/>
-                <ComboBox x:Name="Stud_Week" SelectionChanged="Stud_Week_SelectionChanged" Loaded="Stud_Week_Loaded" Width="80" Margin="10 0 0 0">
-                    <ComboBoxItem Content="First"/>
-                    <ComboBoxItem Content="Second"/>
+                <TextBlock VerticalAlignment="Center" Text="{DynamicResource _Week}" Margin="40 0 0 0"/>
+                <ComboBox SelectedItem="{Binding DataContext.SelectedWeek, ElementName=page,Mode=TwoWay}" x:Name="Stud_Week"  Width="90" Margin="5 0 0 0">
+                    <ComboBoxItem Content="{DynamicResource _First}"/>
+                    <ComboBoxItem Content="{DynamicResource _Second}"/>
                 </ComboBox>
             </StackPanel>
         </Grid>
@@ -50,10 +50,9 @@
                 </Grid.ColumnDefinitions>
 
                 <Grid Grid.Column="0">
-
                     <DockPanel LastChildFill="True" Grid.RowSpan="1" Grid.ColumnSpan="2">
 
-                        <ListBox Padding="0" DockPanel.Dock="Right" Width="1" Name="Lessons" ItemsSource="{Binding TimeTables}" SelectedItem="{Binding SelectedTimeTable}" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="True" Background="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <ListBox Padding="0" DockPanel.Dock="Right" Width="1" Name="Lessons" ItemsSource="{Binding TimeTables}" SelectedItem="{Binding SelectedTimeTable}">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" Margin="0" Height="13" CanVerticallyScroll="False"  OpacityMask="{x:Null}">
@@ -68,12 +67,12 @@
                         <StackPanel Height="700">
                             <ScrollViewer CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" Height="718">
                                 <StackPanel Orientation="Vertical">
-                                    <Label Height="117" Content="Monday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FF9B1FFF" />
-                                    <Label Height="117" Content="Tuesday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFAC48FC"/>
-                                    <Label Height="117" Content="Wednesday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFBC69FF"/>
-                                    <Label Height="117" Content="Thursday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFCF94FF"/>
-                                    <Label Height="117" Content="Friday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFE1BDFF"/>
-                                    <Label Height="117" Content="Saturday" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFF1E0FF"/>
+                                    <Label Height="117" Content="{DynamicResource _Monday}" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Style="{DynamicResource lb_Monday}" />
+                                    <Label Height="117" Content="{DynamicResource _Tuesday}" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFAC48FC"/>
+                                    <Label Height="117" Content="{DynamicResource _Wednesday}" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFBC69FF"/>
+                                    <Label Height="117" Content="{DynamicResource _Thursday}" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFCF94FF"/>
+                                    <Label Height="117" Content="{DynamicResource _Friday}" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFE1BDFF"/>
+                                    <Label Height="117" Content="{DynamicResource _Saturday}" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFF1E0FF"/>
                                 </StackPanel>
                             </ScrollViewer>
                         </StackPanel>
@@ -115,7 +114,6 @@
                         <ListBox ItemsSource="{Binding Path=Tuesday}" SelectedItem="{Binding SelectedTimeTable}">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
-
                                     <StackPanel Orientation="Horizontal" Margin="0" Height="13" CanVerticallyScroll="False"  OpacityMask="{x:Null}">
                                         <TextBlock Margin="10,0,0,0" Width="80" Text="{Binding Path=LessonNumber, Converter={StaticResource LessonConverter}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>
                                         <TextBlock  Margin="10,0,0,0" Width="80" Text="{Binding Path=LessonName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center"/>

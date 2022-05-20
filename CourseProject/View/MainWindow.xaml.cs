@@ -3,6 +3,7 @@ using CourseProject.ErrorMessage;
 using CourseProject.Model;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,9 +18,6 @@ using System.Windows.Shapes;
 
 namespace CourseProject.View
 {
-    /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         User User = User.CurrentUser;
@@ -39,37 +37,76 @@ namespace CourseProject.View
             else Group_list.Visibility = Visibility.Hidden;
 
             DataContext = this;
-            //Choose_Theme_Unchecked(this, new RoutedEventArgs());
-            //AddRemindersToAutorun();
+            if (stud.IsAdmin == false)
+            {
+                MainPage.Content = new StartPage();
+            }
+            else
+            {
+                MainPage.Content = new AdminPage();
+            }
+            Choose_Theme_Unchecked(this, new RoutedEventArgs());
+
+
+            
+            App.LanguageChanged += LanguageChanged;
+
+            
+            Language.Items.Add(new CultureInfo("en-US"));
+            Language.Items.Add(new CultureInfo("ru-RU"));
         }
 
+        private void LanguageChanged(Object sender, EventArgs e)
+        {
+            CultureInfo currLang = App.Language;
+
+            //Отмечаем нужный пункт смены языка как выбранный язык
+            foreach (CultureInfo i in Language.Items)
+            {
+                CultureInfo ci = i;
+                ci.Equals(currLang);
+            }
+        }
+
+        private void Language_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            CultureInfo lang = Language.SelectedItem as CultureInfo;
+            if (lang != null)
+            {
+                App.Language = lang;
+            }
+        }
+
+        private void Language_Loaded(object sender, RoutedEventArgs e)
+        {     
+        }
+        
         //private void AddRemindersToAutorun()
         //{
         //    // открываем нужную ветку в реестре   
         //    // @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run\"  
 
         //    Microsoft.Win32.RegistryKey Key =
-        //        Microsoft.Win32.Registry.LocalMachine.OpenSubKey(
-        //        "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\\", true);
+        //        Microsoft.Win32.Registry.LocalMachine.CreateSubKey(
+        //        "\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
 
-        //    string path = System.IO.Path.GetFullPath(@"StudTasksReminder\StudTasksReminder.exe");
+        //    string path = System.IO.Path.GetFullPath(@"E:\Course project\CourseProject\StudTasksReminder\bin\Debug\StudTasksReminder.exe");
         //    //добавляем первый параметр - название ключа  
         //    // Второй параметр - это путь к   
         //    // исполняемому файлу программы.  
         //    Key.SetValue("NtOrg", "\"" + path + "\"");
         //    Key.Close();
         //}
-        
+
 
         private void Exit_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             var x = MyMessageBox.Show("Do you really want to leave?", MessageBoxButton.YesNo);
             if (x.Equals(MessageBoxResult.Yes))
             {
+                AuthorizationView authorizationView = new AuthorizationView();
+                authorizationView.Show();
                 MainWindow.GetWindow(this).Close();
-                
-                // завершение программы:
-                Environment.Exit(0);
             }
             else if (x.Equals(MessageBoxResult.No))
             {
@@ -83,8 +120,7 @@ namespace CourseProject.View
         }
 
 
-        private void ButtonClose
-            _Click(object sender, RoutedEventArgs e)
+        private void ButtonCloseMenu_Click(object sender, RoutedEventArgs e)
         {
             ButtonOpenMenu.Visibility = Visibility.Visible;
             ButtonCloseMenu.Visibility = Visibility.Collapsed;
@@ -160,6 +196,17 @@ namespace CourseProject.View
             {
                 MessageBox.Show("error: " + ex.Message);
             }
+        }
+
+
+        private void Roll_Up_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            App.Current.Shutdown();
         }
     }
 }

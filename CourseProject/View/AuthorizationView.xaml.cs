@@ -92,7 +92,6 @@ namespace CourseProject.View
                     else MyMessageBox.Show("Check entered data!", MessageBoxButton.OK);
                 }
                 else MyMessageBox.Show("Enter data!", MessageBoxButton.OK);
-            WelcomeView wv = new WelcomeView();
         }
 
         private void Sign_Up_Click(object sender, RoutedEventArgs e)
@@ -103,6 +102,21 @@ namespace CourseProject.View
         private void Sign_In_Click(object sender, RoutedEventArgs e)
         {
             SignIn();
+        }
+
+        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
+
+        private void Roll_Up_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            App.Current.Shutdown();
         }
     }
  }

@@ -12,7 +12,6 @@ namespace CourseProject.DB
     class EFTimeTableRepository
     {
         private StudTasksEntities context;
-
         public EFTimeTableRepository()
         {
             context = new StudTasksEntities();
@@ -20,12 +19,12 @@ namespace CourseProject.DB
 
         public IEnumerable<TimeTable> getTimeTable()            // получение списка таблицы
         {
-            return context.TimeTable.Local;
+            return context.TimeTable;
         }
 
         public ObservableCollection<TimeTable> getTimeTableLocal()
         {
-            return context.TimeTable.Local;
+            return new ObservableCollection<TimeTable>(context.TimeTable.ToList());
         }
 
         public void addTimeTable(TimeTable timeTable)
@@ -39,6 +38,18 @@ namespace CourseProject.DB
             context.TimeTable.Local.Clear();
         }
 
+        public void RemoveByStudId(Student student)
+        {
+            foreach (TimeTable timetable in getTimeTable())
+            {
+                if (timetable.idStudent == student.idStudent)
+                {
+                    context.TimeTable.Remove(timetable);
+                }
+            }
+            context.SaveChanges();
+        }
+        
         public void Update(TimeTable timeTable)
         {
             context.Entry(timeTable).State = EntityState.Modified;
@@ -74,7 +85,7 @@ namespace CourseProject.DB
 
         public IEnumerable<string> GetSubjects(Student student)         // получение предметов по студенту
         {
-            return context.TimeTable.Where(p => (p.LessonName != "")).OrderBy(p => p.LessonName).Select(p => p.LessonName).Distinct().ToList();
+            return context.TimeTable.Where(p => (p.Student.idStudent == student.idStudent) && (p.LessonName != "")).OrderBy(p => p.LessonName).Select(p => p.LessonName).Distinct().ToList();
         }
     }
 }

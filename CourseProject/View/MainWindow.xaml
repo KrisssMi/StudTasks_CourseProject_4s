@@ -6,7 +6,74 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:CourseProject.View"
         mc:Ignorable="d"
-         Title="MainWindow" Height="760" Width="910" WindowStyle="None" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" FontFamily="Palatino Linotype" FontSize="20" Style="{DynamicResource Window}">
+         Title="MainWindow" Height="770" Width="910" WindowStyle="None" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" FontFamily="Palatino Linotype" FontSize="20" Style="{DynamicResource Window}">
+    <Window.Resources>
+       <Style TargetType="Rectangle">
+            <Setter Property="Margin" Value="5"></Setter>
+            <Setter Property="Height" Value="100"></Setter>
+            <Setter Property="Width" Value="100"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+        </Style>
+
+        <Style x:Key="ButtonStyle1" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle">
+                <Setter.Value>
+                    <Style>
+                        <Setter Property="Control.Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <Rectangle Margin="0" SnapsToDevicePixels="True" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background" Value="{DynamicResource PrimaryHueMidBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource PrimaryHueMidBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidForegroundBrush}"/>
+            <Setter Property="materialDesign:ButtonProgressAssist.IndicatorForeground" Value="{DynamicResource PrimaryHueMidForegroundBrush}"/>
+            <Setter Property="materialDesign:ButtonProgressAssist.IndicatorBackground" Value="{DynamicResource PrimaryHueMidBrush}"/>
+            <Setter Property="materialDesign:RippleAssist.Feedback" Value="White"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="materialDesign:ShadowAssist.ShadowDepth" Value="Depth1"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="materialDesign:ButtonProgressAssist.IsIndicatorVisible" Value="False"/>
+            <Setter Property="materialDesign:ButtonProgressAssist.Opacity" Value="0.4"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <AdornerDecorator CacheMode="{Binding (materialDesign:ShadowAssist.CacheMode), RelativeSource={RelativeSource Self}}">
+                                <Grid>
+                                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="10" Margin="0,0,0,0">
+                                    </Border>
+                                </Grid>
+                            </AdornerDecorator>
+                            <materialDesign:Ripple ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="materialDesign:ShadowAssist.Darken" TargetName="border" Value="True"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter Property="materialDesign:ShadowAssist.Darken" TargetName="border" Value="True"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.23"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Window.Triggers>
         <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonOpenMenu">
             <BeginStoryboard Storyboard="{StaticResource OpenMenu}"/>
@@ -15,7 +82,7 @@
             <BeginStoryboard Storyboard="{StaticResource CloseMenu}"/>
         </EventTrigger>
     </Window.Triggers>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="35"/>
@@ -51,35 +118,35 @@
                         <ListViewItem x:Name="Task_List" Height="70" PreviewMouseDown="Task_List_PreviewMouseDown">
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon Style="{DynamicResource Icon}"  Kind="RadioButtonUnchecked" Width="27" Height="27" Margin="8" VerticalAlignment="Center"/>
-                                <TextBlock Text="Tasks" FontSize="20" Style="{DynamicResource Text}"  VerticalAlignment="Center" Margin="10 10"/>
+                                <TextBlock Text="{DynamicResource _Tasks}" FontSize="20" Style="{DynamicResource Text}"  VerticalAlignment="Center" Margin="10 10"/>
                             </StackPanel>
                         </ListViewItem>
 
                         <ListViewItem x:Name="Progress" Height="70" PreviewMouseDown="Progress_PreviewMouseDown">
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon Style="{DynamicResource Icon}" Kind="ProgressStar" Width="27" Height="27" Margin="8" VerticalAlignment="Center"/>
-                                <TextBlock Text="Progress" FontSize="20" Style="{DynamicResource Text}" VerticalAlignment="Center" Margin="10 10"/>
+                                <TextBlock Text="{DynamicResource _Progress}" FontSize="20" Style="{DynamicResource Text}" VerticalAlignment="Center" Margin="10 10"/>
                             </StackPanel>
                         </ListViewItem>
 
                         <ListViewItem Height="70" x:Name="TimeTable_List" PreviewMouseDown="TimeTable_List_PreviewMouseDown">
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon Style="{DynamicResource Icon}" Kind="EventNote" Width="27" Height="27" Margin="8" VerticalAlignment="Center"/>
-                                <TextBlock Text="Timetable" FontSize="20" Style="{DynamicResource Text}" VerticalAlignment="Center" Margin="10 10"/>
+                                <TextBlock Text="{DynamicResource _TimeTable}" FontSize="20" Style="{DynamicResource Text}" VerticalAlignment="Center" Margin="10 10"/>
                             </StackPanel>
                         </ListViewItem>
 
                         <ListViewItem Height="70" x:Name="Profile" PreviewMouseDown="Profile_PreviewMouseDown">
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon Style="{DynamicResource Icon}" Kind="User" Width="27" Height="27" Margin="8" VerticalAlignment="Center"/>
-                                <TextBlock Text="Profile" FontSize="20" Style="{DynamicResource Text}" VerticalAlignment="Center" Margin="10 10"/>
+                                <TextBlock Text="{DynamicResource _Profile}" FontSize="20" Style="{DynamicResource Text}" VerticalAlignment="Center" Margin="10 10"/>
                             </StackPanel>
                         </ListViewItem>
 
                         <ListViewItem x:Name="Group_list" Height="70" Visibility="Visible" PreviewMouseDown="Group_list_PreviewMouseDown">
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon Style="{DynamicResource Icon}" Kind="People" Width="27" Height="27" Margin="8" VerticalAlignment="Center"/>
-                                <TextBlock Text="Student list" FontSize="20" Style="{DynamicResource Text}" VerticalAlignment="Center" Margin="10 10"/>
+                                <TextBlock Text="{DynamicResource _StudentList}" FontSize="20" Style="{DynamicResource Text}" VerticalAlignment="Center" Margin="10 10"/>
                             </StackPanel>
                         </ListViewItem>
 
@@ -89,15 +156,20 @@
         </Grid>
 
         <Grid Style="{DynamicResource Grad}" MouseDown="Grid_MouseDown">
+            <StackPanel Grid.Row="0" Width="150" HorizontalAlignment="Left"  Orientation="Horizontal">
+                <Button HorizontalAlignment="Left" Height="12" VerticalAlignment="Top" Width="12" Margin="10 11 0 0" Style="{DynamicResource ButtonStyle1}" Background="#FFFF2E00" BorderBrush="#FFFF2E00" Click="Button_Click"/>
+                <Button x:Name="Roll_Up" HorizontalAlignment="Left" Height="12" VerticalAlignment="Top" Width="12" Margin="7 11 0 0" Style="{DynamicResource ButtonStyle1}" Background="#FFFFC500" BorderBrush="#FFFFC500" Click="Roll_Up_Click"/>
+            </StackPanel>
             <materialDesign:PackIcon x:Name="Exit" PreviewMouseDown="Exit_PreviewMouseDown"  HorizontalAlignment="Right" Kind="ExitToApp" Width="30" VerticalAlignment="Center" Height="30" Style="{DynamicResource Icon}"></materialDesign:PackIcon>
-            <materialDesign:PackIcon x:Name="Minimize" PreviewMouseDown="Support_PreviewMouseDown" Margin="840 0 0 0" Kind="About" Width="30" VerticalAlignment="Center" Height="30" Style="{DynamicResource Icon}"></materialDesign:PackIcon>
-            <ToggleButton IsChecked="False" Checked="Choose_Theme_Checked" Unchecked="Choose_Theme_Unchecked"  x:Name="Choose_Theme" Margin="0 0 80 0" HorizontalAlignment="Right" Style="{StaticResource MaterialDesignSwitchToggleButton}" ToolTip="MaterialDesignSwitchToggleButton with Content and ToggleButtonAssist.OnContent">
+            <materialDesign:PackIcon x:Name="About" PreviewMouseDown="Support_PreviewMouseDown" Margin="840 0 0 0" Kind="About" Width="30" VerticalAlignment="Center" Height="30" Style="{DynamicResource Icon}"></materialDesign:PackIcon>
+            <ToggleButton IsChecked="False" Checked="Choose_Theme_Checked" Unchecked="Choose_Theme_Unchecked"  x:Name="Choose_Theme" Margin="0 0 80 0" HorizontalAlignment="Right" Style="{StaticResource MaterialDesignSwitchToggleButton}" ToolTip="Choose a theme">
                 <materialDesign:PackIcon Kind="WhiteBalanceSunny" Foreground="Black"/>
                 <materialDesign:ToggleButtonAssist.OnContent>
-                <materialDesign:PackIcon Kind="PowerSleep" />
+                    <materialDesign:PackIcon Kind="PowerSleep" />
                 </materialDesign:ToggleButtonAssist.OnContent>
             </ToggleButton>
-            
+
+            <ComboBox x:Name="Language" Loaded="Language_Loaded" SelectionChanged="Language_SelectionChanged" Margin="625,0,135,0" Height="30" FontSize="13"/>
         </Grid>
     </Grid>
 </Window>

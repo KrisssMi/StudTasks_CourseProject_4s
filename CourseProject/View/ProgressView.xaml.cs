@@ -54,7 +54,7 @@ namespace CourseProject.View
 
         private void LessonsBox_Loaded(object sender, RoutedEventArgs e)
         {
-            List<string> progressSubjects = new List<string> { "Choose subject" };
+            List<string> progressSubjects = new List<string>();
             progressSubjects.AddRange(progressViewModel.GetSubjects());
             LessonsBox.ItemsSource = progressSubjects;
             LessonsBox.SelectedIndex = 0;
