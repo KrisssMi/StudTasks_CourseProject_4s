@@ -30,7 +30,8 @@
                 <TextBox VerticalContentAlignment="Center" Width="115" Text="{Binding Path=LessonName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="{DynamicResource _LessonName}"/>
                 <TextBox VerticalContentAlignment="Center" Width="115" Text="{Binding Path=Auditorium, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="{DynamicResource _Auditorium}" Cursor="Arrow" />
                 <TextBox VerticalContentAlignment="Center" Width="115" Text="{Binding Path=LessonType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="{DynamicResource _LessonType}"/>
-                <Button Content="{DynamicResource _Save}" Command="{Binding ElementName=page, Path=DataContext.UpdateLineCommand}" Width="95"/>
+                <Button Content="{DynamicResource _Save}" Command="{Binding ElementName=page, Path=DataContext.UpdateLineCommand}" Width="95" Style="{DynamicResource MaterialDesignOutlinedButton}" Cursor="Hand">
+                </Button>
 
                 <TextBlock VerticalAlignment="Center" Text="{DynamicResource _Week}" Margin="50 0 0 0"/>
                 <ComboBox SelectedItem="{Binding DataContext.SelectedWeek, ElementName=page,Mode=TwoWay}" x:Name="Stud_Week"  Width="90" Margin="5 0 0 0">

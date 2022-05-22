@@ -7,7 +7,7 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="715" d:DesignWidth="830"
-      Title="MessageView">
+      Title="MessageView" FontFamily="Palatino Linotype">
 
     <Page.Resources>
         <ControlTemplate x:Key="ArrowedItemsControl" TargetType="{x:Type ItemsControl}">

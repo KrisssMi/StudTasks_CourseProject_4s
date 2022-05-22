@@ -5,17 +5,9 @@ using CourseProject.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CourseProject.View
 {
@@ -28,7 +20,6 @@ namespace CourseProject.View
         EFStudentRepository eFStudent = new EFStudentRepository();
         EFProgressRepository eFProgress = new EFProgressRepository();
 
-
         public ProgressView()
         {
             InitializeComponent();
@@ -39,17 +30,6 @@ namespace CourseProject.View
         private void UpdateProgress()
         {
             progressViewModel.OrderProgress();
-        }
-
-        private void Delete_Click(object sender, RoutedEventArgs e)
-        {
-            // если выбрана запись в таблице, то ошибка:
-            // нельзя удалить запись, которая не выбрана
-            if (progressViewModel.SelectedItem == null)
-            {
-                MyMessageBox.Show("Select a progress", MessageBoxButton.OK);
-            }
-            else progressViewModel.RemoveById();
         }
 
         private void LessonsBox_Loaded(object sender, RoutedEventArgs e)
@@ -108,7 +88,6 @@ namespace CourseProject.View
                 }
                 catch (Exception ex)
                 {
-
                     MyMessageBox.Show(ex.Message, MessageBoxButton.OK);
                     Progress progress = new Progress { idStudent = stud.idStudent, LessonName = LessonsBox.SelectedValue.ToString(), ComplitedTasks = 0, NeededTasks = 0, TaskProgress = 0 };
                     progressViewModel.addProgress(progress);

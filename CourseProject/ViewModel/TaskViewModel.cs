@@ -92,8 +92,6 @@ namespace CourseProject.ViewModel
                 eFTaskRepository.ChangeComplite(SelectedTask);
                 UpdateTrue();
             }
-
-
         }
 
         public void UpdateFalse()                                       // обновление невыполненных заданий
@@ -107,9 +105,6 @@ namespace CourseProject.ViewModel
                     UnsatisfiedTasks.Add(t);
                 }
             }
-            //var currentProgress = eFProgress.getProgress().Where(x => x.idStudent == stud.idStudent && x.LessonName == SelectedTask.LessonName).First();
-            //currentProgress.ComplitedTasks++;
-            //eFProgress.Update(currentProgress);
         }
 
         public void UpdateTrue()

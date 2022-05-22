@@ -23,7 +23,11 @@
         </Grid>
 
         <Grid Grid.Row="0" Style="{DynamicResource GridProfile}">
-            <Label Grid.Column="0" Content="{DynamicResource _Profile}" FontFamily="Palatino Linotype" FontSize="40" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Grid.Column="0" Text="{DynamicResource _Profile}" FontFamily="Palatino Linotype" FontSize="40" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="385,-2,0,0">
+                <TextBlock.RenderTransform>
+                    <TranslateTransform X="10" Y="10"/>
+                </TextBlock.RenderTransform>
+            </TextBlock>
         </Grid>
         <Grid Grid.Row="1"/>
         <Grid Margin="155,92,155,92" Grid.Row="1">

@@ -60,27 +60,6 @@ namespace CourseProject.ViewModel
             }
         }
 
-        void Update()                                                       // Обновление прогресса  
-        {
-            Progresses.Clear();
-            foreach (Progress progress in eFProgress.getProgressById(stud)) // Получаем прогресс по id студента
-            {
-                Progresses.Add(progress);
-
-            }
-            if (SelectedItem != null)
-            {
-
-                eFProgress.Find(SelectedItem).TaskProgress = CountProgress;                             // Обновляем прогресс в базе
-                eFProgress.Find(SelectedItem).ComplitedTasks = SelectedItem.ComplitedTasks;             // Обновляем количество завершенных заданий
-                eFProgress.Find(SelectedItem).NeededTasks = SelectedItem.NeededTasks;                   // Обновляем количество необходимых заданий
-                CountProgress = (int)(SelectedItem.ComplitedTasks * 100 / SelectedItem.NeededTasks);    // Подсчитываем прогресс
-                SelectedItem.TaskProgress = CountProgress;                                              // Обновляем прогресс в прогрессе
-                SaveProgress();
-
-            }
-        }
-
         public void addComplitedTasks()         // Добавление завершенных заданий
         {
             if (SelectedItem != null)
@@ -158,6 +137,24 @@ namespace CourseProject.ViewModel
         public void SaveProgress()
         {
             eFProgress.SaveProgress();
+        }
+
+        void Update()                                                       // Обновление прогресса  
+        {
+            Progresses.Clear();
+            foreach (Progress progress in eFProgress.getProgressById(stud)) // Получаем прогресс по id студента
+            {
+                Progresses.Add(progress);
+            }
+            if (SelectedItem != null)
+            {
+                eFProgress.Find(SelectedItem).ComplitedTasks = SelectedItem.ComplitedTasks;             // Обновляем количество завершенных заданий
+                eFProgress.Find(SelectedItem).NeededTasks = SelectedItem.NeededTasks;                   // Обновляем количество необходимых заданий
+                CountProgress = (int)(SelectedItem.ComplitedTasks * 100 / SelectedItem.NeededTasks);    // Подсчитываем прогресс
+                SelectedItem.TaskProgress = CountProgress;                                              // Обновляем прогресс в прогрессе
+                eFProgress.Find(SelectedItem).TaskProgress = CountProgress;                             // Обновляем прогресс в базе
+                SaveProgress();
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;       // Событие изменения свойства

@@ -29,18 +29,6 @@
         <Setter Property="Control.Opacity" Value="0.8"/>
     </Style>
 
-    <Style x:Key="lb_Monday" TargetType="Label">
-        <Setter Property="Background" Value="#FF333333"/>
-    </Style>
-
-    <Style x:Key="lb_Tuesday" TargetType="Label">
-        <Setter Property="Foreground" Value="#FFFFFF" />
-        <Setter Property="FontWeight" Value="Bold" />
-        <Setter Property="FontFamily" Value="Segoe UI" />
-        <Setter Property="FontSize" Value="12" />
-        <Setter Property="Background" Value="#FF333333"/>
-    </Style>
-
     <Style x:Key="Window" TargetType="Window">
         <Setter Property="Background" Value="#FFD4D4D4" />
     </Style>

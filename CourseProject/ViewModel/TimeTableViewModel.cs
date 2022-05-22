@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using CourseProject.DB;
+using CourseProject.ErrorMessage;
 using CourseProject.Model;
 
 namespace CourseProject.ViewModel
@@ -162,7 +163,7 @@ namespace CourseProject.ViewModel
                         }
                         catch (Exception e)
                         {
-                            MessageBox.Show(e.Message);
+                            MyMessageBox.Show(e.Message, MessageBoxButton.OK);
                         }
                     }
                 ));

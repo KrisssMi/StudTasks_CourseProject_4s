@@ -4,6 +4,7 @@ using CourseProject.Model;
 using CourseProject.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -61,15 +62,23 @@ namespace CourseProject.View
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            if (Deadline.Text != String.Empty && Title.Text != String.Empty && ImportanceBox.Text != String.Empty)
+            try
             {
+                if (Deadline.Text != String.Empty && Title.Text != String.Empty && ImportanceBox.Text != String.Empty)
                 {
-                    Model.Task task = new Model.Task { idStudent = stud.idStudent, isComplite = false, LessonName = LessonsBox.SelectedValue.ToString(), DueDate = Convert.ToDateTime(Deadline.SelectedDate), Content = Details.Text, Title = Title.Text, Importance = Convert.ToInt32(ImportanceBox.Text) };
-                    taskViewModel.addTask(task);
-                    Clear();
+                    {
+                        Model.Task task = new Model.Task { idStudent = stud.idStudent, isComplite = false, LessonName = LessonsBox.SelectedValue.ToString(), DueDate = Convert.ToDateTime(Deadline.SelectedDate), Content = Details.Text, Title = Title.Text, Importance = Convert.ToInt32(ImportanceBox.Text) };
+                       
+                            taskViewModel.addTask(task);
+                            Clear();                       
+                    }
                 }
+                else MyMessageBox.Show("Fill in all the fields", MessageBoxButton.OK);
             }
-            else MyMessageBox.Show("Fill in all the fields", MessageBoxButton.OK);
+            catch (Exception ex)
+            {
+                MyMessageBox.Show(ex.Message, MessageBoxButton.OK);
+            }
         }
 
         private void Is_complite_Checked(object sender, RoutedEventArgs e)
