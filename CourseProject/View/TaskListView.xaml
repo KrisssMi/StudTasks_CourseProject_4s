@@ -78,10 +78,10 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <TextBlock Text="Deadline: " FontSize="10"  TextWrapping="Wrap"/>
-                                <TextBlock Text="{Binding DueDate}" FontSize="10" Margin="-90 0 0 0" TextWrapping="Wrap"/>
-                                <TextBlock Text="Importance: " FontSize="10"  Margin="-65 0 0 0" />
-                                <TextBlock Text="{Binding Importance}" FontSize="10"  Margin="20 -13 0 0" TextWrapping="NoWrap"/>
+                                <TextBlock Text="Deadline: " FontSize="10"  TextWrapping="Wrap" DockPanel.Dock="Right" Background="Transparent" Width="Auto"/>
+                                <TextBlock Text="{Binding DueDate}" FontSize="10" Margin="-90 0 0 0" TextWrapping="Wrap" DockPanel.Dock="Right" Background="Transparent" Width="Auto"/>
+                                <TextBlock Text="Importance: " FontSize="10"  Margin="-65 0 0 0" DockPanel.Dock="Right" Background="Transparent" Width="Auto"/>
+                                <TextBlock Text="{Binding Importance}" FontSize="10"  Margin="20 -13 0 0" TextWrapping="NoWrap" DockPanel.Dock="Right" Background="Transparent" Width="Auto"/>
                                 <materialDesign:PackIcon Kind="Delete" Margin="-35 15 0 0" Height="30" Width="30" x:Name="Delete" PreviewMouseDown="Delete_PreviewMouseDown"/>
                             </StackPanel>
                         </DataTemplate>
@@ -115,7 +115,7 @@
                 <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
 
-            <Button x:Name="ToNewTask" Content="{DynamicResource _NewTask}"  VerticalAlignment="Center" Width="155" FontSize="15" Grid.Row="1" Grid.Column="1" Click="ToNewTask_Click" Cursor="Hand"></Button>
+            <Button x:Name="ToNewTask" Content="{DynamicResource _NewTask}" VerticalAlignment="Center" Width="155" FontSize="15" Grid.Row="1" Grid.Column="1" Click="ToNewTask_Click" Cursor="Hand"></Button>
 
 
             

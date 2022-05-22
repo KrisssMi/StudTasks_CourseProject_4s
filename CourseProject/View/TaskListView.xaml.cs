@@ -64,7 +64,6 @@ namespace CourseProject.View
             if (Deadline.Text != String.Empty && Title.Text != String.Empty && ImportanceBox.Text != String.Empty)
             {
                 {
-                    
                     Model.Task task = new Model.Task { idStudent = stud.idStudent, isComplite = false, LessonName = LessonsBox.SelectedValue.ToString(), DueDate = Convert.ToDateTime(Deadline.SelectedDate), Content = Details.Text, Title = Title.Text, Importance = Convert.ToInt32(ImportanceBox.Text) };
                     taskViewModel.addTask(task);
                     Clear();
@@ -126,7 +125,7 @@ namespace CourseProject.View
 
         private void FilterByImportance_SelectionChanged(object sender, SelectionChangedEventArgs e)                    // поиск по важности
         {
-           taskViewModel.OrderByImportance(FilterByImportance.SelectedIndex + 1 );
+            taskViewModel.OrderByImportance(FilterByImportance.SelectedIndex + 1);
         }
     }
 }

@@ -25,6 +25,7 @@ namespace CourseProject.Model
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Message> Message { get; set; }
         public virtual DbSet<Progress> Progress { get; set; }
         public virtual DbSet<Student> Student { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }

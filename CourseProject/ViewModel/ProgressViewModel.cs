@@ -15,16 +15,14 @@ namespace CourseProject.ViewModel
 {
     class ProgressViewModel
     {
-        EFProgressRepository eFProgress = new EFProgressRepository();       // Репозиторий для прогресса
-        EFTimeTableRepository eFTimeTable = new EFTimeTableRepository();    // Репозиторий для расписания
-        EFStudentRepository eFStudent = new EFStudentRepository();          // Репозиторий для студентов
-
-        int allTasks = 1;
-        int complitedTasks = 0;
-        int countProgress = 0;
 
         User user = User.CurrentUser;
         Student stud = new Student();
+        EFProgressRepository eFProgress = new EFProgressRepository();       // Репозиторий для прогресса
+        EFTimeTableRepository eFTimeTable = new EFTimeTableRepository();    // Репозиторий для расписания
+        EFStudentRepository eFStudent = new EFStudentRepository();          // Репозиторий для студентов
+        EFTaskRepository eFTask = new EFTaskRepository();                  // Репозиторий для заданий
+        int countProgress = 0;
 
         Progress selectedItem;
         ObservableCollection<Progress> progresses = new ObservableCollection<Progress>();  // Коллекция прогресса
@@ -46,33 +44,10 @@ namespace CourseProject.ViewModel
             }
         }
 
-        public ProgressViewModel()         
+        public ProgressViewModel()
         {
             stud = eFStudent.GetStudentById((int)user.idStudent);       // Получаем студента по id
             Update();                                                   // Обновляем прогресс
-        }
-
-        public int ComplitedTasks
-        {
-            get { return complitedTasks; }
-            set
-            {
-                if (value >= 0)
-                    complitedTasks = value;
-                OnPropertyChanged("ComplitedTasks");
-            }
-        }
-
-        public int NeededTasks
-        {
-            get { return allTasks; }
-            set
-            {
-                if (value > 0)
-                    allTasks = value;
-                Update();
-                OnPropertyChanged("NeededTasks");
-            }
         }
 
         public int CountProgress                                            // Количество прогресса
@@ -91,14 +66,15 @@ namespace CourseProject.ViewModel
             foreach (Progress progress in eFProgress.getProgressById(stud)) // Получаем прогресс по id студента
             {
                 Progresses.Add(progress);
+
             }
             if (SelectedItem != null)
             {
-                CountProgress = (int)(SelectedItem.ComplitedTasks * 100 / SelectedItem.NeededTasks);    // Подсчитываем прогресс
 
                 eFProgress.Find(SelectedItem).TaskProgress = CountProgress;                             // Обновляем прогресс в базе
                 eFProgress.Find(SelectedItem).ComplitedTasks = SelectedItem.ComplitedTasks;             // Обновляем количество завершенных заданий
                 eFProgress.Find(SelectedItem).NeededTasks = SelectedItem.NeededTasks;                   // Обновляем количество необходимых заданий
+                CountProgress = (int)(SelectedItem.ComplitedTasks * 100 / SelectedItem.NeededTasks);    // Подсчитываем прогресс
                 SelectedItem.TaskProgress = CountProgress;                                              // Обновляем прогресс в прогрессе
                 SaveProgress();
 

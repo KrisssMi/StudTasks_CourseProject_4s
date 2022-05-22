@@ -7,27 +7,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace StudTasksReminder.Model
+namespace CourseProject.Model
 {
+    using CourseProject.ErrorMessage;
     using System;
-    using System.Collections.Generic;
-    
-    public partial class Task
+
+    public partial class Message
     {
-        public int idTask { get; set; }
+        public int idMessage { get; set; }
         public int idStudent { get; set; }
-        public Nullable<bool> isComplite { get; set; }
-        public Nullable<System.DateTime> DueDate { get; set; }
-        public string LessonName { get; set; }
-        public Nullable<int> Importance { get; set; }
         public string Content { get; set; }
-        public string Title { get; set; }
+        public Nullable<System.DateTime> DateOfCreate { get; set; }
     
         public virtual Student Student { get; set; }
 
-        public string Date
+        public Message() { }
+
+        public Message(int idstudent, string content)
         {
-            get { return DueDate.Value.Day + "/" + DueDate.Value.Month + "/" + DueDate.Value.Year; }
+            idStudent = idstudent;
+            Content = content;
+            DateOfCreate = DateTime.Now;
         }
     }
 }

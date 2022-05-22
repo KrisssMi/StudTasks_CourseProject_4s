@@ -123,7 +123,8 @@
             <PasswordBox x:Name="Reg_Password" MaxLength ="27" Grid.Row="7" Grid.Column="1" Width="250" Visibility="Hidden" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" materialDesign:HintAssist.Hint="Password" CaretBrush="#FFF07E3E" SelectionBrush="#FFF03ED8" RenderTransformOrigin="0.496,2.192"/>
             <PasswordBox x:Name="Db_Password" MaxLength ="27" Grid.Row="8" Grid.Column="1"  Visibility="Hidden" Width="250" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" materialDesign:HintAssist.Hint="Repeat password" CaretBrush="#FFF07E3E" SelectionBrush="#FFF03ED8" RenderTransformOrigin="0.496,2.192" Margin="58,0,57,20" Cursor="Arrow"/>
 
-            <Button x:Name="Sign_In" Grid.Row="9" Margin="92,19,93,9" Grid.Column="1" Content="Login" HorizontalContentAlignment="Center" Width="180" Click="Sign_In_Click" Cursor="Hand"/>
+            <Button x:Name="Sign_In" Grid.Row="9" Margin="92,19,93,9" Grid.Column="1" Content="Login" HorizontalContentAlignment="Center" Width="180" Click="Sign_In_Click" Cursor="Hand" Background="#FF961EFF" BorderBrush="#FF491A87"/>
+            
             <Button x:Name="Sign_Up" Visibility="Hidden" Grid.Row="9" Margin="0 10 0 0" Grid.Column="1" Content="Sign Up" HorizontalContentAlignment="Center" Width="180" Click="Sign_Up_Click" Cursor="Hand"/>
 
             <Label Content="|" Grid.Row="8" Grid.Column="1" FontSize="14" HorizontalContentAlignment="Center" Margin="0,58,0,38" Grid.RowSpan="2"/>
@@ -134,7 +135,7 @@
                       Margin="90,0,10,40"
                       IsChecked="False"
                       Content="Sign In"
-                      Foreground="Purple" Height="8"/>
+                      Foreground="Purple" Height="8" Checked="To_Sign_In_Checked"/>
                 <RadioButton x:Name="To_Sign_Up" PreviewMouseDown="To_Sign_Up_PreviewMouseDown"
                       Style="{StaticResource MaterialDesignTabRadioButton}"
                       Margin="10,0,0,40" 

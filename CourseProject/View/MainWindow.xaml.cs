@@ -22,6 +22,7 @@ namespace CourseProject.View
     {
         User User = User.CurrentUser;
         Student stud = new Student();
+        EFMessageRepository eFMessage = new EFMessageRepository();
         EFStudentRepository eFStudent = new EFStudentRepository();
 
         public MainWindow()
@@ -45,6 +46,8 @@ namespace CourseProject.View
             {
                 MainPage.Content = new AdminPage();
             }
+
+            Count_Message.Badge = eFMessage.CountMessages();
             Choose_Theme_Unchecked(this, new RoutedEventArgs());
 
 
@@ -80,23 +83,6 @@ namespace CourseProject.View
         private void Language_Loaded(object sender, RoutedEventArgs e)
         {     
         }
-        
-        //private void AddRemindersToAutorun()
-        //{
-        //    // открываем нужную ветку в реестре   
-        //    // @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run\"  
-
-        //    Microsoft.Win32.RegistryKey Key =
-        //        Microsoft.Win32.Registry.LocalMachine.CreateSubKey(
-        //        "\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
-
-        //    string path = System.IO.Path.GetFullPath(@"E:\Course project\CourseProject\StudTasksReminder\bin\Debug\StudTasksReminder.exe");
-        //    //добавляем первый параметр - название ключа  
-        //    // Второй параметр - это путь к   
-        //    // исполняемому файлу программы.  
-        //    Key.SetValue("NtOrg", "\"" + path + "\"");
-        //    Key.Close();
-        //}
 
 
         private void Exit_PreviewMouseDown(object sender, MouseButtonEventArgs e)
@@ -165,8 +151,12 @@ namespace CourseProject.View
             MainPage.Content = new StudentsListView();
         }
 
+        private void Message_List_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            MainPage.Content = new MessageView();
+            Count_Message.Badge = eFMessage.CountMessages();
+        }
 
-        
 
         private void Choose_Theme_Checked(object sender, RoutedEventArgs e)         // тёмная тема
         {

@@ -5,6 +5,15 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="Хранилище StudTasksModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="idMessage" />
+          </Key>
+          <Property Name="idMessage" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idStudent" Type="int" Nullable="false" />
+          <Property Name="Content" Type="nvarchar" MaxLength="256" />
+          <Property Name="DateOfCreate" Type="datetime" />
+        </EntityType>
         <EntityType Name="Progress">
           <Key>
             <PropertyRef Name="idProgress" />
@@ -72,6 +81,18 @@
           <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <Association Name="FK__Message__idStude__2BFE89A6">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="Message" Type="Self.Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="idStudent" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="idStudent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Progress__idStud__114A936A">
           <End Role="Student" Type="Self.Student" Multiplicity="1" />
           <End Role="Progress" Type="Self.Progress" Multiplicity="*" />
@@ -121,12 +142,17 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Хранилище StudTasksModelContainer">
+          <EntitySet Name="Message" EntityType="Self.Message" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Progress" EntityType="Self.Progress" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TimeTable" EntityType="Self.TimeTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Message__idStude__2BFE89A6" Association="Self.FK__Message__idStude__2BFE89A6">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Message" EntitySet="Message" />
+          </AssociationSet>
           <AssociationSet Name="FK__Progress__idStud__114A936A" Association="Self.FK__Progress__idStud__114A936A">
             <End Role="Student" EntitySet="Student" />
             <End Role="Progress" EntitySet="Progress" />
@@ -149,6 +175,16 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="StudTasksModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="idMessage" />
+          </Key>
+          <Property Name="idMessage" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idStudent" Type="Int32" Nullable="false" />
+          <Property Name="Content" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="DateOfCreate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Student" Relationship="Self.FK__Message__idStude__2BFE89A6" FromRole="Message" ToRole="Student" />
+        </EntityType>
         <EntityType Name="Progress">
           <Key>
             <PropertyRef Name="idProgress" />
@@ -172,6 +208,7 @@
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Message" Relationship="Self.FK__Message__idStude__2BFE89A6" FromRole="Student" ToRole="Message" />
           <NavigationProperty Name="Progress" Relationship="Self.FK__Progress__idStud__114A936A" FromRole="Student" ToRole="Progress" />
           <NavigationProperty Name="Task" Relationship="Self.FK__Task__idStudent__0B91BA14" FromRole="Student" ToRole="Task" />
           <NavigationProperty Name="TimeTable" Relationship="Self.FK__TimeTable__idStu__08B54D69" FromRole="Student" ToRole="TimeTable" />
@@ -224,6 +261,18 @@
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Student" Relationship="Self.FK__User__idStudent__05D8E0BE" FromRole="User" ToRole="Student" />
         </EntityType>
+        <Association Name="FK__Message__idStude__2BFE89A6">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="Message" Type="Self.Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="idStudent" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="idStudent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Progress__idStud__114A936A">
           <End Role="Student" Type="Self.Student" Multiplicity="1" />
           <End Role="Progress" Type="Self.Progress" Multiplicity="*" />
@@ -273,12 +322,17 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="StudTasksEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Message" EntityType="Self.Message" />
           <EntitySet Name="Progress" EntityType="Self.Progress" />
           <EntitySet Name="Student" EntityType="Self.Student" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Task" EntityType="Self.Task" />
           <EntitySet Name="TimeTable" EntityType="Self.TimeTable" />
           <EntitySet Name="User" EntityType="Self.User" />
+          <AssociationSet Name="FK__Message__idStude__2BFE89A6" Association="Self.FK__Message__idStude__2BFE89A6">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Message" EntitySet="Message" />
+          </AssociationSet>
           <AssociationSet Name="FK__Progress__idStud__114A936A" Association="Self.FK__Progress__idStud__114A936A">
             <End Role="Student" EntitySet="Student" />
             <End Role="Progress" EntitySet="Progress" />
@@ -302,6 +356,16 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="Хранилище StudTasksModelContainer" CdmEntityContainer="StudTasksEntities">
+          <EntitySetMapping Name="Message">
+            <EntityTypeMapping TypeName="StudTasksModel.Message">
+              <MappingFragment StoreEntitySet="Message">
+                <ScalarProperty Name="idMessage" ColumnName="idMessage" />
+                <ScalarProperty Name="idStudent" ColumnName="idStudent" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="DateOfCreate" ColumnName="DateOfCreate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Progress">
             <EntityTypeMapping TypeName="StudTasksModel.Progress">
               <MappingFragment StoreEntitySet="Progress">

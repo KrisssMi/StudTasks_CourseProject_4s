@@ -42,4 +42,5 @@
     <v:String x:Key="_Saturday">Суббота</v:String>
     <v:String x:Key="_Save">Сохранить</v:String>
     <v:String x:Key="_Cancel">Отменить</v:String>
+    <v:String x:Key="_NewMessage">Нажмите Enter, чтобы отправить сообщение</v:String>
 </ResourceDictionary>

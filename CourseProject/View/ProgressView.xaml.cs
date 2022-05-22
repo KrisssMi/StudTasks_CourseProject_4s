@@ -19,9 +19,6 @@ using System.Windows.Shapes;
 
 namespace CourseProject.View
 {
-    /// <summary>
-    /// Логика взаимодействия для ProgressView.xaml
-    /// </summary>
     public partial class ProgressView : Page
     {
         User user = User.CurrentUser;
@@ -29,6 +26,9 @@ namespace CourseProject.View
 
         ProgressViewModel progressViewModel = new ProgressViewModel();
         EFStudentRepository eFStudent = new EFStudentRepository();
+        EFProgressRepository eFProgress = new EFProgressRepository();
+
+
         public ProgressView()
         {
             InitializeComponent();
@@ -69,7 +69,7 @@ namespace CourseProject.View
 
         private void SetExistElementNotification()
         {
-            NotificationMessgeToProgress.Content = "U have already selected this item! :)";
+            NotificationMessgeToProgress.Content = "You have already selected this item! :)";
         }
 
         private void ClearNotification()
@@ -93,18 +93,28 @@ namespace CourseProject.View
 
         private void AddProgress_Click(object sender, RoutedEventArgs e)
         {
-            ClearNotification();
-            //if (LessonsBox.SelectedIndex != 0 && !IsProgressInProgressList(LessonsBox.SelectedItem as string))
-            //{
-            //    Progress progress = new Progress { ComplitedTasks = 0, idStudent = stud.idStudent, LessonName = LessonsBox.SelectedValue.ToString(), NeededTasks = 1, TaskProgress = 0 };
-            //    progressViewModel.addProgress(progress);
-            //    progressViewModel.OrderProgress();
-            //}
-            
-                Progress progress = new Progress { ComplitedTasks = 0, idStudent = stud.idStudent, NeededTasks = 1, TaskProgress = 0 };
-                progressViewModel.addProgress(progress);
-                progressViewModel.OrderProgress();
-           
+            ClearNotification();    // очищаем сообщение об ошибке
+            if (LessonsBox.SelectedIndex != 0 && !IsProgressInProgressList(LessonsBox.SelectedItem as string))
+            {
+                try
+                {
+                    if (eFProgress.getProgressById(stud) == null)
+                    {
+                        throw new Exception("Нет заданий!");
+                    }
+                    Progress progress = new Progress { idStudent = stud.idStudent, LessonName = LessonsBox.SelectedValue.ToString(), ComplitedTasks = eFProgress.getProgressById(stud).Where(x => x.LessonName == LessonsBox.SelectedItem as string).First().ComplitedTasks, NeededTasks = eFProgress.getProgressById(stud).Where(x => x.LessonName == LessonsBox.SelectedItem as string).First().NeededTasks, TaskProgress = eFProgress.getProgressById(stud).Where(x => x.LessonName == LessonsBox.SelectedItem as string).First().TaskProgress };
+                    progressViewModel.addProgress(progress);
+                    progressViewModel.OrderProgress();
+                }
+                catch (Exception ex)
+                {
+
+                    MyMessageBox.Show(ex.Message, MessageBoxButton.OK);
+                    Progress progress = new Progress { idStudent = stud.idStudent, LessonName = LessonsBox.SelectedValue.ToString(), ComplitedTasks = 0, NeededTasks = 0, TaskProgress = 0 };
+                    progressViewModel.addProgress(progress);
+                    progressViewModel.OrderProgress();
+                }
+            }
         }
 
         private void NeededTasksMinus_PreviewMouseDown(object sender, RoutedEventArgs e)

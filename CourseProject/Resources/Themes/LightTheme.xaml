@@ -4,7 +4,7 @@
 
     <Style x:Key="Grid1" TargetType="Grid">
         <Setter Property="Background" Value="White" />
-        <Setter Property="Opacity" Value="0.4" />
+        <Setter Property="Opacity" Value="0.2" />
     </Style>
 
     <Style x:Key="Menu" TargetType="StackPanel">
@@ -25,9 +25,33 @@
 
     <Style x:Key="Grid2" TargetType="Grid">
         <Setter Property="Background" Value="#FFE3C3F3" />
-        <Setter Property="Opacity" Value="0.6"/>
+        <Setter Property="Opacity" Value="0.4"/>
     </Style>
 
+    <Style x:Key="Button1" TargetType="Button">
+        <Setter Property="Background" Value="#FFED93EE"/>
+        <Setter Property="Foreground" Value="#FF1A1A1A"/>
+        <Setter Property="BorderBrush" Value="#FF1A1A1A"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#FFF5F5F5"/>
+                <Setter Property="Foreground" Value="#FF1A1A1A"/>
+                <Setter Property="BorderBrush" Value="#FF1A1A1A"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="#FFF5F5F5"/>
+                <Setter Property="Foreground" Value="#FF1A1A1A"/>
+                <Setter Property="BorderBrush" Value="#FF1A1A1A"/>
+            </Trigger>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="Background" Value="#FF792121"/>
+                <Setter Property="Foreground" Value="#FF1A1A1A"/>
+                <Setter Property="BorderBrush" Value="#FF1A1A1A"/>
+            </Trigger>
+            
+        </Style.Triggers>
+    </Style>
 
     <Style x:Key="lb_Monday" TargetType="Label">
         <Setter Property="Background" Value="#FFED93EE"/>
@@ -73,6 +97,4 @@
             <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="67"/>
         </DoubleAnimationUsingKeyFrames>
     </Storyboard>
-    
-    
 </ResourceDictionary>

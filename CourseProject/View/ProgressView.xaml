@@ -49,8 +49,9 @@
                                         </StackPanel>
                                         <StackPanel Orientation="Vertical">
                                             <ProgressBar Minimum="0" Opacity="0.7" Maximum="100" Height="15" Width="600" Value="{Binding TaskProgress, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}" Background="Lavender"/>
-                                           <TextBlock Text="{Binding LessonName}" FontSize="10" Margin="-90 0 0 0" TextWrapping="Wrap"/>
+                                            <TextBlock Text="{Binding LessonName}" Margin="50 20 0 0" FontSize="16" TextWrapping="Wrap" TextAlignment="Center" Foreground="Black"/>
                                         </StackPanel>
+                                        
                                     </DockPanel>
                                 </Grid>
                             </DataTemplate>

@@ -19,6 +19,7 @@ namespace CourseProject.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Student()
         {
+            this.Message = new HashSet<Message>();
             this.Progress = new HashSet<Progress>();
             this.Task = new HashSet<Task>();
             this.TimeTable = new HashSet<TimeTable>();
@@ -33,6 +34,8 @@ namespace CourseProject.Model
         public string Phone { get; set; }
         public string Description { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Message> Message { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Progress> Progress { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -54,7 +57,6 @@ namespace CourseProject.Model
                 isAdmin = false;
             }
         }
-
 
         public bool IsAdmin             // проверка на администратора
         {

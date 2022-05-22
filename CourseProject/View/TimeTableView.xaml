@@ -10,7 +10,7 @@
       xmlns:viewmodel="clr-namespace:CourseProject.ViewModel" 
       d:DataContext="{d:DesignInstance Type=viewmodel:TimeTableViewModel}" d:DesignWidth="780"
       Title="TimeTableView" Background="{x:Null}" FontFamily="Palatino Linotype" Height="743"
-      x:Name="page">
+      x:Name="page" Style="{DynamicResource Page}">
     <Page.Resources>
         <databinding:DayConverter x:Key="DayConverter"></databinding:DayConverter>
         <databinding:LessonConverter x:Key="LessonConverter"></databinding:LessonConverter>
@@ -32,7 +32,7 @@
                 <TextBox VerticalContentAlignment="Center" Width="115" Text="{Binding Path=LessonType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="{DynamicResource _LessonType}"/>
                 <Button Content="{DynamicResource _Save}" Command="{Binding ElementName=page, Path=DataContext.UpdateLineCommand}" Width="95"/>
 
-                <TextBlock VerticalAlignment="Center" Text="{DynamicResource _Week}" Margin="40 0 0 0"/>
+                <TextBlock VerticalAlignment="Center" Text="{DynamicResource _Week}" Margin="50 0 0 0"/>
                 <ComboBox SelectedItem="{Binding DataContext.SelectedWeek, ElementName=page,Mode=TwoWay}" x:Name="Stud_Week"  Width="90" Margin="5 0 0 0">
                     <ComboBoxItem Content="{DynamicResource _First}"/>
                     <ComboBoxItem Content="{DynamicResource _Second}"/>
@@ -67,7 +67,7 @@
                         <StackPanel Height="700">
                             <ScrollViewer CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" Height="718">
                                 <StackPanel Orientation="Vertical">
-                                    <Label Height="117" Content="{DynamicResource _Monday}" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Style="{DynamicResource lb_Monday}" />
+                                    <Label Height="117" Content="{DynamicResource _Monday}" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FF9E25FF" />
                                     <Label Height="117" Content="{DynamicResource _Tuesday}" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFAC48FC"/>
                                     <Label Height="117" Content="{DynamicResource _Wednesday}" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFBC69FF"/>
                                     <Label Height="117" Content="{DynamicResource _Thursday}" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFCF94FF"/>

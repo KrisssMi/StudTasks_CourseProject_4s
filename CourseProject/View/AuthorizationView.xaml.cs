@@ -118,5 +118,10 @@ namespace CourseProject.View
         {
             App.Current.Shutdown();
         }
+
+        private void To_Sign_In_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
  }

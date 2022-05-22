@@ -42,4 +42,5 @@
     <v:String x:Key="_Saturday">Saturday</v:String>
     <v:String x:Key="_Save">Save</v:String>
     <v:String x:Key="_Cancel">Cancel</v:String>
+    <v:String x:Key="_NewMessage">Press Enter to send message</v:String>
 </ResourceDictionary>

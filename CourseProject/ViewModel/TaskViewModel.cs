@@ -19,6 +19,7 @@ namespace CourseProject.ViewModel
         EFTaskRepository eFTaskRepository = new EFTaskRepository();
         EFTimeTableRepository eFTimeTable = new EFTimeTableRepository();
         EFStudentRepository eFStudent = new EFStudentRepository();
+        EFProgressRepository eFProgress = new EFProgressRepository();
 
         private Model.Task selectedTask;
 
@@ -69,9 +70,14 @@ namespace CourseProject.ViewModel
             if (SelectedTask != null)
             {
                 SelectedTask.isComplite = true;
+                var currentProgress = eFProgress.getProgress().Where(x => x.idStudent == stud.idStudent && x.LessonName == SelectedTask.LessonName).First();
+                currentProgress.ComplitedTasks++;
+                eFProgress.Update(currentProgress);
                 eFTaskRepository.ChangeComplite(SelectedTask);
                 UpdateFalse();
             }
+
+
         }
 
 
@@ -80,9 +86,14 @@ namespace CourseProject.ViewModel
             if (SelectedTask != null)
             {
                 SelectedTask.isComplite = false;
+                var currentProgress = eFProgress.getProgress().Where(x => x.idStudent == stud.idStudent && x.LessonName == SelectedTask.LessonName).First();
+                currentProgress.ComplitedTasks--;
+                eFProgress.Update(currentProgress);
                 eFTaskRepository.ChangeComplite(SelectedTask);
                 UpdateTrue();
             }
+
+
         }
 
         public void UpdateFalse()                                       // обновление невыполненных заданий
@@ -96,6 +107,9 @@ namespace CourseProject.ViewModel
                     UnsatisfiedTasks.Add(t);
                 }
             }
+            //var currentProgress = eFProgress.getProgress().Where(x => x.idStudent == stud.idStudent && x.LessonName == SelectedTask.LessonName).First();
+            //currentProgress.ComplitedTasks++;
+            //eFProgress.Update(currentProgress);
         }
 
         public void UpdateTrue()
@@ -114,8 +128,22 @@ namespace CourseProject.ViewModel
 
         public void addTask(Model.Task task)
         {
-            eFTaskRepository.addTask(task);
-            UnsatisfiedTasks.Add(task);
+            Progress currentProgress;
+            try
+            {
+
+                eFTaskRepository.addTask(task);
+                currentProgress = eFProgress.getProgress().Where(x => x.idStudent == stud.idStudent && x.LessonName == task.LessonName).First();
+                UnsatisfiedTasks.Add(task);
+            }
+            catch (Exception ex)
+            {
+                eFProgress.addProgress(new Progress() { idStudent = stud.idStudent, LessonName = task.LessonName, ComplitedTasks = 0, NeededTasks = 0 });
+                currentProgress = eFProgress.getProgress().Where(x => x.idStudent == stud.idStudent && x.LessonName == task.LessonName).First();
+                UnsatisfiedTasks.Add(task);
+            }
+            currentProgress.NeededTasks++;
+            eFProgress.Update(currentProgress);
         }
 
 
@@ -124,6 +152,18 @@ namespace CourseProject.ViewModel
         {
             eFTaskRepository.RemoveById(SelectedTask);
             UnsatisfiedTasks.Remove(SelectedTask);
+            var currentProgress = eFProgress.getProgress().Where(x => x.idStudent == stud.idStudent && x.LessonName == selectedTask.LessonName).First();
+            if ((bool)selectedTask.isComplite == true)
+            {
+                currentProgress.ComplitedTasks--;
+                currentProgress.NeededTasks--;
+            }
+            else
+            {
+                currentProgress.NeededTasks--;
+            }
+            eFProgress.Update(currentProgress);
+
         }
 
 
@@ -142,7 +182,7 @@ namespace CourseProject.ViewModel
             }
         }
 
-        
+
         public void OrderByImportance(int imp)
         {
             UnsatisfiedTasks.Clear();
