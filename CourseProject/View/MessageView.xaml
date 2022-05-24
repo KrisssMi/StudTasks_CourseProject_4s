@@ -46,7 +46,7 @@
         <Button x:Name="Delete_Message" Background="#FF822CDF" Grid.Row="1" Grid.Column="1" Width="100" VerticalAlignment="Top" HorizontalAlignment="Right" PreviewMouseDown="Delete_Message_PreviewMouseDown" Height="50" Cursor="Hand">
             <materialDesign:PackIcon Kind="Delete" Height="30" Width="30"></materialDesign:PackIcon>
         </Button>
-        <ListBox BorderThickness="1" Height="480" ItemsSource="{Binding Messages}" Width="700" Grid.Row="1" Grid.Column="1" x:Name="Messages" VerticalAlignment="Center" Background="Transparent" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Disabled" BorderBrush="Black"
+        <ListBox BorderThickness="1" Height="480" ItemsSource="{Binding Messages}" Width="700" Grid.Row="1" Grid.Column="1" x:Name="Messages" VerticalAlignment="Center" Background="Transparent" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible" BorderBrush="Black"
     HorizontalContentAlignment="Center"
     Template="{DynamicResource ArrowedItemsControl}" Margin="60,0,60,0">
             <ListBox.Effect>
@@ -58,7 +58,8 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <DockPanel LastChildFill="True" HorizontalAlignment="Center">
-                        <TextBox DockPanel.Dock="Bottom" HorizontalAlignment="Center" IsReadOnly="True" FontSize="17"  Text="{Binding Path=Content}" FontFamily="ComicSans" TextWrapping="Wrap" Width="680">
+                        
+                        <TextBox DockPanel.Dock="Bottom" HorizontalAlignment="Center" IsReadOnly="True" FontSize="17"  Text="{Binding Path=Content}" FontFamily="ComicSans" TextWrapping="Wrap" Width="680" BorderBrush="Black">
                         </TextBox>
                         <DockPanel Margin="0 0 0 5">
                             <TextBlock DockPanel.Dock="Left" Background="Transparent" Width="Auto" Text="{Binding Path=Student.Name}" Foreground="#FFAE1F4D" />

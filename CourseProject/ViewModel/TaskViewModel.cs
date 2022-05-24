@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace CourseProject.ViewModel
 {
-    class TaskViewModel : INotifyPropertyChanged
+    class TaskViewModel : BaseViewModel
     {
         User user = User.CurrentUser;
         Student stud = new Student();
@@ -26,7 +26,7 @@ namespace CourseProject.ViewModel
         private ObservableCollection<Model.Task> unsatisfiedTasks = new ObservableCollection<Model.Task>();
 
 
-        public ObservableCollection<Model.Task> UnsatisfiedTasks            // невыполненные задания
+        public ObservableCollection<Model.Task> UnsatisfiedTasks        // невыполненные задания
         {
             get { return unsatisfiedTasks; }
             set
@@ -36,7 +36,7 @@ namespace CourseProject.ViewModel
             }
         }
 
-        public Model.Task SelectedTask                                    // выбранное задание
+        public Model.Task SelectedTask                                  // выбранное задание
         {
             get { return selectedTask; }
             set
@@ -46,18 +46,11 @@ namespace CourseProject.ViewModel
             }
         }
 
-        public IEnumerable<string> GetSubjects()                            // получение предметов из таблицы расписания
+        public IEnumerable<string> GetSubjects()                        // получение предметов из таблицы расписания
         {
             return eFTimeTable.GetSubjects(stud);
         }
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
-        }
+        
 
         public TaskViewModel()
         {
@@ -72,14 +65,12 @@ namespace CourseProject.ViewModel
                 SelectedTask.isComplite = true;
                 var currentProgress = eFProgress.getProgress().Where(x => x.idStudent == stud.idStudent && x.LessonName == SelectedTask.LessonName).First();
                 currentProgress.ComplitedTasks++;
+                currentProgress.TaskProgress = (int)(currentProgress.ComplitedTasks * 100 / currentProgress.NeededTasks);
                 eFProgress.Update(currentProgress);
                 eFTaskRepository.ChangeComplite(SelectedTask);
                 UpdateFalse();
             }
-
-
         }
-
 
         public void ChangeFalse()
         {
@@ -88,6 +79,7 @@ namespace CourseProject.ViewModel
                 SelectedTask.isComplite = false;
                 var currentProgress = eFProgress.getProgress().Where(x => x.idStudent == stud.idStudent && x.LessonName == SelectedTask.LessonName).First();
                 currentProgress.ComplitedTasks--;
+                currentProgress.TaskProgress = (int)(currentProgress.ComplitedTasks * 100 / currentProgress.NeededTasks);
                 eFProgress.Update(currentProgress);
                 eFTaskRepository.ChangeComplite(SelectedTask);
                 UpdateTrue();
@@ -126,28 +118,28 @@ namespace CourseProject.ViewModel
             Progress currentProgress;
             try
             {
-
                 eFTaskRepository.addTask(task);
                 currentProgress = eFProgress.getProgress().Where(x => x.idStudent == stud.idStudent && x.LessonName == task.LessonName).First();
                 UnsatisfiedTasks.Add(task);
             }
             catch (Exception ex)
             {
-                eFProgress.addProgress(new Progress() { idStudent = stud.idStudent, LessonName = task.LessonName, ComplitedTasks = 0, NeededTasks = 0 });
+                eFProgress.addProgress(new Progress() { idStudent = stud.idStudent, LessonName = task.LessonName, ComplitedTasks = 0, NeededTasks = 0, TaskProgress = 0 });
+                eFProgress.SaveProgress();
                 currentProgress = eFProgress.getProgress().Where(x => x.idStudent == stud.idStudent && x.LessonName == task.LessonName).First();
                 UnsatisfiedTasks.Add(task);
             }
             currentProgress.NeededTasks++;
-            eFProgress.Update(currentProgress);
+            currentProgress.TaskProgress = (int)(currentProgress.ComplitedTasks * 100 / currentProgress.NeededTasks);
+            eFProgress.Update(currentProgress);          
         }
-
-
 
         public void RemoveTask(Model.Task selectedTask)
         {
+            Progress currentProgress;
             eFTaskRepository.RemoveById(SelectedTask);
             UnsatisfiedTasks.Remove(SelectedTask);
-            var currentProgress = eFProgress.getProgress().Where(x => x.idStudent == stud.idStudent && x.LessonName == selectedTask.LessonName).First();
+            currentProgress = eFProgress.getProgress().Where(x => x.idStudent == stud.idStudent && x.LessonName == selectedTask.LessonName).First();
             if ((bool)selectedTask.isComplite == true)
             {
                 currentProgress.ComplitedTasks--;
@@ -157,8 +149,15 @@ namespace CourseProject.ViewModel
             {
                 currentProgress.NeededTasks--;
             }
-            eFProgress.Update(currentProgress);
-
+            try
+            {
+                currentProgress.TaskProgress = (int)(currentProgress.ComplitedTasks * 100 / currentProgress.NeededTasks);
+                eFProgress.Update(currentProgress);              
+            }
+            catch (Exception)
+            {
+                eFProgress.Remove(currentProgress);
+            }
         }
 
 

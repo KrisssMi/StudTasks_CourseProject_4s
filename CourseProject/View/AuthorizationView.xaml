@@ -113,7 +113,7 @@
 
 
             <TextBox x:Name="Name" Grid.Row="2" Grid.Column="1" Visibility="Hidden" Width="250" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Name" Cursor="Arrow"/>
-            <TextBox x:Name="Surname" Grid.Row="3" Grid.Column="1" Visibility="Hidden" Width="250" Text="{Binding Surname, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Surname"/>
+            <TextBox x:Name="Surname" Grid.Row="3" Grid.Column="1" Visibility="Hidden" Width="250" Text="{Binding Surname, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Surname" Cursor="Arrow"/>
             <TextBox x:Name="Phone" Grid.Row="4" Grid.Column="1" Visibility="Hidden" Width="250" Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Phone"/>
             <TextBox x:Name="Email" Grid.Row="5" Grid.Column="1" Visibility="Hidden" Width="250" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Email" Cursor="Arrow"/>
             <TextBox x:Name="NumStudCard" Grid.Row="1" Grid.Column="1" Visibility="Hidden" Width="250" Text="{Binding NumStudCard, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="№ student card" Cursor="Arrow"/>

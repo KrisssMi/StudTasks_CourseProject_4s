@@ -21,8 +21,8 @@
 
         <Style x:Key="scaleButton1" TargetType="Button">
             <Setter Property="Height" Value="50"/>
-            <Setter Property="Width" Value="50"/>
-            <Setter Property="Background" Value="{StaticResource MaterialDesignCardBackground}"/>
+            <Setter Property="Width" Value="55"/>
+            <Setter Property="Background" Value="#9D00EB"/>
             <Setter Property="RenderTransformOrigin" Value=".4 .4"/>
             <Setter Property="RenderTransform">
                 <Setter.Value>
@@ -132,7 +132,7 @@
             </DataGrid.CellStyle>
         </DataGrid>
 
-        <Grid Grid.Column="1" Grid.RowSpan="2" Style="{DynamicResource Grid2}" Background="#FF1F1F1F" />
+        <Grid Grid.Column="1" Grid.RowSpan="2" Style="{DynamicResource Grid2}" Background="#DCD0FF" />
 
         <Grid Grid.Column="1" Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -146,7 +146,7 @@
                 <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
 
-            <Button x:Name="ToNewTask" Style="{StaticResource scaleButton1}" Content="{DynamicResource _NewTask}" VerticalAlignment="Center" Width="Auto" FontSize="15" Grid.Row="1" Grid.Column="1" Click="ToNewTask_Click" Cursor="Hand" BorderBrush="#FF6522A8" Foreground="#FF6522A8" Margin="44,0,44,0">
+            <Button x:Name="ToNewTask" Style="{StaticResource scaleButton1}" Content="{DynamicResource _NewTask}" VerticalAlignment="Center" Width="Auto" FontSize="15" Grid.Row="1" Grid.Column="1" Click="ToNewTask_Click" Cursor="Hand" BorderBrush="#FF6522A8" Foreground="White" Margin="44,0,44,0">
                
             </Button>
 
@@ -177,7 +177,7 @@
                         </DatePicker.CalendarStyle>
 
                         <DatePicker.BlackoutDates>
-                            <CalendarDateRange Start="1/1/0001" End="5/24/2022"/>
+                            <CalendarDateRange Start="1/1/0001" End="5/21/2022"/>
                         </DatePicker.BlackoutDates>
                     </DatePicker>
 

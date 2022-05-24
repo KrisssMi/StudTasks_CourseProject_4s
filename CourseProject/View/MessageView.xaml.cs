@@ -31,7 +31,7 @@ namespace CourseProject.View
         {
             stud = eFStudent.GetStudentById((int)user.idStudent);
             InitializeComponent();
-            ConfigurateControlsIfNotAdmin();
+            //ConfigurateControlsIfNotAdmin();
             messageViewModel = new MessageViewModel();
             DataContext = messageViewModel;
         }
@@ -43,34 +43,33 @@ namespace CourseProject.View
 
         public void SendMessage()
         {
-            if (stud.IsAdmin)
-            {
+            
                 messageViewModel.SendMessage(Message_Content.Text);
                 ClearTextArea();
-            }
+            
         }
 
-        private void ConfigurateControlsIfNotAdmin()
-        {
-            if (!stud.IsAdmin)
-            {
-                Message_Content.Foreground = Brushes.Red;
-                Message_Content.Text = "You can't leave messages";
-                Message_Content.FontSize = 18;
-                Message_Content.TextAlignment = TextAlignment.Center;
-                Message_Content.IsReadOnly = true;
-                Message_Content.Cursor = Cursors.Arrow;
-                //Send_message.Visibility = Visibility.Collapsed;
-                Delete_Message.IsEnabled = false;
-            }
-        }
+        //private void ConfigurateControlsIfNotAdmin()
+        //{
+        //    if (!stud.IsAdmin)
+        //    {
+        //        Message_Content.Foreground = Brushes.Red;
+        //        Message_Content.Text = "You can't leave messages";
+        //        Message_Content.FontSize = 18;
+        //        Message_Content.TextAlignment = TextAlignment.Center;
+        //        Message_Content.IsReadOnly = true;
+        //        Message_Content.Cursor = Cursors.Arrow;
+        //        //Send_message.Visibility = Visibility.Collapsed;
+        //        Delete_Message.IsEnabled = false;
+        //    }
+        //}
 
         private void Delete_Message_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             try
             {
                 Message m = (Messages.SelectedItem as Message);
-                if (m.idStudent == stud.idStudent)
+                if (m.idStudent == stud.idStudent || stud.IsAdmin)
                 {
                     messageViewModel.RemoveMessageById(m);
                 }

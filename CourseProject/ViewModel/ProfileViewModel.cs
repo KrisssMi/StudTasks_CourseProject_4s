@@ -9,7 +9,6 @@ namespace CourseProject.ViewModel
 {
     class ProfileViewModel : BaseViewModel
     {
-        //User user = User.CurrentUser;
         Student stud = new Student();
 
         public User LoggerUser { get; set; }

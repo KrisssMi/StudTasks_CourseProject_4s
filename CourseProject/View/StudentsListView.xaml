@@ -20,7 +20,7 @@
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button x:Name="Delete" Click="Delete_Click" Style="{DynamicResource MaterialDesignFlatDarkButton}">
+                            <Button x:Name="Delete" Click="Delete_Click" Style="{DynamicResource MaterialDesignFlatDarkBgButton}">
                                 <materialDesign:PackIcon Kind="DeleteForever" Height="25" Width="25" Foreground="White"/>
                             </Button>
                         </DataTemplate>

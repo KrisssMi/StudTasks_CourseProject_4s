@@ -11,11 +11,13 @@ using System.Windows;
 using System.Xml.Linq;
 using CourseProject.ErrorMessage;
 using System.Windows.Input;
+using System.Windows.Navigation;
 
 namespace CourseProject.ViewModel
 {
     class AuthorizationViewModel
     {
+        private DelegateCommand updateAuth;
         IEnumerable<User> users;
         IEnumerable<Student> students;
 
@@ -142,13 +144,11 @@ namespace CourseProject.ViewModel
         }
 
         public User СompareDataOfUser(string password)
-            {
+        {
                 Password = password;
                 if (!String.IsNullOrEmpty(Login) && !String.IsNullOrEmpty(Password))
                 {
-                    User tmp = eFUser.GetUserByLogin(Login);
-
-               
+                    User tmp = eFUser.GetUserByLogin(Login);              
                     if (tmp.Password != User.getHash(Password))
                     {
                         return null;
@@ -157,19 +157,15 @@ namespace CourseProject.ViewModel
                 
                     if (tmp != null)
                     {
-
                         User.CurrentUser = tmp;
                         CreateRestoringFile(Login, Password);
                         return tmp;
-
-
                     }
                     else
                         return null;
                 }
-
                 return null;
-            }
+        }
 
 
             public void GetTimeTable()
@@ -197,5 +193,5 @@ namespace CourseProject.ViewModel
             {
                 return eFUser.getUsers();
             }
-        }
     }
+}

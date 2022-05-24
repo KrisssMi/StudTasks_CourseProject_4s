@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace CourseProject.ViewModel
 {
-    class MessageViewModel : INotifyPropertyChanged
+    class MessageViewModel : BaseViewModel
     {
         User user = User.CurrentUser;
         Student stud = new Student();
@@ -56,13 +56,6 @@ namespace CourseProject.ViewModel
                 eFMessage.addMessage(m);
                 tmpMessages.Add(m);
             }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
     }
 }

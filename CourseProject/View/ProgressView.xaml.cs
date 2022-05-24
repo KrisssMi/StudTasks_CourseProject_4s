@@ -88,32 +88,12 @@ namespace CourseProject.View
                 }
                 catch (Exception ex)
                 {
-                    MyMessageBox.Show(ex.Message, MessageBoxButton.OK);
+                    MyMessageBox.Show("Задач по данному предмету нет", MessageBoxButton.OK);
                     Progress progress = new Progress { idStudent = stud.idStudent, LessonName = LessonsBox.SelectedValue.ToString(), ComplitedTasks = 0, NeededTasks = 0, TaskProgress = 0 };
                     progressViewModel.addProgress(progress);
                     progressViewModel.OrderProgress();
                 }
             }
-        }
-
-        private void NeededTasksMinus_PreviewMouseDown(object sender, RoutedEventArgs e)
-        {
-            progressViewModel.minusNeededTasks();
-        }
-
-        private void CompletedTasksPlus_PreviewMouseDown(object sender, RoutedEventArgs e)
-        {
-            progressViewModel.addComplitedTasks();
-        }
-
-        private void CompletedTasksMinus_PreviewMouseDown(object sender, RoutedEventArgs e)
-        {
-            progressViewModel.minusComplitedTasks();
-        }
-
-        private void NeededTasksPlus_PreviewMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            progressViewModel.addNeededTasks();
         }
     }
 }

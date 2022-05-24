@@ -54,6 +54,12 @@
                             <materialDesign:PackIcon Style="{DynamicResource Icon}" Kind="Menu" VerticalAlignment="Center" Margin="-20"  Width="27" Height="27" Foreground="black"/>
                         </Button>
                     </Grid>
+                    <ListViewItem Height="70" x:Name="TimeTable_List" PreviewMouseDown="TimeTable_List_PreviewMouseDown">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Style="{DynamicResource Icon}" Kind="EventNote" Width="27" Height="27" Margin="8" VerticalAlignment="Center"/>
+                            <TextBlock Text="{DynamicResource _TimeTable}" FontSize="20" Style="{DynamicResource Text}" VerticalAlignment="Center" Margin="10 10"/>
+                        </StackPanel>
+                    </ListViewItem>
 
                     <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                         <ListViewItem x:Name="Task_List" Height="70" PreviewMouseDown="Task_List_PreviewMouseDown">
@@ -70,10 +76,12 @@
                             </StackPanel>
                         </ListViewItem>
 
-                        <ListViewItem Height="70" x:Name="TimeTable_List" PreviewMouseDown="TimeTable_List_PreviewMouseDown">
-                            <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Style="{DynamicResource Icon}" Kind="EventNote" Width="27" Height="27" Margin="8" VerticalAlignment="Center"/>
-                                <TextBlock Text="{DynamicResource _TimeTable}" FontSize="20" Style="{DynamicResource Text}" VerticalAlignment="Center" Margin="10 10"/>
+                        <ListViewItem Height="70" x:Name="Message_List" PreviewMouseDown="Message_List_PreviewMouseDown">
+                            <StackPanel Height="60" Orientation="Horizontal">
+                                <materialDesign:Badged  Height="50" Margin="0 10 0 0" x:Name="Count_Message">
+                                    <materialDesign:PackIcon Style="{DynamicResource Icon}" Kind="Email" Width="27" Height="27" Margin="8" VerticalAlignment="Center"/>
+                                </materialDesign:Badged>
+                                <TextBlock Text="Messages" Style="{DynamicResource Text}" VerticalAlignment="Center" FontSize="20" Margin="10 10"/>
                             </StackPanel>
                         </ListViewItem>
 
@@ -81,15 +89,6 @@
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon Style="{DynamicResource Icon}" Kind="User" Width="27" Height="27" Margin="8" VerticalAlignment="Center"/>
                                 <TextBlock Text="{DynamicResource _Profile}" FontSize="20" Style="{DynamicResource Text}" VerticalAlignment="Center" Margin="10 10"/>
-                            </StackPanel>
-                        </ListViewItem>
-
-                        <ListViewItem Height="70" x:Name="Message_List" PreviewMouseDown="Message_List_PreviewMouseDown">
-                            <StackPanel Height="60" Orientation="Horizontal">
-                                <materialDesign:Badged  Height="50" Margin="0 10 0 0" x:Name="Count_Message">
-                                    <materialDesign:PackIcon Style="{DynamicResource Icon}" Kind="Email" Width="27" Height="27" Margin="8" VerticalAlignment="Center"/>
-                                </materialDesign:Badged>
-                                <TextBlock Text="Messages" Style="{DynamicResource Text}" VerticalAlignment="Center" FontSize="20" Margin="10 10"/>
                             </StackPanel>
                         </ListViewItem>
 

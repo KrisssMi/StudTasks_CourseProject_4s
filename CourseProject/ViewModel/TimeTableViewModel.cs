@@ -13,16 +13,14 @@ using CourseProject.Model;
 
 namespace CourseProject.ViewModel
 {
-    internal class TimeTableViewModel : INotifyPropertyChanged
+    internal class TimeTableViewModel : BaseViewModel
     {
         private readonly EFStudentRepository eFStudent = new EFStudentRepository();
         private readonly EFTimeTableRepository eFTimeTable = new EFTimeTableRepository();
 
         private TimeTable selectedTimeTable;        // выбранная запись в таблице
         private Student stud = new Student();
-
         private DelegateCommand updateLine;
-        private readonly User user = User.CurrentUser;
         private List<TimeTable> _monday = new List<TimeTable>();
         private List<TimeTable> _tuesday;
         private List<TimeTable> _wednesday;
@@ -138,6 +136,37 @@ namespace CourseProject.ViewModel
                 }
             }
         }
+        
+        public ObservableCollection<TimeTable> GetByWeekAdmin(string week, int idStudent)
+        {
+            TimeTables.Clear();
+            foreach (var tt in getTimeTable())
+            {
+                stud = eFStudent.GetStudentById(tt.idStudent);
+                if (stud.idStudent == tt.idStudent) TimeTables.Add(tt);
+            }
+
+            return TimeTables;
+        }
+
+        public IEnumerable<TimeTable> getTimeTable()
+        {
+            return eFTimeTable.getTimeTable();
+        }
+
+        public ObservableCollection<TimeTable> GetByWeek(string week, int id)
+        {
+            TimeTables.Clear();
+            foreach (var tt in getTimeTable())
+                if (tt.idStudent == id && tt.Week == week)
+                    TimeTables.Add(tt);
+            return TimeTables;
+        }
+
+        public void Save()
+        {
+            eFTimeTable.Save();
+        }
 
         public ICommand UpdateLineCommand
         {
@@ -168,46 +197,6 @@ namespace CourseProject.ViewModel
                     }
                 ));
             }
-        }
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public ObservableCollection<TimeTable> GetByWeek(string week, int id)
-        {
-            TimeTables.Clear();
-            foreach (var tt in getTimeTable())
-                if (tt.idStudent == id && tt.Week == week)
-                    TimeTables.Add(tt);
-            return TimeTables;
-        }
-
-        public ObservableCollection<TimeTable> GetByWeekAdmin(string week, int idStudent)
-        {
-            TimeTables.Clear();
-            foreach (var tt in getTimeTable())
-            {
-                stud = eFStudent.GetStudentById(tt.idStudent);
-                if (stud.idStudent == tt.idStudent) TimeTables.Add(tt);
-            }
-
-            return TimeTables;
-        }
-
-        public IEnumerable<TimeTable> getTimeTable()
-        {
-            return eFTimeTable.getTimeTable();
-        }
-
-        public void Save()
-        {
-            eFTimeTable.Save();
-        }
-
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
     }
 }

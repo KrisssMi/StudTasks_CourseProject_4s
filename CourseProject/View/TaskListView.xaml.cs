@@ -48,9 +48,6 @@ namespace CourseProject.View
             Clear();
         }
 
-
-
-
         private void LessonsBox_Loaded(object sender, RoutedEventArgs e)
         {
             List<string> taskSubjects = new List<string>();

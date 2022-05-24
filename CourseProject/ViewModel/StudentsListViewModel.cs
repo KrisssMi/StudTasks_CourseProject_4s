@@ -11,9 +11,8 @@ using System.Threading.Tasks;
 
 namespace CourseProject.ViewModel
 {
-    class StudentsListViewModel : INotifyPropertyChanged
+    class StudentsListViewModel : BaseViewModel
     {
-        private StudTasksEntities context;                    // контекст базы данных
         EFUserRepository eFUser = new EFUserRepository();
         EFProgressRepository eFProgress = new EFProgressRepository();
         EFTaskRepository eFTask = new EFTaskRepository();
@@ -79,13 +78,6 @@ namespace CourseProject.ViewModel
             foreach (Student a in students)
                 tmpStudents.Add(a);
             SingletonView.SingletonAdmin.getInstance(null).StudentsListViewModel = this;
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
     }
 }
