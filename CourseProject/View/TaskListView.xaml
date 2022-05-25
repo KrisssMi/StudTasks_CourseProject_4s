@@ -177,7 +177,7 @@
                         </DatePicker.CalendarStyle>
 
                         <DatePicker.BlackoutDates>
-                            <CalendarDateRange Start="1/1/0001" End="5/21/2022"/>
+                            <CalendarDateRange Start="1/1/0001" End="5/24/2022"/>
                         </DatePicker.BlackoutDates>
                     </DatePicker>
 

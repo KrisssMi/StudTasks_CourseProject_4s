@@ -9,9 +9,9 @@
 
 namespace CourseProject.Model
 {
-    using CourseProject.ErrorMessage;
     using System;
-
+    using System.Collections.Generic;
+    
     public partial class Message
     {
         public int idMessage { get; set; }

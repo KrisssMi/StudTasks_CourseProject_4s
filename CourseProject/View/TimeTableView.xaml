@@ -27,10 +27,10 @@
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" DataContext="{Binding SelectedTimeTable}">
                 <TextBox IsReadOnly="True" VerticalContentAlignment="Center" Width="95" Text="{Binding Day, Converter={StaticResource DayConverter}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="{DynamicResource _Day}"  Cursor="Arrow" />
                 <TextBox IsReadOnly="True" VerticalContentAlignment="Center" Width="90" Text="{Binding LessonNumber, Converter={StaticResource LessonConverter},  UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="{DynamicResource _Time}"  Cursor="Arrow" />
-                <TextBox VerticalContentAlignment="Center" Width="115" Text="{Binding Path=LessonName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="{DynamicResource _LessonName}"/>
-                <TextBox VerticalContentAlignment="Center" Width="115" Text="{Binding Path=Auditorium, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="{DynamicResource _Auditorium}" Cursor="Arrow" />
-                <TextBox VerticalContentAlignment="Center" Width="115" Text="{Binding Path=LessonType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="{DynamicResource _LessonType}"/>
-                <Button Content="{DynamicResource _Save}" Command="{Binding ElementName=page, Path=DataContext.UpdateLineCommand}" Width="95" Style="{DynamicResource MaterialDesignOutlinedButton}" Cursor="Hand">
+                <TextBox VerticalContentAlignment="Center" Width="115" Text="{Binding Path=LessonName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="{DynamicResource _LessonName}" MaxLength="50"/>
+                <TextBox VerticalContentAlignment="Center" Width="115" Text="{Binding Path=Auditorium, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="{DynamicResource _Auditorium}" Cursor="Arrow" MaxLength="5"/>
+                <TextBox VerticalContentAlignment="Center" Width="115" Text="{Binding Path=LessonType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Center" materialDesign:HintAssist.Hint="{DynamicResource _LessonType}" Cursor="Arrow" MaxLength="2"/>
+                <Button Content="{DynamicResource _Save}" Command="{Binding ElementName=page, Path=DataContext.UpdateLineCommand}" Width="110" Style="{DynamicResource MaterialDesignOutlinedButton}" Cursor="Hand">
                 </Button>
 
                 <TextBlock VerticalAlignment="Center" Text="{DynamicResource _Week}" Margin="50 0 0 0"/>
@@ -68,7 +68,7 @@
                         <StackPanel Height="700">
                             <ScrollViewer CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" Height="718">
                                 <StackPanel Orientation="Vertical">
-                                    <Label Height="117" Content="{DynamicResource _Monday}" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FF9E25FF" />
+                                    <Label Height="117" Content="{DynamicResource _Monday}" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FF9E25FF"/>
                                     <Label Height="117" Content="{DynamicResource _Tuesday}" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFAC48FC"/>
                                     <Label Height="117" Content="{DynamicResource _Wednesday}" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFBC69FF"/>
                                     <Label Height="117" Content="{DynamicResource _Thursday}" FontSize="30" HorizontalContentAlignment="Center" Opacity="0.9" FontStyle="Italic" VerticalContentAlignment="Center" Background="#FFCF94FF"/>

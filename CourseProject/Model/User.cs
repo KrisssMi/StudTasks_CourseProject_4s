@@ -9,12 +9,13 @@
 
 namespace CourseProject.Model
 {
-    using CourseProject.ErrorMessage;
     using System;
+    using System.Text;
+    using CourseProject.ErrorMessage;
+    using System.Windows;
     using System.Collections.Generic;
     using System.Security.Cryptography;
     using System.Text;
-    using System.Windows;
 
     public partial class User
     {

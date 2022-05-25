@@ -1,4 +1,5 @@
 ﻿using CourseProject.DB;
+using CourseProject.ErrorMessage;
 using CourseProject.Model;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace CourseProject.ViewModel
 {
@@ -18,6 +20,7 @@ namespace CourseProject.ViewModel
         EFTaskRepository eFTask = new EFTaskRepository();
         EFStudentRepository eFStudent = new EFStudentRepository();
         EFTimeTableRepository eFTimeTable = new EFTimeTableRepository();
+        EFMessageRepository eFMessage = new EFMessageRepository();
 
 
         public IEnumerable<Student> getStudents()
@@ -41,13 +44,21 @@ namespace CourseProject.ViewModel
         }
 
         public void RemoveAllInfAboutStudent(Student student)
-        { 
+        {
+            try
+            {
             eFTimeTable.RemoveByStudId(student);
             eFProgress.RemoveByStudId(student);
             eFTask.RemoveByStudId(student);
+            eFMessage.RemoveByStudId(student);
             eFUser.RemoveUserById(student);
             eFStudent.RemoveStudentById(student);
             tmpStudents.Remove(student);
+            }
+            catch (Exception ex)
+            {
+                MyMessageBox.Show(ex.Message, MessageBoxButton.OK);
+            }  
         }
 
         User User = User.CurrentUser;

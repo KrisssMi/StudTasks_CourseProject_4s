@@ -4,19 +4,9 @@ using CourseProject.Model;
 using CourseProject.ViewModel;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CourseProject.View
 {
@@ -61,7 +51,7 @@ namespace CourseProject.View
         {
             try
             {
-                if (Deadline.Text != String.Empty && Title.Text != String.Empty && ImportanceBox.Text != String.Empty)
+                if (Deadline.Text != String.Empty && Title.Text != String.Empty && ImportanceBox.Text != String.Empty && Title.Text.Length<50 && Details.Text.Length<256)
                 {
                     {
                         Model.Task task = new Model.Task { idStudent = stud.idStudent, isComplite = false, LessonName = LessonsBox.SelectedValue.ToString(), DueDate = Convert.ToDateTime(Deadline.SelectedDate), Content = Details.Text, Title = Title.Text, Importance = Convert.ToInt32(ImportanceBox.Text) };
@@ -70,11 +60,11 @@ namespace CourseProject.View
                             Clear();                       
                     }
                 }
-                else MyMessageBox.Show("Fill in all the fields", MessageBoxButton.OK);
+                else MyMessageBox.Show("Fill in all the fields correctly!", MessageBoxButton.OK);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MyMessageBox.Show(ex.Message, MessageBoxButton.OK);
+                MyMessageBox.Show("Choose a subject!", MessageBoxButton.OK);
             }
         }
 

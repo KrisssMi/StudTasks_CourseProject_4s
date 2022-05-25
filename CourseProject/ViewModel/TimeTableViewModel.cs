@@ -178,7 +178,7 @@ namespace CourseProject.ViewModel
                         try
                         {
                             TimeTable updated;
-
+                            
                             using (StudTasksEntities db = new StudTasksEntities())
                             {
                                 updated = db.TimeTable.FirstOrDefault(x =>
@@ -187,6 +187,11 @@ namespace CourseProject.ViewModel
                                 updated.Auditorium = SelectedTimeTable.Auditorium;
                                 updated.LessonName = SelectedTimeTable.LessonName;
                                 updated.LessonType = SelectedTimeTable.LessonType;
+                                if (SelectedTimeTable.LessonType.Length > 2)
+                                {
+                                    MyMessageBox.Show("The lesson type must consist of two letters", MessageBoxButton.OK);
+                                    return;
+                                }
                                 db.SaveChanges();
                             }
                         }

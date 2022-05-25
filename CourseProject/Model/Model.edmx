@@ -11,7 +11,7 @@
           </Key>
           <Property Name="idMessage" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idStudent" Type="int" Nullable="false" />
-          <Property Name="Content" Type="nvarchar" MaxLength="256" />
+          <Property Name="Content" Type="nvarchar(max)" />
           <Property Name="DateOfCreate" Type="datetime" />
         </EntityType>
         <EntityType Name="Progress">
@@ -35,7 +35,6 @@
           <Property Name="Surname" Type="nvarchar" MaxLength="20" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
           <Property Name="Phone" Type="nvarchar" MaxLength="20" />
-          <Property Name="Description" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -57,7 +56,7 @@
           <Property Name="DueDate" Type="date" />
           <Property Name="LessonName" Type="nvarchar" MaxLength="50" />
           <Property Name="Importance" Type="int" />
-          <Property Name="Content" Type="nvarchar" MaxLength="50" />
+          <Property Name="Content" Type="nvarchar" MaxLength="256" />
           <Property Name="Title" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="TimeTable">
@@ -67,17 +66,17 @@
           <Property Name="idTimeTable" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idStudent" Type="int" Nullable="false" />
           <Property Name="Day" Type="int" />
-          <Property Name="LessonName" Type="nvarchar" MaxLength="50" />
-          <Property Name="Auditorium" Type="nvarchar" MaxLength="10" />
+          <Property Name="LessonName" Type="nvarchar(max)" />
+          <Property Name="Auditorium" Type="nvarchar(max)" />
           <Property Name="LessonNumber" Type="int" />
           <Property Name="LessonType" Type="nvarchar" MaxLength="2" />
-          <Property Name="Week" Type="nvarchar" MaxLength="10" />
+          <Property Name="Week" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Login" />
           </Key>
-          <Property Name="idStudent" Type="int" />
+          <Property Name="idStudent" Type="int" Nullable="false" />
           <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" />
         </EntityType>
@@ -130,7 +129,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__User__idStudent__05D8E0BE">
-          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Student">
@@ -181,7 +180,7 @@
           </Key>
           <Property Name="idMessage" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="idStudent" Type="Int32" Nullable="false" />
-          <Property Name="Content" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DateOfCreate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Student" Relationship="Self.FK__Message__idStude__2BFE89A6" FromRole="Message" ToRole="Student" />
         </EntityType>
@@ -207,7 +206,6 @@
           <Property Name="Surname" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Message" Relationship="Self.FK__Message__idStude__2BFE89A6" FromRole="Student" ToRole="Message" />
           <NavigationProperty Name="Progress" Relationship="Self.FK__Progress__idStud__114A936A" FromRole="Student" ToRole="Progress" />
           <NavigationProperty Name="Task" Relationship="Self.FK__Task__idStudent__0B91BA14" FromRole="Student" ToRole="Task" />
@@ -234,7 +232,7 @@
           <Property Name="DueDate" Type="DateTime" Precision="0" />
           <Property Name="LessonName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Importance" Type="Int32" />
-          <Property Name="Content" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Student" Relationship="Self.FK__Task__idStudent__0B91BA14" FromRole="Task" ToRole="Student" />
         </EntityType>
@@ -245,18 +243,18 @@
           <Property Name="idTimeTable" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="idStudent" Type="Int32" Nullable="false" />
           <Property Name="Day" Type="Int32" />
-          <Property Name="LessonName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Auditorium" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="LessonName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Auditorium" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="LessonNumber" Type="Int32" />
           <Property Name="LessonType" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
-          <Property Name="Week" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Week" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Student" Relationship="Self.FK__TimeTable__idStu__08B54D69" FromRole="TimeTable" ToRole="Student" />
         </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Login" />
           </Key>
-          <Property Name="idStudent" Type="Int32" />
+          <Property Name="idStudent" Type="Int32" Nullable="false" />
           <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Student" Relationship="Self.FK__User__idStudent__05D8E0BE" FromRole="User" ToRole="Student" />
@@ -310,7 +308,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__User__idStudent__05D8E0BE">
-          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Student">
@@ -387,7 +385,6 @@
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

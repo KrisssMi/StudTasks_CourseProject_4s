@@ -1,4 +1,5 @@
 ﻿using CourseProject.DB;
+using CourseProject.ErrorMessage;
 using CourseProject.Model;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace CourseProject.ViewModel
 {
@@ -136,27 +138,34 @@ namespace CourseProject.ViewModel
 
         public void RemoveTask(Model.Task selectedTask)
         {
-            Progress currentProgress;
-            eFTaskRepository.RemoveById(SelectedTask);
-            UnsatisfiedTasks.Remove(SelectedTask);
-            currentProgress = eFProgress.getProgress().Where(x => x.idStudent == stud.idStudent && x.LessonName == selectedTask.LessonName).First();
-            if ((bool)selectedTask.isComplite == true)
-            {
-                currentProgress.ComplitedTasks--;
-                currentProgress.NeededTasks--;
-            }
-            else
-            {
-                currentProgress.NeededTasks--;
-            }
             try
             {
-                currentProgress.TaskProgress = (int)(currentProgress.ComplitedTasks * 100 / currentProgress.NeededTasks);
-                eFProgress.Update(currentProgress);              
+                Progress currentProgress;
+                eFTaskRepository.RemoveById(SelectedTask);
+                UnsatisfiedTasks.Remove(SelectedTask);
+                currentProgress = eFProgress.getProgress().Where(x => x.idStudent == stud.idStudent && x.LessonName == selectedTask.LessonName).First();
+                if ((bool)selectedTask.isComplite == true)
+                {
+                    currentProgress.ComplitedTasks--;
+                    currentProgress.NeededTasks--;
+                }
+                else
+                {
+                    currentProgress.NeededTasks--;
+                }
+                try
+                {
+                    currentProgress.TaskProgress = (int)(currentProgress.ComplitedTasks * 100 / currentProgress.NeededTasks);
+                    eFProgress.Update(currentProgress);
+                }
+                catch (Exception)
+                {
+                    eFProgress.Remove(currentProgress);
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                eFProgress.Remove(currentProgress);
+                MyMessageBox.Show(ex.Message, MessageBoxButton.OK);
             }
         }
 

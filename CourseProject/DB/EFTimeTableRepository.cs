@@ -1,4 +1,5 @@
-﻿using CourseProject.Model;
+﻿using CourseProject.ErrorMessage;
+using CourseProject.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -6,6 +7,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace CourseProject.DB
 {
@@ -58,7 +60,14 @@ namespace CourseProject.DB
 
         public void Save()
         {
-            context.SaveChanges();
+            try
+            {
+                context.SaveChanges();
+            }
+            catch(Exception ex)
+            {
+                MyMessageBox.Show(ex.Message, MessageBoxButton.OK);
+            }
         }
 
         public void UpdateTT(TimeTable timeTable)

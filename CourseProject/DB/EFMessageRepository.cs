@@ -46,6 +46,19 @@ namespace CourseProject.DB
             context.SaveChanges();
         }
 
+        public void RemoveByStudId(Student student)
+        {
+            if (student != null)
+            {
+                var messages = context.Message.Where(m => m.idStudent == student.idStudent);
+                foreach (var message in messages)
+                {
+                    context.Message.Remove(message);
+                }
+                context.SaveChanges();
+            }
+        }
+
         public Message GetMessageById(int id)
         {
             return context.Message.FirstOrDefault(x => x.idMessage == id);

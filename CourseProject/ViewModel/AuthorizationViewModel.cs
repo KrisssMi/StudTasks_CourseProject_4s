@@ -87,7 +87,11 @@ namespace CourseProject.ViewModel
                 MyMessageBox.Show("Student card number must contain 8 digits!", MessageBoxButton.OK);
                 return false;
             }
-
+            if (Name.Length>20 || Surname.Length>20)
+            {
+                MyMessageBox.Show("To much letters in Name or Surname!", MessageBoxButton.OK);
+                return false;
+            }
             if (!password1.Equals(password2))
             {
                 MyMessageBox.Show("Passwords must match!", MessageBoxButton.OK);

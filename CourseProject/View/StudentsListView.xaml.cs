@@ -35,6 +35,7 @@ namespace CourseProject.View
             {
                 studentsListViewModel.UpdateAll();
                 Students_Grid.ItemsSource = studentsListViewModel.Students;
+                
             }
             catch (System.Data.Entity.Validation.DbEntityValidationException ex)
             {
@@ -57,11 +58,23 @@ namespace CourseProject.View
 
         private void Students_Grid_SelectionChanged(object sender, SelectedCellsChangedEventArgs e)
         {
-            if (e.AddedCells.Count == 0) return;
-            var currentCell = e.AddedCells[0];
-            if (currentCell.Column == Students_Grid.Columns[2])
+            try
             {
+                if (e.AddedCells.Count == 0) return;
+                var currentCell = e.AddedCells[0];
+                if (currentCell.Column == Students_Grid.Columns[2])
+                {
+                    // нельзя редактировать айди студента:
+                    var cellInfo = currentCell.Column.GetCellContent(currentCell.Item);
+                    var textBox = cellInfo.FindName("TextBox") as TextBox;
+                    textBox.IsReadOnly = true;
+                
                 Students_Grid.BeginEdit();
+                }
+            }
+            catch (Exception ex)
+            {
+                MyMessageBox.Show(ex.Message, MessageBoxButton.OK);
             }
         }
 
