@@ -10,12 +10,10 @@
 namespace CourseProject.Model
 {
     using System;
-    using System.Text;
-    using CourseProject.ErrorMessage;
-    using System.Windows;
     using System.Collections.Generic;
     using System.Security.Cryptography;
     using System.Text;
+    using System.Windows;
 
     public partial class User
     {
@@ -27,7 +25,6 @@ namespace CourseProject.Model
 
         public User()
         {
-
         }
 
         public User(int idstudent, string login, string password)
@@ -44,15 +41,13 @@ namespace CourseProject.Model
             get { return currentUser; }
             set
             {
-                if (value != null)          // если пользователь не авторизован,
-                    currentUser = value;    // то присваиваем ему значение пользователя из БД
+                if (value != null)
+                    currentUser = value;
                 else
-                    MyMessageBox.Show("Ошибка входа!", MessageBoxButton.OK);
+                    MessageBox.Show("Ошибка входа!");
             }
         }
 
-
-        // получение хэш-кода пароля
         public static string getHash(string password)
         {
             if (String.IsNullOrEmpty(password))

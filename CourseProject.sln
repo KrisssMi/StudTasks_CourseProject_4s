@@ -5,6 +5,8 @@ VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseProject", "CourseProject\CourseProject.csproj", "{F21A2680-7E79-4CE1-994E-E4951EF45CEE}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "StudTaskSetup", "StudTaskSetup\StudTaskSetup.vdproj", "{F6676FA7-13B0-4123-BC93-6E0FC592604E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,8 @@ Global
 		{F21A2680-7E79-4CE1-994E-E4951EF45CEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F21A2680-7E79-4CE1-994E-E4951EF45CEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F21A2680-7E79-4CE1-994E-E4951EF45CEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6676FA7-13B0-4123-BC93-6E0FC592604E}.Debug|Any CPU.ActiveCfg = Debug
+		{F6676FA7-13B0-4123-BC93-6E0FC592604E}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -24,5 +24,10 @@ namespace CourseProject.Model
         public string Title { get; set; }
     
         public virtual Student Student { get; set; }
+
+        public string Date
+        {
+            get { return DueDate.Value.Day + "/" + DueDate.Value.Month + "/" + DueDate.Value.Year; }
+        }        
     }
 }

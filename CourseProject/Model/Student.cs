@@ -47,17 +47,14 @@ namespace CourseProject.Model
         public Student(int idstudent, string name, string surname, string email, string phone)
         {
             this.idStudent = idstudent;
-            {
-                idStudent = idstudent;
-                Name = name;
-                Surname = surname;
-                Email = email;
-                Phone = phone;
-                isAdmin = false;
-            }
+            this.Name = name;
+            this.Surname = surname;
+            this.Email = email;
+            this.Phone = phone;
+            this.isAdmin = false;
         }
 
-        public bool IsAdmin             // проверка на администратора
+        public bool IsAdmin
         {
             get { return (bool)isAdmin; }
             set
@@ -67,7 +64,8 @@ namespace CourseProject.Model
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;           // оповещение об изменениях в свойствах
+
+        public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
             if (PropertyChanged != null)
